@@ -234,266 +234,268 @@ WorldMoneyWords performs decimal-string rounding in PHP, including correct carry
 
 > **Quick reference:** These 15 commonly used countries stay visible. Expand the section below to browse every other supported ISO country.
 
-|  | Country | ISO country | Currency | ISO currency |
-|:---:|---|:---:|---|:---:|
-| 🇮🇳 | **India** | `IND` | Indian Rupee | `INR` |
-| 🇺🇸 | **United States** | `USA` | US Dollar | `USD` |
-| 🇬🇧 | **United Kingdom** | `GBR` | Pound Sterling | `GBP` |
-| 🇦🇪 | **United Arab Emirates** | `ARE` | UAE Dirham | `AED` |
-| 🇨🇦 | **Canada** | `CAN` | Canadian Dollar | `CAD` |
-| 🇦🇺 | **Australia** | `AUS` | Australian Dollar | `AUD` |
-| 🇩🇪 | **Germany** | `DEU` | Euro | `EUR` |
-| 🇫🇷 | **France** | `FRA` | Euro | `EUR` |
-| 🇯🇵 | **Japan** | `JPN` | Japanese Yen | `JPY` |
-| 🇨🇳 | **China** | `CHN` | Yuan | `CNY` |
-| 🇸🇬 | **Singapore** | `SGP` | Singapore Dollar | `SGD` |
-| 🇸🇦 | **Saudi Arabia** | `SAU` | Saudi Riyal | `SAR` |
-| 🇧🇷 | **Brazil** | `BRA` | Brazilian Real | `BRL` |
-| 🇿🇦 | **South Africa** | `ZAF` | Rand | `ZAR` |
-| 🇳🇿 | **New Zealand** | `NZL` | New Zealand Dollar | `NZD` |
+|  | Country | **Alpha-2** | **Alpha-3** | Currency | ISO currency |
+|:---:|---|:---:|:---:|---|:---:|
+| 🇮🇳 | **India** | `IN` | `IND` | Indian Rupee | `INR` |
+| 🇺🇸 | **United States** | `US` | `USA` | US Dollar | `USD` |
+| 🇬🇧 | **United Kingdom** | `GB` | `GBR` | Pound Sterling | `GBP` |
+| 🇦🇪 | **United Arab Emirates** | `AE` | `ARE` | UAE Dirham | `AED` |
+| 🇨🇦 | **Canada** | `CA` | `CAN` | Canadian Dollar | `CAD` |
+| 🇦🇺 | **Australia** | `AU` | `AUS` | Australian Dollar | `AUD` |
+| 🇩🇪 | **Germany** | `DE` | `DEU` | Euro | `EUR` |
+| 🇫🇷 | **France** | `FR` | `FRA` | Euro | `EUR` |
+| 🇯🇵 | **Japan** | `JP` | `JPN` | Japanese Yen | `JPY` |
+| 🇨🇳 | **China** | `CN` | `CHN` | Yuan | `CNY` |
+| 🇸🇬 | **Singapore** | `SG` | `SGP` | Singapore Dollar | `SGD` |
+| 🇸🇦 | **Saudi Arabia** | `SA` | `SAU` | Saudi Riyal | `SAR` |
+| 🇧🇷 | **Brazil** | `BR` | `BRA` | Brazilian Real | `BRL` |
+| 🇿🇦 | **South Africa** | `ZA` | `ZAF` | Rand | `ZAR` |
+| 🇳🇿 | **New Zealand** | `NZ` | `NZL` | New Zealand Dollar | `NZD` |
 
 <details>
 <summary><strong>🌐 Browse all other 235 supported countries</strong></summary>
 
 <br>
 
-|  | Country | Alpha-2 | Alpha-3 |
-|:---:|---|:---:|:---:|
-| 🇦🇫 | **Afghanistan** | `AF` | `AFG` |
-| 🇦🇽 | **Åland Islands** | `AX` | `ALA` |
-| 🇦🇱 | **Albania** | `AL` | `ALB` |
-| 🇩🇿 | **Algeria** | `DZ` | `DZA` |
-| 🇦🇸 | **American Samoa** | `AS` | `ASM` |
-| 🇦🇩 | **Andorra** | `AD` | `AND` |
-| 🇦🇴 | **Angola** | `AO` | `AGO` |
-| 🇦🇮 | **Anguilla** | `AI` | `AIA` |
-| 🇦🇶 | **Antarctica** | `AQ` | `ATA` |
-| 🇦🇬 | **Antigua and Barbuda** | `AG` | `ATG` |
-| 🇦🇷 | **Argentina** | `AR` | `ARG` |
-| 🇦🇲 | **Armenia** | `AM` | `ARM` |
-| 🇦🇼 | **Aruba** | `AW` | `ABW` |
-| 🇦🇹 | **Austria** | `AT` | `AUT` |
-| 🇦🇿 | **Azerbaijan** | `AZ` | `AZE` |
-| 🇧🇸 | **Bahamas** | `BS` | `BHS` |
-| 🇧🇭 | **Bahrain** | `BH` | `BHR` |
-| 🇧🇩 | **Bangladesh** | `BD` | `BGD` |
-| 🇧🇧 | **Barbados** | `BB` | `BRB` |
-| 🇧🇾 | **Belarus** | `BY` | `BLR` |
-| 🇧🇪 | **Belgium** | `BE` | `BEL` |
-| 🇧🇿 | **Belize** | `BZ` | `BLZ` |
-| 🇧🇯 | **Benin** | `BJ` | `BEN` |
-| 🇧🇲 | **Bermuda** | `BM` | `BMU` |
-| 🇧🇹 | **Bhutan** | `BT` | `BTN` |
-| 🇧🇴 | **Bolivia (Plurinational State of)** | `BO` | `BOL` |
-| 🇧🇶 | **Bonaire, Sint Eustatius and Saba** | `BQ` | `BES` |
-| 🇧🇦 | **Bosnia and Herzegovina** | `BA` | `BIH` |
-| 🇧🇼 | **Botswana** | `BW` | `BWA` |
-| 🇧🇻 | **Bouvet Island** | `BV` | `BVT` |
-| 🇮🇴 | **British Indian Ocean Territory** | `IO` | `IOT` |
-| 🇧🇳 | **Brunei Darussalam** | `BN` | `BRN` |
-| 🇧🇬 | **Bulgaria** | `BG` | `BGR` |
-| 🇧🇫 | **Burkina Faso** | `BF` | `BFA` |
-| 🇧🇮 | **Burundi** | `BI` | `BDI` |
-| 🇨🇻 | **Cabo Verde** | `CV` | `CPV` |
-| 🇰🇭 | **Cambodia** | `KH` | `KHM` |
-| 🇨🇲 | **Cameroon** | `CM` | `CMR` |
-| 🇰🇾 | **Cayman Islands** | `KY` | `CYM` |
-| 🇨🇫 | **Central African Republic** | `CF` | `CAF` |
-| 🇹🇩 | **Chad** | `TD` | `TCD` |
-| 🇨🇱 | **Chile** | `CL` | `CHL` |
-| 🇨🇽 | **Christmas Island** | `CX` | `CXR` |
-| 🇨🇨 | **Cocos (Keeling) Islands** | `CC` | `CCK` |
-| 🇨🇴 | **Colombia** | `CO` | `COL` |
-| 🇰🇲 | **Comoros** | `KM` | `COM` |
-| 🇨🇬 | **Congo** | `CG` | `COG` |
-| 🇨🇩 | **Congo (Democratic Republic of the)** | `CD` | `COD` |
-| 🇨🇰 | **Cook Islands** | `CK` | `COK` |
-| 🇨🇷 | **Costa Rica** | `CR` | `CRI` |
-| 🇨🇮 | **Côte d'Ivoire** | `CI` | `CIV` |
-| 🇭🇷 | **Croatia** | `HR` | `HRV` |
-| 🇨🇺 | **Cuba** | `CU` | `CUB` |
-| 🇨🇼 | **Curaçao** | `CW` | `CUW` |
-| 🇨🇾 | **Cyprus** | `CY` | `CYP` |
-| 🇨🇿 | **Czechia** | `CZ` | `CZE` |
-| 🇩🇰 | **Denmark** | `DK` | `DNK` |
-| 🇩🇯 | **Djibouti** | `DJ` | `DJI` |
-| 🇩🇲 | **Dominica** | `DM` | `DMA` |
-| 🇩🇴 | **Dominican Republic** | `DO` | `DOM` |
-| 🇪🇨 | **Ecuador** | `EC` | `ECU` |
-| 🇪🇬 | **Egypt** | `EG` | `EGY` |
-| 🇸🇻 | **El Salvador** | `SV` | `SLV` |
-| 🇬🇶 | **Equatorial Guinea** | `GQ` | `GNQ` |
-| 🇪🇷 | **Eritrea** | `ER` | `ERI` |
-| 🇪🇪 | **Estonia** | `EE` | `EST` |
-| 🇪🇹 | **Ethiopia** | `ET` | `ETH` |
-| 🇸🇿 | **Eswatini** | `SZ` | `SWZ` |
-| 🇫🇰 | **Falkland Islands (Malvinas)** | `FK` | `FLK` |
-| 🇫🇴 | **Faroe Islands** | `FO` | `FRO` |
-| 🇫🇯 | **Fiji** | `FJ` | `FJI` |
-| 🇫🇮 | **Finland** | `FI` | `FIN` |
-| 🇬🇫 | **French Guiana** | `GF` | `GUF` |
-| 🇵🇫 | **French Polynesia** | `PF` | `PYF` |
-| 🇹🇫 | **French Southern Territories** | `TF` | `ATF` |
-| 🇬🇦 | **Gabon** | `GA` | `GAB` |
-| 🇬🇲 | **Gambia** | `GM` | `GMB` |
-| 🇬🇪 | **Georgia** | `GE` | `GEO` |
-| 🇬🇭 | **Ghana** | `GH` | `GHA` |
-| 🇬🇮 | **Gibraltar** | `GI` | `GIB` |
-| 🇬🇷 | **Greece** | `GR` | `GRC` |
-| 🇬🇱 | **Greenland** | `GL` | `GRL` |
-| 🇬🇩 | **Grenada** | `GD` | `GRD` |
-| 🇬🇵 | **Guadeloupe** | `GP` | `GLP` |
-| 🇬🇺 | **Guam** | `GU` | `GUM` |
-| 🇬🇹 | **Guatemala** | `GT` | `GTM` |
-| 🇬🇬 | **Guernsey** | `GG` | `GGY` |
-| 🇬🇳 | **Guinea** | `GN` | `GIN` |
-| 🇬🇼 | **Guinea-Bissau** | `GW` | `GNB` |
-| 🇬🇾 | **Guyana** | `GY` | `GUY` |
-| 🇭🇹 | **Haiti** | `HT` | `HTI` |
-| 🇭🇲 | **Heard Island and McDonald Islands** | `HM` | `HMD` |
-| 🇻🇦 | **Holy See** | `VA` | `VAT` |
-| 🇭🇳 | **Honduras** | `HN` | `HND` |
-| 🇭🇰 | **Hong Kong** | `HK` | `HKG` |
-| 🇭🇺 | **Hungary** | `HU` | `HUN` |
-| 🇮🇸 | **Iceland** | `IS` | `ISL` |
-| 🇮🇩 | **Indonesia** | `ID` | `IDN` |
-| 🇮🇷 | **Iran (Islamic Republic of)** | `IR` | `IRN` |
-| 🇮🇶 | **Iraq** | `IQ` | `IRQ` |
-| 🇮🇪 | **Ireland** | `IE` | `IRL` |
-| 🇮🇲 | **Isle of Man** | `IM` | `IMN` |
-| 🇮🇱 | **Israel** | `IL` | `ISR` |
-| 🇮🇹 | **Italy** | `IT` | `ITA` |
-| 🇯🇲 | **Jamaica** | `JM` | `JAM` |
-| 🇯🇪 | **Jersey** | `JE` | `JEY` |
-| 🇯🇴 | **Jordan** | `JO` | `JOR` |
-| 🇰🇿 | **Kazakhstan** | `KZ` | `KAZ` |
-| 🇰🇪 | **Kenya** | `KE` | `KEN` |
-| 🇰🇮 | **Kiribati** | `KI` | `KIR` |
-| 🇰🇵 | **Korea (Democratic People's Republic of)** | `KP` | `PRK` |
-| 🇰🇷 | **Korea (Republic of)** | `KR` | `KOR` |
-| 🇽🇰 | **Kosovo** | `XK` | `XKX` |
-| 🇰🇼 | **Kuwait** | `KW` | `KWT` |
-| 🇰🇬 | **Kyrgyzstan** | `KG` | `KGZ` |
-| 🇱🇦 | **Lao People's Democratic Republic** | `LA` | `LAO` |
-| 🇱🇻 | **Latvia** | `LV` | `LVA` |
-| 🇱🇧 | **Lebanon** | `LB` | `LBN` |
-| 🇱🇸 | **Lesotho** | `LS` | `LSO` |
-| 🇱🇷 | **Liberia** | `LR` | `LBR` |
-| 🇱🇾 | **Libya** | `LY` | `LBY` |
-| 🇱🇮 | **Liechtenstein** | `LI` | `LIE` |
-| 🇱🇹 | **Lithuania** | `LT` | `LTU` |
-| 🇱🇺 | **Luxembourg** | `LU` | `LUX` |
-| 🇲🇴 | **Macao** | `MO` | `MAC` |
-| 🇲🇰 | **North Macedonia** | `MK` | `MKD` |
-| 🇲🇬 | **Madagascar** | `MG` | `MDG` |
-| 🇲🇼 | **Malawi** | `MW` | `MWI` |
-| 🇲🇾 | **Malaysia** | `MY` | `MYS` |
-| 🇲🇻 | **Maldives** | `MV` | `MDV` |
-| 🇲🇱 | **Mali** | `ML` | `MLI` |
-| 🇲🇹 | **Malta** | `MT` | `MLT` |
-| 🇲🇭 | **Marshall Islands** | `MH` | `MHL` |
-| 🇲🇶 | **Martinique** | `MQ` | `MTQ` |
-| 🇲🇷 | **Mauritania** | `MR` | `MRT` |
-| 🇲🇺 | **Mauritius** | `MU` | `MUS` |
-| 🇾🇹 | **Mayotte** | `YT` | `MYT` |
-| 🇲🇽 | **Mexico** | `MX` | `MEX` |
-| 🇫🇲 | **Micronesia (Federated States of)** | `FM` | `FSM` |
-| 🇲🇩 | **Moldova (Republic of)** | `MD` | `MDA` |
-| 🇲🇨 | **Monaco** | `MC` | `MCO` |
-| 🇲🇳 | **Mongolia** | `MN` | `MNG` |
-| 🇲🇪 | **Montenegro** | `ME` | `MNE` |
-| 🇲🇸 | **Montserrat** | `MS` | `MSR` |
-| 🇲🇦 | **Morocco** | `MA` | `MAR` |
-| 🇲🇿 | **Mozambique** | `MZ` | `MOZ` |
-| 🇲🇲 | **Myanmar** | `MM` | `MMR` |
-| 🇳🇦 | **Namibia** | `NA` | `NAM` |
-| 🇳🇷 | **Naoero** | `NR` | `NRU` |
-| 🇳🇵 | **Nepal** | `NP` | `NPL` |
-| 🇳🇱 | **Netherlands** | `NL` | `NLD` |
-| 🇳🇨 | **New Caledonia** | `NC` | `NCL` |
-| 🇳🇮 | **Nicaragua** | `NI` | `NIC` |
-| 🇳🇪 | **Niger** | `NE` | `NER` |
-| 🇳🇬 | **Nigeria** | `NG` | `NGA` |
-| 🇳🇺 | **Niue** | `NU` | `NIU` |
-| 🇳🇫 | **Norfolk Island** | `NF` | `NFK` |
-| 🇲🇵 | **Northern Mariana Islands** | `MP` | `MNP` |
-| 🇳🇴 | **Norway** | `NO` | `NOR` |
-| 🇴🇲 | **Oman** | `OM` | `OMN` |
-| 🇵🇰 | **Pakistan** | `PK` | `PAK` |
-| 🇵🇼 | **Palau** | `PW` | `PLW` |
-| 🇵🇸 | **Palestine, State of** | `PS` | `PSE` |
-| 🇵🇦 | **Panama** | `PA` | `PAN` |
-| 🇵🇬 | **Papua New Guinea** | `PG` | `PNG` |
-| 🇵🇾 | **Paraguay** | `PY` | `PRY` |
-| 🇵🇪 | **Peru** | `PE` | `PER` |
-| 🇵🇭 | **Philippines** | `PH` | `PHL` |
-| 🇵🇳 | **Pitcairn** | `PN` | `PCN` |
-| 🇵🇱 | **Poland** | `PL` | `POL` |
-| 🇵🇹 | **Portugal** | `PT` | `PRT` |
-| 🇵🇷 | **Puerto Rico** | `PR` | `PRI` |
-| 🇶🇦 | **Qatar** | `QA` | `QAT` |
-| 🇷🇪 | **Réunion** | `RE` | `REU` |
-| 🇷🇴 | **Romania** | `RO` | `ROU` |
-| 🇷🇺 | **Russian Federation** | `RU` | `RUS` |
-| 🇷🇼 | **Rwanda** | `RW` | `RWA` |
-| 🇧🇱 | **Saint Barthélemy** | `BL` | `BLM` |
-| 🇸🇭 | **Saint Helena, Ascension and Tristan da Cunha** | `SH` | `SHN` |
-| 🇰🇳 | **Saint Kitts and Nevis** | `KN` | `KNA` |
-| 🇱🇨 | **Saint Lucia** | `LC` | `LCA` |
-| 🇲🇫 | **Saint Martin (French part)** | `MF` | `MAF` |
-| 🇵🇲 | **Saint Pierre and Miquelon** | `PM` | `SPM` |
-| 🇻🇨 | **Saint Vincent and the Grenadines** | `VC` | `VCT` |
-| 🇼🇸 | **Samoa** | `WS` | `WSM` |
-| 🇸🇲 | **San Marino** | `SM` | `SMR` |
-| 🇸🇹 | **Sao Tome and Principe** | `ST` | `STP` |
-| 🇸🇳 | **Senegal** | `SN` | `SEN` |
-| 🇷🇸 | **Serbia** | `RS` | `SRB` |
-| 🇸🇨 | **Seychelles** | `SC` | `SYC` |
-| 🇸🇱 | **Sierra Leone** | `SL` | `SLE` |
-| 🇸🇽 | **Sint Maarten (Dutch part)** | `SX` | `SXM` |
-| 🇸🇰 | **Slovakia** | `SK` | `SVK` |
-| 🇸🇮 | **Slovenia** | `SI` | `SVN` |
-| 🇸🇧 | **Solomon Islands** | `SB` | `SLB` |
-| 🇸🇴 | **Somalia** | `SO` | `SOM` |
-| 🇬🇸 | **South Georgia and the South Sandwich Islands** | `GS` | `SGS` |
-| 🇸🇸 | **South Sudan** | `SS` | `SSD` |
-| 🇪🇸 | **Spain** | `ES` | `ESP` |
-| 🇱🇰 | **Sri Lanka** | `LK` | `LKA` |
-| 🇸🇩 | **Sudan** | `SD` | `SDN` |
-| 🇸🇷 | **Suriname** | `SR` | `SUR` |
-| 🇸🇯 | **Svalbard and Jan Mayen** | `SJ` | `SJM` |
-| 🇸🇪 | **Sweden** | `SE` | `SWE` |
-| 🇨🇭 | **Switzerland** | `CH` | `CHE` |
-| 🇸🇾 | **Syrian Arab Republic** | `SY` | `SYR` |
-| 🇹🇼 | **Taiwan (Province of China)** | `TW` | `TWN` |
-| 🇹🇯 | **Tajikistan** | `TJ` | `TJK` |
-| 🇹🇿 | **Tanzania, United Republic of** | `TZ` | `TZA` |
-| 🇹🇭 | **Thailand** | `TH` | `THA` |
-| 🇹🇱 | **Timor-Leste** | `TL` | `TLS` |
-| 🇹🇬 | **Togo** | `TG` | `TGO` |
-| 🇹🇰 | **Tokelau** | `TK` | `TKL` |
-| 🇹🇴 | **Tonga** | `TO` | `TON` |
-| 🇹🇹 | **Trinidad and Tobago** | `TT` | `TTO` |
-| 🇹🇳 | **Tunisia** | `TN` | `TUN` |
-| 🇹🇷 | **Türkiye** | `TR` | `TUR` |
-| 🇹🇲 | **Turkmenistan** | `TM` | `TKM` |
-| 🇹🇨 | **Turks and Caicos Islands** | `TC` | `TCA` |
-| 🇹🇻 | **Tuvalu** | `TV` | `TUV` |
-| 🇺🇬 | **Uganda** | `UG` | `UGA` |
-| 🇺🇦 | **Ukraine** | `UA` | `UKR` |
-| 🇺🇲 | **United States Minor Outlying Islands** | `UM` | `UMI` |
-| 🇺🇾 | **Uruguay** | `UY` | `URY` |
-| 🇺🇿 | **Uzbekistan** | `UZ` | `UZB` |
-| 🇻🇺 | **Vanuatu** | `VU` | `VUT` |
-| 🇻🇪 | **Venezuela (Bolivarian Republic of)** | `VE` | `VEN` |
-| 🇻🇳 | **Viet Nam** | `VN` | `VNM` |
-| 🇻🇬 | **Virgin Islands (British)** | `VG` | `VGB` |
-| 🇻🇮 | **Virgin Islands (U.S.)** | `VI` | `VIR` |
-| 🇼🇫 | **Wallis and Futuna** | `WF` | `WLF` |
-| 🇪🇭 | **Western Sahara** | `EH` | `ESH` |
-| 🇾🇪 | **Yemen** | `YE` | `YEM` |
-| 🇿🇲 | **Zambia** | `ZM` | `ZMB` |
-| 🇿🇼 | **Zimbabwe** | `ZW` | `ZWE` |
+|  | Country | **Alpha-2** | **Alpha-3** | Currency | ISO currency |
+|:---:|---|:---:|:---:|---|:---:|
+| 🇦🇫 | **Afghanistan** | `AF` | `AFG` | Afghan Afghani | `AFN` |
+| 🇦🇽 | **Åland Islands** | `AX` | `ALA` | Euro | `EUR` |
+| 🇦🇱 | **Albania** | `AL` | `ALB` | Albanian Lek | `ALL` |
+| 🇩🇿 | **Algeria** | `DZ` | `DZA` | Algerian Dinar | `DZD` |
+| 🇦🇸 | **American Samoa** | `AS` | `ASM` | US Dollar | `USD` |
+| 🇦🇩 | **Andorra** | `AD` | `AND` | Euro | `EUR` |
+| 🇦🇴 | **Angola** | `AO` | `AGO` | Angolan Kwanza | `AOA` |
+| 🇦🇮 | **Anguilla** | `AI` | `AIA` | East Caribbean Dollar | `XCD` |
+| 🇦🇶 | **Antarctica** | `AQ` | `ATA` | — | — |
+| 🇦🇬 | **Antigua and Barbuda** | `AG` | `ATG` | East Caribbean Dollar | `XCD` |
+| 🇦🇷 | **Argentina** | `AR` | `ARG` | Argentine Peso | `ARS` |
+| 🇦🇲 | **Armenia** | `AM` | `ARM` | Armenian Dram | `AMD` |
+| 🇦🇼 | **Aruba** | `AW` | `ABW` | Aruban Florin | `AWG` |
+| 🇦🇹 | **Austria** | `AT` | `AUT` | Euro | `EUR` |
+| 🇦🇿 | **Azerbaijan** | `AZ` | `AZE` | Azerbaijani Manat | `AZN` |
+| 🇧🇸 | **Bahamas** | `BS` | `BHS` | Bahamian Dollar | `BSD` |
+| 🇧🇭 | **Bahrain** | `BH` | `BHR` | Bahraini Dinar | `BHD` |
+| 🇧🇩 | **Bangladesh** | `BD` | `BGD` | Bangladeshi Taka | `BDT` |
+| 🇧🇧 | **Barbados** | `BB` | `BRB` | Barbadian Dollar | `BBD` |
+| 🇧🇾 | **Belarus** | `BY` | `BLR` | Belarusian Ruble | `BYN` |
+| 🇧🇪 | **Belgium** | `BE` | `BEL` | Euro | `EUR` |
+| 🇧🇿 | **Belize** | `BZ` | `BLZ` | Belize Dollar | `BZD` |
+| 🇧🇯 | **Benin** | `BJ` | `BEN` | West African CFA Franc | `XOF` |
+| 🇧🇲 | **Bermuda** | `BM` | `BMU` | Bermudan Dollar | `BMD` |
+| 🇧🇹 | **Bhutan** | `BT` | `BTN` | Bhutanese Ngultrum, Indian Rupee | `BTN`, `INR` |
+| 🇧🇴 | **Bolivia (Plurinational State of)** | `BO` | `BOL` | Bolivian Boliviano | `BOB` |
+| 🇧🇶 | **Bonaire, Sint Eustatius and Saba** | `BQ` | `BES` | US Dollar | `USD` |
+| 🇧🇦 | **Bosnia and Herzegovina** | `BA` | `BIH` | Bosnia-Herzegovina Convertible Mark | `BAM` |
+| 🇧🇼 | **Botswana** | `BW` | `BWA` | Botswanan Pula | `BWP` |
+| 🇧🇻 | **Bouvet Island** | `BV` | `BVT` | Norwegian Krone | `NOK` |
+| 🇮🇴 | **British Indian Ocean Territory** | `IO` | `IOT` | US Dollar | `USD` |
+| 🇧🇳 | **Brunei Darussalam** | `BN` | `BRN` | Brunei Dollar | `BND` |
+| 🇧🇬 | **Bulgaria** | `BG` | `BGR` | Euro | `EUR` |
+| 🇧🇫 | **Burkina Faso** | `BF` | `BFA` | West African CFA Franc | `XOF` |
+| 🇧🇮 | **Burundi** | `BI` | `BDI` | Burundian Franc | `BIF` |
+| 🇨🇻 | **Cabo Verde** | `CV` | `CPV` | Cape Verdean Escudo | `CVE` |
+| 🇰🇭 | **Cambodia** | `KH` | `KHM` | Cambodian Riel | `KHR` |
+| 🇨🇲 | **Cameroon** | `CM` | `CMR` | Central African CFA Franc | `XAF` |
+| 🇰🇾 | **Cayman Islands** | `KY` | `CYM` | Cayman Islands Dollar | `KYD` |
+| 🇨🇫 | **Central African Republic** | `CF` | `CAF` | Central African CFA Franc | `XAF` |
+| 🇹🇩 | **Chad** | `TD` | `TCD` | Central African CFA Franc | `XAF` |
+| 🇨🇱 | **Chile** | `CL` | `CHL` | Chilean Peso | `CLP` |
+| 🇨🇽 | **Christmas Island** | `CX` | `CXR` | Australian Dollar | `AUD` |
+| 🇨🇨 | **Cocos (Keeling) Islands** | `CC` | `CCK` | Australian Dollar | `AUD` |
+| 🇨🇴 | **Colombia** | `CO` | `COL` | Colombian Peso | `COP` |
+| 🇰🇲 | **Comoros** | `KM` | `COM` | Comorian Franc | `KMF` |
+| 🇨🇬 | **Congo** | `CG` | `COG` | Central African CFA Franc | `XAF` |
+| 🇨🇩 | **Congo (Democratic Republic of the)** | `CD` | `COD` | Congolese Franc | `CDF` |
+| 🇨🇰 | **Cook Islands** | `CK` | `COK` | New Zealand Dollar | `NZD` |
+| 🇨🇷 | **Costa Rica** | `CR` | `CRI` | Costa Rican Colón | `CRC` |
+| 🇨🇮 | **Côte d'Ivoire** | `CI` | `CIV` | West African CFA Franc | `XOF` |
+| 🇭🇷 | **Croatia** | `HR` | `HRV` | Euro | `EUR` |
+| 🇨🇺 | **Cuba** | `CU` | `CUB` | Cuban Peso | `CUP` |
+| 🇨🇼 | **Curaçao** | `CW` | `CUW` | Caribbean guilder | `XCG` |
+| 🇨🇾 | **Cyprus** | `CY` | `CYP` | Euro | `EUR` |
+| 🇨🇿 | **Czechia** | `CZ` | `CZE` | Czech Koruna | `CZK` |
+| 🇩🇰 | **Denmark** | `DK` | `DNK` | Danish Krone | `DKK` |
+| 🇩🇯 | **Djibouti** | `DJ` | `DJI` | Djiboutian Franc | `DJF` |
+| 🇩🇲 | **Dominica** | `DM` | `DMA` | East Caribbean Dollar | `XCD` |
+| 🇩🇴 | **Dominican Republic** | `DO` | `DOM` | Dominican Peso | `DOP` |
+| 🇪🇨 | **Ecuador** | `EC` | `ECU` | US Dollar | `USD` |
+| 🇪🇬 | **Egypt** | `EG` | `EGY` | Egyptian Pound | `EGP` |
+| 🇸🇻 | **El Salvador** | `SV` | `SLV` | US Dollar | `USD` |
+| 🇬🇶 | **Equatorial Guinea** | `GQ` | `GNQ` | Central African CFA Franc | `XAF` |
+| 🇪🇷 | **Eritrea** | `ER` | `ERI` | Eritrean Nakfa | `ERN` |
+| 🇪🇪 | **Estonia** | `EE` | `EST` | Euro | `EUR` |
+| 🇪🇹 | **Ethiopia** | `ET` | `ETH` | Ethiopian Birr | `ETB` |
+| 🇸🇿 | **Eswatini** | `SZ` | `SWZ` | Swazi Lilangeni | `SZL` |
+| 🇫🇰 | **Falkland Islands (Malvinas)** | `FK` | `FLK` | Falkland Islands Pound | `FKP` |
+| 🇫🇴 | **Faroe Islands** | `FO` | `FRO` | Danish Krone | `DKK` |
+| 🇫🇯 | **Fiji** | `FJ` | `FJI` | Fijian Dollar | `FJD` |
+| 🇫🇮 | **Finland** | `FI` | `FIN` | Euro | `EUR` |
+| 🇬🇫 | **French Guiana** | `GF` | `GUF` | Euro | `EUR` |
+| 🇵🇫 | **French Polynesia** | `PF` | `PYF` | CFP Franc | `XPF` |
+| 🇹🇫 | **French Southern Territories** | `TF` | `ATF` | Euro | `EUR` |
+| 🇬🇦 | **Gabon** | `GA` | `GAB` | Central African CFA Franc | `XAF` |
+| 🇬🇲 | **Gambia** | `GM` | `GMB` | Gambian Dalasi | `GMD` |
+| 🇬🇪 | **Georgia** | `GE` | `GEO` | Georgian Lari | `GEL` |
+| 🇬🇭 | **Ghana** | `GH` | `GHA` | Ghanaian Cedi | `GHS` |
+| 🇬🇮 | **Gibraltar** | `GI` | `GIB` | Gibraltar Pound | `GIP` |
+| 🇬🇷 | **Greece** | `GR` | `GRC` | Euro | `EUR` |
+| 🇬🇱 | **Greenland** | `GL` | `GRL` | Danish Krone | `DKK` |
+| 🇬🇩 | **Grenada** | `GD` | `GRD` | East Caribbean Dollar | `XCD` |
+| 🇬🇵 | **Guadeloupe** | `GP` | `GLP` | Euro | `EUR` |
+| 🇬🇺 | **Guam** | `GU` | `GUM` | US Dollar | `USD` |
+| 🇬🇹 | **Guatemala** | `GT` | `GTM` | Guatemalan Quetzal | `GTQ` |
+| 🇬🇬 | **Guernsey** | `GG` | `GGY` | British Pound | `GBP` |
+| 🇬🇳 | **Guinea** | `GN` | `GIN` | Guinean Franc | `GNF` |
+| 🇬🇼 | **Guinea-Bissau** | `GW` | `GNB` | West African CFA Franc | `XOF` |
+| 🇬🇾 | **Guyana** | `GY` | `GUY` | Guyanaese Dollar | `GYD` |
+| 🇭🇹 | **Haiti** | `HT` | `HTI` | Haitian Gourde, US Dollar | `HTG`, `USD` |
+| 🇭🇲 | **Heard Island and McDonald Islands** | `HM` | `HMD` | Australian Dollar | `AUD` |
+| 🇻🇦 | **Holy See** | `VA` | `VAT` | Euro | `EUR` |
+| 🇭🇳 | **Honduras** | `HN` | `HND` | Honduran Lempira | `HNL` |
+| 🇭🇰 | **Hong Kong** | `HK` | `HKG` | Hong Kong Dollar | `HKD` |
+| 🇭🇺 | **Hungary** | `HU` | `HUN` | Hungarian Forint | `HUF` |
+| 🇮🇸 | **Iceland** | `IS` | `ISL` | Icelandic Króna | `ISK` |
+| 🇮🇩 | **Indonesia** | `ID` | `IDN` | Indonesian Rupiah | `IDR` |
+| 🇮🇷 | **Iran (Islamic Republic of)** | `IR` | `IRN` | Iranian Rial | `IRR` |
+| 🇮🇶 | **Iraq** | `IQ` | `IRQ` | Iraqi Dinar | `IQD` |
+| 🇮🇪 | **Ireland** | `IE` | `IRL` | Euro | `EUR` |
+| 🇮🇲 | **Isle of Man** | `IM` | `IMN` | British Pound | `GBP` |
+| 🇮🇱 | **Israel** | `IL` | `ISR` | Israeli New Shekel | `ILS` |
+| 🇮🇹 | **Italy** | `IT` | `ITA` | Euro | `EUR` |
+| 🇯🇲 | **Jamaica** | `JM` | `JAM` | Jamaican Dollar | `JMD` |
+| 🇯🇪 | **Jersey** | `JE` | `JEY` | British Pound | `GBP` |
+| 🇯🇴 | **Jordan** | `JO` | `JOR` | Jordanian Dinar | `JOD` |
+| 🇰🇿 | **Kazakhstan** | `KZ` | `KAZ` | Kazakhstani Tenge | `KZT` |
+| 🇰🇪 | **Kenya** | `KE` | `KEN` | Kenyan Shilling | `KES` |
+| 🇰🇮 | **Kiribati** | `KI` | `KIR` | Australian Dollar | `AUD` |
+| 🇰🇵 | **Korea (Democratic People's Republic of)** | `KP` | `PRK` | North Korean Won | `KPW` |
+| 🇰🇷 | **Korea (Republic of)** | `KR` | `KOR` | South Korean Won | `KRW` |
+| 🇽🇰 | **Kosovo** | `XK` | `XKX` | Euro | `EUR` |
+| 🇰🇼 | **Kuwait** | `KW` | `KWT` | Kuwaiti Dinar | `KWD` |
+| 🇰🇬 | **Kyrgyzstan** | `KG` | `KGZ` | Kyrgyz Som | `KGS` |
+| 🇱🇦 | **Lao People's Democratic Republic** | `LA` | `LAO` | Laotian Kip | `LAK` |
+| 🇱🇻 | **Latvia** | `LV` | `LVA` | Euro | `EUR` |
+| 🇱🇧 | **Lebanon** | `LB` | `LBN` | Lebanese Pound | `LBP` |
+| 🇱🇸 | **Lesotho** | `LS` | `LSO` | South African Rand, Lesotho Loti | `ZAR`, `LSL` |
+| 🇱🇷 | **Liberia** | `LR` | `LBR` | Liberian Dollar | `LRD` |
+| 🇱🇾 | **Libya** | `LY` | `LBY` | Libyan Dinar | `LYD` |
+| 🇱🇮 | **Liechtenstein** | `LI` | `LIE` | Swiss Franc | `CHF` |
+| 🇱🇹 | **Lithuania** | `LT` | `LTU` | Euro | `EUR` |
+| 🇱🇺 | **Luxembourg** | `LU` | `LUX` | Euro | `EUR` |
+| 🇲🇴 | **Macao** | `MO` | `MAC` | Macanese Pataca | `MOP` |
+| 🇲🇰 | **North Macedonia** | `MK` | `MKD` | Macedonian Denar | `MKD` |
+| 🇲🇬 | **Madagascar** | `MG` | `MDG` | Malagasy Ariary | `MGA` |
+| 🇲🇼 | **Malawi** | `MW` | `MWI` | Malawian Kwacha | `MWK` |
+| 🇲🇾 | **Malaysia** | `MY` | `MYS` | Malaysian Ringgit | `MYR` |
+| 🇲🇻 | **Maldives** | `MV` | `MDV` | Maldivian Rufiyaa | `MVR` |
+| 🇲🇱 | **Mali** | `ML` | `MLI` | West African CFA Franc | `XOF` |
+| 🇲🇹 | **Malta** | `MT` | `MLT` | Euro | `EUR` |
+| 🇲🇭 | **Marshall Islands** | `MH` | `MHL` | US Dollar | `USD` |
+| 🇲🇶 | **Martinique** | `MQ` | `MTQ` | Euro | `EUR` |
+| 🇲🇷 | **Mauritania** | `MR` | `MRT` | Mauritanian Ouguiya | `MRU` |
+| 🇲🇺 | **Mauritius** | `MU` | `MUS` | Mauritian Rupee | `MUR` |
+| 🇾🇹 | **Mayotte** | `YT` | `MYT` | Euro | `EUR` |
+| 🇲🇽 | **Mexico** | `MX` | `MEX` | Mexican Peso | `MXN` |
+| 🇫🇲 | **Micronesia (Federated States of)** | `FM` | `FSM` | US Dollar | `USD` |
+| 🇲🇩 | **Moldova (Republic of)** | `MD` | `MDA` | Moldovan Leu | `MDL` |
+| 🇲🇨 | **Monaco** | `MC` | `MCO` | Euro | `EUR` |
+| 🇲🇳 | **Mongolia** | `MN` | `MNG` | Mongolian Tugrik | `MNT` |
+| 🇲🇪 | **Montenegro** | `ME` | `MNE` | Euro | `EUR` |
+| 🇲🇸 | **Montserrat** | `MS` | `MSR` | East Caribbean Dollar | `XCD` |
+| 🇲🇦 | **Morocco** | `MA` | `MAR` | Moroccan Dirham | `MAD` |
+| 🇲🇿 | **Mozambique** | `MZ` | `MOZ` | Mozambican Metical | `MZN` |
+| 🇲🇲 | **Myanmar** | `MM` | `MMR` | Myanmar Kyat | `MMK` |
+| 🇳🇦 | **Namibia** | `NA` | `NAM` | Namibian Dollar, South African Rand | `NAD`, `ZAR` |
+| 🇳🇷 | **Naoero** | `NR` | `NRU` | Australian Dollar | `AUD` |
+| 🇳🇵 | **Nepal** | `NP` | `NPL` | Nepalese Rupee | `NPR` |
+| 🇳🇱 | **Netherlands** | `NL` | `NLD` | Euro | `EUR` |
+| 🇳🇨 | **New Caledonia** | `NC` | `NCL` | CFP Franc | `XPF` |
+| 🇳🇮 | **Nicaragua** | `NI` | `NIC` | Nicaraguan Córdoba | `NIO` |
+| 🇳🇪 | **Niger** | `NE` | `NER` | West African CFA Franc | `XOF` |
+| 🇳🇬 | **Nigeria** | `NG` | `NGA` | Nigerian Naira | `NGN` |
+| 🇳🇺 | **Niue** | `NU` | `NIU` | New Zealand Dollar | `NZD` |
+| 🇳🇫 | **Norfolk Island** | `NF` | `NFK` | Australian Dollar | `AUD` |
+| 🇲🇵 | **Northern Mariana Islands** | `MP` | `MNP` | US Dollar | `USD` |
+| 🇳🇴 | **Norway** | `NO` | `NOR` | Norwegian Krone | `NOK` |
+| 🇴🇲 | **Oman** | `OM` | `OMN` | Omani Rial | `OMR` |
+| 🇵🇰 | **Pakistan** | `PK` | `PAK` | Pakistani Rupee | `PKR` |
+| 🇵🇼 | **Palau** | `PW` | `PLW` | US Dollar | `USD` |
+| 🇵🇸 | **Palestine, State of** | `PS` | `PSE` | Israeli New Shekel, Jordanian Dinar | `ILS`, `JOD` |
+| 🇵🇦 | **Panama** | `PA` | `PAN` | Panamanian Balboa, US Dollar | `PAB`, `USD` |
+| 🇵🇬 | **Papua New Guinea** | `PG` | `PNG` | Papua New Guinean Kina | `PGK` |
+| 🇵🇾 | **Paraguay** | `PY` | `PRY` | Paraguayan Guarani | `PYG` |
+| 🇵🇪 | **Peru** | `PE` | `PER` | Peruvian Sol | `PEN` |
+| 🇵🇭 | **Philippines** | `PH` | `PHL` | Philippine Peso | `PHP` |
+| 🇵🇳 | **Pitcairn** | `PN` | `PCN` | New Zealand Dollar | `NZD` |
+| 🇵🇱 | **Poland** | `PL` | `POL` | Polish Zloty | `PLN` |
+| 🇵🇹 | **Portugal** | `PT` | `PRT` | Euro | `EUR` |
+| 🇵🇷 | **Puerto Rico** | `PR` | `PRI` | US Dollar | `USD` |
+| 🇶🇦 | **Qatar** | `QA` | `QAT` | Qatari Riyal | `QAR` |
+| 🇷🇪 | **Réunion** | `RE` | `REU` | Euro | `EUR` |
+| 🇷🇴 | **Romania** | `RO` | `ROU` | Romanian Leu | `RON` |
+| 🇷🇺 | **Russian Federation** | `RU` | `RUS` | Russian Ruble | `RUB` |
+| 🇷🇼 | **Rwanda** | `RW` | `RWA` | Rwandan Franc | `RWF` |
+| 🇧🇱 | **Saint Barthélemy** | `BL` | `BLM` | Euro | `EUR` |
+| 🇸🇭 | **Saint Helena, Ascension and Tristan da Cunha** | `SH` | `SHN` | St. Helena Pound | `SHP` |
+| 🇰🇳 | **Saint Kitts and Nevis** | `KN` | `KNA` | East Caribbean Dollar | `XCD` |
+| 🇱🇨 | **Saint Lucia** | `LC` | `LCA` | East Caribbean Dollar | `XCD` |
+| 🇲🇫 | **Saint Martin (French part)** | `MF` | `MAF` | Euro | `EUR` |
+| 🇵🇲 | **Saint Pierre and Miquelon** | `PM` | `SPM` | Euro | `EUR` |
+| 🇻🇨 | **Saint Vincent and the Grenadines** | `VC` | `VCT` | East Caribbean Dollar | `XCD` |
+| 🇼🇸 | **Samoa** | `WS` | `WSM` | Samoan Tala | `WST` |
+| 🇸🇲 | **San Marino** | `SM` | `SMR` | Euro | `EUR` |
+| 🇸🇹 | **Sao Tome and Principe** | `ST` | `STP` | São Tomé & Príncipe Dobra | `STN` |
+| 🇸🇳 | **Senegal** | `SN` | `SEN` | West African CFA Franc | `XOF` |
+| 🇷🇸 | **Serbia** | `RS` | `SRB` | Serbian Dinar | `RSD` |
+| 🇸🇨 | **Seychelles** | `SC` | `SYC` | Seychellois Rupee | `SCR` |
+| 🇸🇱 | **Sierra Leone** | `SL` | `SLE` | Sierra Leonean Leone | `SLE` |
+| 🇸🇽 | **Sint Maarten (Dutch part)** | `SX` | `SXM` | Caribbean guilder | `XCG` |
+| 🇸🇰 | **Slovakia** | `SK` | `SVK` | Euro | `EUR` |
+| 🇸🇮 | **Slovenia** | `SI` | `SVN` | Euro | `EUR` |
+| 🇸🇧 | **Solomon Islands** | `SB` | `SLB` | Solomon Islands Dollar | `SBD` |
+| 🇸🇴 | **Somalia** | `SO` | `SOM` | Somali Shilling | `SOS` |
+| 🇬🇸 | **South Georgia and the South Sandwich Islands** | `GS` | `SGS` | British Pound | `GBP` |
+| 🇸🇸 | **South Sudan** | `SS` | `SSD` | South Sudanese Pound | `SSP` |
+| 🇪🇸 | **Spain** | `ES` | `ESP` | Euro | `EUR` |
+| 🇱🇰 | **Sri Lanka** | `LK` | `LKA` | Sri Lankan Rupee | `LKR` |
+| 🇸🇩 | **Sudan** | `SD` | `SDN` | Sudanese Pound | `SDG` |
+| 🇸🇷 | **Suriname** | `SR` | `SUR` | Surinamese Dollar | `SRD` |
+| 🇸🇯 | **Svalbard and Jan Mayen** | `SJ` | `SJM` | Norwegian Krone | `NOK` |
+| 🇸🇪 | **Sweden** | `SE` | `SWE` | Swedish Krona | `SEK` |
+| 🇨🇭 | **Switzerland** | `CH` | `CHE` | Swiss Franc | `CHF` |
+| 🇸🇾 | **Syrian Arab Republic** | `SY` | `SYR` | Syrian Pound | `SYP` |
+| 🇹🇼 | **Taiwan (Province of China)** | `TW` | `TWN` | New Taiwan Dollar | `TWD` |
+| 🇹🇯 | **Tajikistan** | `TJ` | `TJK` | Tajikistani Somoni | `TJS` |
+| 🇹🇿 | **Tanzania, United Republic of** | `TZ` | `TZA` | Tanzanian Shilling | `TZS` |
+| 🇹🇭 | **Thailand** | `TH` | `THA` | Thai Baht | `THB` |
+| 🇹🇱 | **Timor-Leste** | `TL` | `TLS` | US Dollar | `USD` |
+| 🇹🇬 | **Togo** | `TG` | `TGO` | West African CFA Franc | `XOF` |
+| 🇹🇰 | **Tokelau** | `TK` | `TKL` | New Zealand Dollar | `NZD` |
+| 🇹🇴 | **Tonga** | `TO` | `TON` | Tongan Paʻanga | `TOP` |
+| 🇹🇹 | **Trinidad and Tobago** | `TT` | `TTO` | Trinidad & Tobago Dollar | `TTD` |
+| 🇹🇳 | **Tunisia** | `TN` | `TUN` | Tunisian Dinar | `TND` |
+| 🇹🇷 | **Türkiye** | `TR` | `TUR` | Turkish Lira | `TRY` |
+| 🇹🇲 | **Turkmenistan** | `TM` | `TKM` | Turkmenistani Manat | `TMT` |
+| 🇹🇨 | **Turks and Caicos Islands** | `TC` | `TCA` | US Dollar | `USD` |
+| 🇹🇻 | **Tuvalu** | `TV` | `TUV` | Australian Dollar | `AUD` |
+| 🇺🇬 | **Uganda** | `UG` | `UGA` | Ugandan Shilling | `UGX` |
+| 🇺🇦 | **Ukraine** | `UA` | `UKR` | Ukrainian Hryvnia | `UAH` |
+| 🇺🇲 | **United States Minor Outlying Islands** | `UM` | `UMI` | US Dollar | `USD` |
+| 🇺🇾 | **Uruguay** | `UY` | `URY` | Uruguayan Peso | `UYU` |
+| 🇺🇿 | **Uzbekistan** | `UZ` | `UZB` | Uzbekistani Som | `UZS` |
+| 🇻🇺 | **Vanuatu** | `VU` | `VUT` | Vanuatu Vatu | `VUV` |
+| 🇻🇪 | **Venezuela (Bolivarian Republic of)** | `VE` | `VEN` | Venezuelan Bolívar | `VES` |
+| 🇻🇳 | **Viet Nam** | `VN` | `VNM` | Vietnamese Dong | `VND` |
+| 🇻🇬 | **Virgin Islands (British)** | `VG` | `VGB` | US Dollar | `USD` |
+| 🇻🇮 | **Virgin Islands (U.S.)** | `VI` | `VIR` | US Dollar | `USD` |
+| 🇼🇫 | **Wallis and Futuna** | `WF` | `WLF` | CFP Franc | `XPF` |
+| 🇪🇭 | **Western Sahara** | `EH` | `ESH` | Moroccan Dirham | `MAD` |
+| 🇾🇪 | **Yemen** | `YE` | `YEM` | Yemeni Rial | `YER` |
+| 🇿🇲 | **Zambia** | `ZM` | `ZMB` | Zambian Kwacha | `ZMW` |
+| 🇿🇼 | **Zimbabwe** | `ZW` | `ZWE` | Zimbabwean Gold, US Dollar | `ZWG`, `USD` |
+
+> Currency assignments follow current Unicode CLDR tender data. `—` indicates that no single current official currency is assigned in that dataset.
 
 </details>
 
