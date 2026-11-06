@@ -230,270 +230,270 @@ $converter->convert('1.999', 'USA', 'USD');
 
 WorldMoneyWords performs decimal-string rounding in PHP, including correct carry behavior and negative-zero handling.
 
-## Country and currency support
+## 🌍 Country and currency support
 
-The 15 most commonly used countries are shown by default:
+> **Quick reference:** These 15 commonly used countries stay visible. Expand the section below to browse every other supported ISO country.
 
-| Country | Country code | Currency | Currency code |
-|---|---:|---|---:|
-| India | `IND` | Indian Rupee | `INR` |
-| United States | `USA` | US Dollar | `USD` |
-| United Kingdom | `GBR` | Pound Sterling | `GBP` |
-| United Arab Emirates | `ARE` | UAE Dirham | `AED` |
-| Canada | `CAN` | Canadian Dollar | `CAD` |
-| Australia | `AUS` | Australian Dollar | `AUD` |
-| Germany | `DEU` | Euro | `EUR` |
-| France | `FRA` | Euro | `EUR` |
-| Japan | `JPN` | Japanese Yen | `JPY` |
-| China | `CHN` | Yuan | `CNY` |
-| Singapore | `SGP` | Singapore Dollar | `SGD` |
-| Saudi Arabia | `SAU` | Saudi Riyal | `SAR` |
-| Brazil | `BRA` | Brazilian Real | `BRL` |
-| South Africa | `ZAF` | Rand | `ZAR` |
-| New Zealand | `NZL` | New Zealand Dollar | `NZD` |
+|  | Country | ISO country | Currency | ISO currency |
+|:---:|---|:---:|---|:---:|
+| 🇮🇳 | **India** | `IND` | Indian Rupee | `INR` |
+| 🇺🇸 | **United States** | `USA` | US Dollar | `USD` |
+| 🇬🇧 | **United Kingdom** | `GBR` | Pound Sterling | `GBP` |
+| 🇦🇪 | **United Arab Emirates** | `ARE` | UAE Dirham | `AED` |
+| 🇨🇦 | **Canada** | `CAN` | Canadian Dollar | `CAD` |
+| 🇦🇺 | **Australia** | `AUS` | Australian Dollar | `AUD` |
+| 🇩🇪 | **Germany** | `DEU` | Euro | `EUR` |
+| 🇫🇷 | **France** | `FRA` | Euro | `EUR` |
+| 🇯🇵 | **Japan** | `JPN` | Japanese Yen | `JPY` |
+| 🇨🇳 | **China** | `CHN` | Yuan | `CNY` |
+| 🇸🇬 | **Singapore** | `SGP` | Singapore Dollar | `SGD` |
+| 🇸🇦 | **Saudi Arabia** | `SAU` | Saudi Riyal | `SAR` |
+| 🇧🇷 | **Brazil** | `BRA` | Brazilian Real | `BRL` |
+| 🇿🇦 | **South Africa** | `ZAF` | Rand | `ZAR` |
+| 🇳🇿 | **New Zealand** | `NZL` | New Zealand Dollar | `NZD` |
 
 <details>
-<summary><strong>🌐 Show all other 235 supported countries</strong></summary>
+<summary><strong>🌐 Browse all other 235 supported countries</strong></summary>
 
 <br>
 
-| Country | ISO alpha-3 code |
-|---|---:|
-| Afghanistan | `AFG` |
-| Åland Islands | `ALA` |
-| Albania | `ALB` |
-| Algeria | `DZA` |
-| American Samoa | `ASM` |
-| Andorra | `AND` |
-| Angola | `AGO` |
-| Anguilla | `AIA` |
-| Antarctica | `ATA` |
-| Antigua and Barbuda | `ATG` |
-| Argentina | `ARG` |
-| Armenia | `ARM` |
-| Aruba | `ABW` |
-| Austria | `AUT` |
-| Azerbaijan | `AZE` |
-| Bahamas | `BHS` |
-| Bahrain | `BHR` |
-| Bangladesh | `BGD` |
-| Barbados | `BRB` |
-| Belarus | `BLR` |
-| Belgium | `BEL` |
-| Belize | `BLZ` |
-| Benin | `BEN` |
-| Bermuda | `BMU` |
-| Bhutan | `BTN` |
-| Bolivia (Plurinational State of) | `BOL` |
-| Bonaire, Sint Eustatius and Saba | `BES` |
-| Bosnia and Herzegovina | `BIH` |
-| Botswana | `BWA` |
-| Bouvet Island | `BVT` |
-| British Indian Ocean Territory | `IOT` |
-| Brunei Darussalam | `BRN` |
-| Bulgaria | `BGR` |
-| Burkina Faso | `BFA` |
-| Burundi | `BDI` |
-| Cabo Verde | `CPV` |
-| Cambodia | `KHM` |
-| Cameroon | `CMR` |
-| Cayman Islands | `CYM` |
-| Central African Republic | `CAF` |
-| Chad | `TCD` |
-| Chile | `CHL` |
-| Christmas Island | `CXR` |
-| Cocos (Keeling) Islands | `CCK` |
-| Colombia | `COL` |
-| Comoros | `COM` |
-| Congo | `COG` |
-| Congo (Democratic Republic of the) | `COD` |
-| Cook Islands | `COK` |
-| Costa Rica | `CRI` |
-| Côte d'Ivoire | `CIV` |
-| Croatia | `HRV` |
-| Cuba | `CUB` |
-| Curaçao | `CUW` |
-| Cyprus | `CYP` |
-| Czechia | `CZE` |
-| Denmark | `DNK` |
-| Djibouti | `DJI` |
-| Dominica | `DMA` |
-| Dominican Republic | `DOM` |
-| Ecuador | `ECU` |
-| Egypt | `EGY` |
-| El Salvador | `SLV` |
-| Equatorial Guinea | `GNQ` |
-| Eritrea | `ERI` |
-| Estonia | `EST` |
-| Ethiopia | `ETH` |
-| Eswatini | `SWZ` |
-| Falkland Islands (Malvinas) | `FLK` |
-| Faroe Islands | `FRO` |
-| Fiji | `FJI` |
-| Finland | `FIN` |
-| French Guiana | `GUF` |
-| French Polynesia | `PYF` |
-| French Southern Territories | `ATF` |
-| Gabon | `GAB` |
-| Gambia | `GMB` |
-| Georgia | `GEO` |
-| Ghana | `GHA` |
-| Gibraltar | `GIB` |
-| Greece | `GRC` |
-| Greenland | `GRL` |
-| Grenada | `GRD` |
-| Guadeloupe | `GLP` |
-| Guam | `GUM` |
-| Guatemala | `GTM` |
-| Guernsey | `GGY` |
-| Guinea | `GIN` |
-| Guinea-Bissau | `GNB` |
-| Guyana | `GUY` |
-| Haiti | `HTI` |
-| Heard Island and McDonald Islands | `HMD` |
-| Holy See | `VAT` |
-| Honduras | `HND` |
-| Hong Kong | `HKG` |
-| Hungary | `HUN` |
-| Iceland | `ISL` |
-| Indonesia | `IDN` |
-| Iran (Islamic Republic of) | `IRN` |
-| Iraq | `IRQ` |
-| Ireland | `IRL` |
-| Isle of Man | `IMN` |
-| Israel | `ISR` |
-| Italy | `ITA` |
-| Jamaica | `JAM` |
-| Jersey | `JEY` |
-| Jordan | `JOR` |
-| Kazakhstan | `KAZ` |
-| Kenya | `KEN` |
-| Kiribati | `KIR` |
-| Korea (Democratic People's Republic of) | `PRK` |
-| Korea (Republic of) | `KOR` |
-| Kosovo | `XKX` |
-| Kuwait | `KWT` |
-| Kyrgyzstan | `KGZ` |
-| Lao People's Democratic Republic | `LAO` |
-| Latvia | `LVA` |
-| Lebanon | `LBN` |
-| Lesotho | `LSO` |
-| Liberia | `LBR` |
-| Libya | `LBY` |
-| Liechtenstein | `LIE` |
-| Lithuania | `LTU` |
-| Luxembourg | `LUX` |
-| Macao | `MAC` |
-| North Macedonia | `MKD` |
-| Madagascar | `MDG` |
-| Malawi | `MWI` |
-| Malaysia | `MYS` |
-| Maldives | `MDV` |
-| Mali | `MLI` |
-| Malta | `MLT` |
-| Marshall Islands | `MHL` |
-| Martinique | `MTQ` |
-| Mauritania | `MRT` |
-| Mauritius | `MUS` |
-| Mayotte | `MYT` |
-| Mexico | `MEX` |
-| Micronesia (Federated States of) | `FSM` |
-| Moldova (Republic of) | `MDA` |
-| Monaco | `MCO` |
-| Mongolia | `MNG` |
-| Montenegro | `MNE` |
-| Montserrat | `MSR` |
-| Morocco | `MAR` |
-| Mozambique | `MOZ` |
-| Myanmar | `MMR` |
-| Namibia | `NAM` |
-| Naoero | `NRU` |
-| Nepal | `NPL` |
-| Netherlands | `NLD` |
-| New Caledonia | `NCL` |
-| Nicaragua | `NIC` |
-| Niger | `NER` |
-| Nigeria | `NGA` |
-| Niue | `NIU` |
-| Norfolk Island | `NFK` |
-| Northern Mariana Islands | `MNP` |
-| Norway | `NOR` |
-| Oman | `OMN` |
-| Pakistan | `PAK` |
-| Palau | `PLW` |
-| Palestine, State of | `PSE` |
-| Panama | `PAN` |
-| Papua New Guinea | `PNG` |
-| Paraguay | `PRY` |
-| Peru | `PER` |
-| Philippines | `PHL` |
-| Pitcairn | `PCN` |
-| Poland | `POL` |
-| Portugal | `PRT` |
-| Puerto Rico | `PRI` |
-| Qatar | `QAT` |
-| Réunion | `REU` |
-| Romania | `ROU` |
-| Russian Federation | `RUS` |
-| Rwanda | `RWA` |
-| Saint Barthélemy | `BLM` |
-| Saint Helena, Ascension and Tristan da Cunha | `SHN` |
-| Saint Kitts and Nevis | `KNA` |
-| Saint Lucia | `LCA` |
-| Saint Martin (French part) | `MAF` |
-| Saint Pierre and Miquelon | `SPM` |
-| Saint Vincent and the Grenadines | `VCT` |
-| Samoa | `WSM` |
-| San Marino | `SMR` |
-| Sao Tome and Principe | `STP` |
-| Senegal | `SEN` |
-| Serbia | `SRB` |
-| Seychelles | `SYC` |
-| Sierra Leone | `SLE` |
-| Sint Maarten (Dutch part) | `SXM` |
-| Slovakia | `SVK` |
-| Slovenia | `SVN` |
-| Solomon Islands | `SLB` |
-| Somalia | `SOM` |
-| South Georgia and the South Sandwich Islands | `SGS` |
-| South Sudan | `SSD` |
-| Spain | `ESP` |
-| Sri Lanka | `LKA` |
-| Sudan | `SDN` |
-| Suriname | `SUR` |
-| Svalbard and Jan Mayen | `SJM` |
-| Sweden | `SWE` |
-| Switzerland | `CHE` |
-| Syrian Arab Republic | `SYR` |
-| Taiwan (Province of China) | `TWN` |
-| Tajikistan | `TJK` |
-| Tanzania, United Republic of | `TZA` |
-| Thailand | `THA` |
-| Timor-Leste | `TLS` |
-| Togo | `TGO` |
-| Tokelau | `TKL` |
-| Tonga | `TON` |
-| Trinidad and Tobago | `TTO` |
-| Tunisia | `TUN` |
-| Türkiye | `TUR` |
-| Turkmenistan | `TKM` |
-| Turks and Caicos Islands | `TCA` |
-| Tuvalu | `TUV` |
-| Uganda | `UGA` |
-| Ukraine | `UKR` |
-| United States Minor Outlying Islands | `UMI` |
-| Uruguay | `URY` |
-| Uzbekistan | `UZB` |
-| Vanuatu | `VUT` |
-| Venezuela (Bolivarian Republic of) | `VEN` |
-| Viet Nam | `VNM` |
-| Virgin Islands (British) | `VGB` |
-| Virgin Islands (U.S.) | `VIR` |
-| Wallis and Futuna | `WLF` |
-| Western Sahara | `ESH` |
-| Yemen | `YEM` |
-| Zambia | `ZMB` |
-| Zimbabwe | `ZWE` |
+|  | Country | Alpha-2 | Alpha-3 |
+|:---:|---|:---:|:---:|
+| 🇦🇫 | **Afghanistan** | `AF` | `AFG` |
+| 🇦🇽 | **Åland Islands** | `AX` | `ALA` |
+| 🇦🇱 | **Albania** | `AL` | `ALB` |
+| 🇩🇿 | **Algeria** | `DZ` | `DZA` |
+| 🇦🇸 | **American Samoa** | `AS` | `ASM` |
+| 🇦🇩 | **Andorra** | `AD` | `AND` |
+| 🇦🇴 | **Angola** | `AO` | `AGO` |
+| 🇦🇮 | **Anguilla** | `AI` | `AIA` |
+| 🇦🇶 | **Antarctica** | `AQ` | `ATA` |
+| 🇦🇬 | **Antigua and Barbuda** | `AG` | `ATG` |
+| 🇦🇷 | **Argentina** | `AR` | `ARG` |
+| 🇦🇲 | **Armenia** | `AM` | `ARM` |
+| 🇦🇼 | **Aruba** | `AW` | `ABW` |
+| 🇦🇹 | **Austria** | `AT` | `AUT` |
+| 🇦🇿 | **Azerbaijan** | `AZ` | `AZE` |
+| 🇧🇸 | **Bahamas** | `BS` | `BHS` |
+| 🇧🇭 | **Bahrain** | `BH` | `BHR` |
+| 🇧🇩 | **Bangladesh** | `BD` | `BGD` |
+| 🇧🇧 | **Barbados** | `BB` | `BRB` |
+| 🇧🇾 | **Belarus** | `BY` | `BLR` |
+| 🇧🇪 | **Belgium** | `BE` | `BEL` |
+| 🇧🇿 | **Belize** | `BZ` | `BLZ` |
+| 🇧🇯 | **Benin** | `BJ` | `BEN` |
+| 🇧🇲 | **Bermuda** | `BM` | `BMU` |
+| 🇧🇹 | **Bhutan** | `BT` | `BTN` |
+| 🇧🇴 | **Bolivia (Plurinational State of)** | `BO` | `BOL` |
+| 🇧🇶 | **Bonaire, Sint Eustatius and Saba** | `BQ` | `BES` |
+| 🇧🇦 | **Bosnia and Herzegovina** | `BA` | `BIH` |
+| 🇧🇼 | **Botswana** | `BW` | `BWA` |
+| 🇧🇻 | **Bouvet Island** | `BV` | `BVT` |
+| 🇮🇴 | **British Indian Ocean Territory** | `IO` | `IOT` |
+| 🇧🇳 | **Brunei Darussalam** | `BN` | `BRN` |
+| 🇧🇬 | **Bulgaria** | `BG` | `BGR` |
+| 🇧🇫 | **Burkina Faso** | `BF` | `BFA` |
+| 🇧🇮 | **Burundi** | `BI` | `BDI` |
+| 🇨🇻 | **Cabo Verde** | `CV` | `CPV` |
+| 🇰🇭 | **Cambodia** | `KH` | `KHM` |
+| 🇨🇲 | **Cameroon** | `CM` | `CMR` |
+| 🇰🇾 | **Cayman Islands** | `KY` | `CYM` |
+| 🇨🇫 | **Central African Republic** | `CF` | `CAF` |
+| 🇹🇩 | **Chad** | `TD` | `TCD` |
+| 🇨🇱 | **Chile** | `CL` | `CHL` |
+| 🇨🇽 | **Christmas Island** | `CX` | `CXR` |
+| 🇨🇨 | **Cocos (Keeling) Islands** | `CC` | `CCK` |
+| 🇨🇴 | **Colombia** | `CO` | `COL` |
+| 🇰🇲 | **Comoros** | `KM` | `COM` |
+| 🇨🇬 | **Congo** | `CG` | `COG` |
+| 🇨🇩 | **Congo (Democratic Republic of the)** | `CD` | `COD` |
+| 🇨🇰 | **Cook Islands** | `CK` | `COK` |
+| 🇨🇷 | **Costa Rica** | `CR` | `CRI` |
+| 🇨🇮 | **Côte d'Ivoire** | `CI` | `CIV` |
+| 🇭🇷 | **Croatia** | `HR` | `HRV` |
+| 🇨🇺 | **Cuba** | `CU` | `CUB` |
+| 🇨🇼 | **Curaçao** | `CW` | `CUW` |
+| 🇨🇾 | **Cyprus** | `CY` | `CYP` |
+| 🇨🇿 | **Czechia** | `CZ` | `CZE` |
+| 🇩🇰 | **Denmark** | `DK` | `DNK` |
+| 🇩🇯 | **Djibouti** | `DJ` | `DJI` |
+| 🇩🇲 | **Dominica** | `DM` | `DMA` |
+| 🇩🇴 | **Dominican Republic** | `DO` | `DOM` |
+| 🇪🇨 | **Ecuador** | `EC` | `ECU` |
+| 🇪🇬 | **Egypt** | `EG` | `EGY` |
+| 🇸🇻 | **El Salvador** | `SV` | `SLV` |
+| 🇬🇶 | **Equatorial Guinea** | `GQ` | `GNQ` |
+| 🇪🇷 | **Eritrea** | `ER` | `ERI` |
+| 🇪🇪 | **Estonia** | `EE` | `EST` |
+| 🇪🇹 | **Ethiopia** | `ET` | `ETH` |
+| 🇸🇿 | **Eswatini** | `SZ` | `SWZ` |
+| 🇫🇰 | **Falkland Islands (Malvinas)** | `FK` | `FLK` |
+| 🇫🇴 | **Faroe Islands** | `FO` | `FRO` |
+| 🇫🇯 | **Fiji** | `FJ` | `FJI` |
+| 🇫🇮 | **Finland** | `FI` | `FIN` |
+| 🇬🇫 | **French Guiana** | `GF` | `GUF` |
+| 🇵🇫 | **French Polynesia** | `PF` | `PYF` |
+| 🇹🇫 | **French Southern Territories** | `TF` | `ATF` |
+| 🇬🇦 | **Gabon** | `GA` | `GAB` |
+| 🇬🇲 | **Gambia** | `GM` | `GMB` |
+| 🇬🇪 | **Georgia** | `GE` | `GEO` |
+| 🇬🇭 | **Ghana** | `GH` | `GHA` |
+| 🇬🇮 | **Gibraltar** | `GI` | `GIB` |
+| 🇬🇷 | **Greece** | `GR` | `GRC` |
+| 🇬🇱 | **Greenland** | `GL` | `GRL` |
+| 🇬🇩 | **Grenada** | `GD` | `GRD` |
+| 🇬🇵 | **Guadeloupe** | `GP` | `GLP` |
+| 🇬🇺 | **Guam** | `GU` | `GUM` |
+| 🇬🇹 | **Guatemala** | `GT` | `GTM` |
+| 🇬🇬 | **Guernsey** | `GG` | `GGY` |
+| 🇬🇳 | **Guinea** | `GN` | `GIN` |
+| 🇬🇼 | **Guinea-Bissau** | `GW` | `GNB` |
+| 🇬🇾 | **Guyana** | `GY` | `GUY` |
+| 🇭🇹 | **Haiti** | `HT` | `HTI` |
+| 🇭🇲 | **Heard Island and McDonald Islands** | `HM` | `HMD` |
+| 🇻🇦 | **Holy See** | `VA` | `VAT` |
+| 🇭🇳 | **Honduras** | `HN` | `HND` |
+| 🇭🇰 | **Hong Kong** | `HK` | `HKG` |
+| 🇭🇺 | **Hungary** | `HU` | `HUN` |
+| 🇮🇸 | **Iceland** | `IS` | `ISL` |
+| 🇮🇩 | **Indonesia** | `ID` | `IDN` |
+| 🇮🇷 | **Iran (Islamic Republic of)** | `IR` | `IRN` |
+| 🇮🇶 | **Iraq** | `IQ` | `IRQ` |
+| 🇮🇪 | **Ireland** | `IE` | `IRL` |
+| 🇮🇲 | **Isle of Man** | `IM` | `IMN` |
+| 🇮🇱 | **Israel** | `IL` | `ISR` |
+| 🇮🇹 | **Italy** | `IT` | `ITA` |
+| 🇯🇲 | **Jamaica** | `JM` | `JAM` |
+| 🇯🇪 | **Jersey** | `JE` | `JEY` |
+| 🇯🇴 | **Jordan** | `JO` | `JOR` |
+| 🇰🇿 | **Kazakhstan** | `KZ` | `KAZ` |
+| 🇰🇪 | **Kenya** | `KE` | `KEN` |
+| 🇰🇮 | **Kiribati** | `KI` | `KIR` |
+| 🇰🇵 | **Korea (Democratic People's Republic of)** | `KP` | `PRK` |
+| 🇰🇷 | **Korea (Republic of)** | `KR` | `KOR` |
+| 🇽🇰 | **Kosovo** | `XK` | `XKX` |
+| 🇰🇼 | **Kuwait** | `KW` | `KWT` |
+| 🇰🇬 | **Kyrgyzstan** | `KG` | `KGZ` |
+| 🇱🇦 | **Lao People's Democratic Republic** | `LA` | `LAO` |
+| 🇱🇻 | **Latvia** | `LV` | `LVA` |
+| 🇱🇧 | **Lebanon** | `LB` | `LBN` |
+| 🇱🇸 | **Lesotho** | `LS` | `LSO` |
+| 🇱🇷 | **Liberia** | `LR` | `LBR` |
+| 🇱🇾 | **Libya** | `LY` | `LBY` |
+| 🇱🇮 | **Liechtenstein** | `LI` | `LIE` |
+| 🇱🇹 | **Lithuania** | `LT` | `LTU` |
+| 🇱🇺 | **Luxembourg** | `LU` | `LUX` |
+| 🇲🇴 | **Macao** | `MO` | `MAC` |
+| 🇲🇰 | **North Macedonia** | `MK` | `MKD` |
+| 🇲🇬 | **Madagascar** | `MG` | `MDG` |
+| 🇲🇼 | **Malawi** | `MW` | `MWI` |
+| 🇲🇾 | **Malaysia** | `MY` | `MYS` |
+| 🇲🇻 | **Maldives** | `MV` | `MDV` |
+| 🇲🇱 | **Mali** | `ML` | `MLI` |
+| 🇲🇹 | **Malta** | `MT` | `MLT` |
+| 🇲🇭 | **Marshall Islands** | `MH` | `MHL` |
+| 🇲🇶 | **Martinique** | `MQ` | `MTQ` |
+| 🇲🇷 | **Mauritania** | `MR` | `MRT` |
+| 🇲🇺 | **Mauritius** | `MU` | `MUS` |
+| 🇾🇹 | **Mayotte** | `YT` | `MYT` |
+| 🇲🇽 | **Mexico** | `MX` | `MEX` |
+| 🇫🇲 | **Micronesia (Federated States of)** | `FM` | `FSM` |
+| 🇲🇩 | **Moldova (Republic of)** | `MD` | `MDA` |
+| 🇲🇨 | **Monaco** | `MC` | `MCO` |
+| 🇲🇳 | **Mongolia** | `MN` | `MNG` |
+| 🇲🇪 | **Montenegro** | `ME` | `MNE` |
+| 🇲🇸 | **Montserrat** | `MS` | `MSR` |
+| 🇲🇦 | **Morocco** | `MA` | `MAR` |
+| 🇲🇿 | **Mozambique** | `MZ` | `MOZ` |
+| 🇲🇲 | **Myanmar** | `MM` | `MMR` |
+| 🇳🇦 | **Namibia** | `NA` | `NAM` |
+| 🇳🇷 | **Naoero** | `NR` | `NRU` |
+| 🇳🇵 | **Nepal** | `NP` | `NPL` |
+| 🇳🇱 | **Netherlands** | `NL` | `NLD` |
+| 🇳🇨 | **New Caledonia** | `NC` | `NCL` |
+| 🇳🇮 | **Nicaragua** | `NI` | `NIC` |
+| 🇳🇪 | **Niger** | `NE` | `NER` |
+| 🇳🇬 | **Nigeria** | `NG` | `NGA` |
+| 🇳🇺 | **Niue** | `NU` | `NIU` |
+| 🇳🇫 | **Norfolk Island** | `NF` | `NFK` |
+| 🇲🇵 | **Northern Mariana Islands** | `MP` | `MNP` |
+| 🇳🇴 | **Norway** | `NO` | `NOR` |
+| 🇴🇲 | **Oman** | `OM` | `OMN` |
+| 🇵🇰 | **Pakistan** | `PK` | `PAK` |
+| 🇵🇼 | **Palau** | `PW` | `PLW` |
+| 🇵🇸 | **Palestine, State of** | `PS` | `PSE` |
+| 🇵🇦 | **Panama** | `PA` | `PAN` |
+| 🇵🇬 | **Papua New Guinea** | `PG` | `PNG` |
+| 🇵🇾 | **Paraguay** | `PY` | `PRY` |
+| 🇵🇪 | **Peru** | `PE` | `PER` |
+| 🇵🇭 | **Philippines** | `PH` | `PHL` |
+| 🇵🇳 | **Pitcairn** | `PN` | `PCN` |
+| 🇵🇱 | **Poland** | `PL` | `POL` |
+| 🇵🇹 | **Portugal** | `PT` | `PRT` |
+| 🇵🇷 | **Puerto Rico** | `PR` | `PRI` |
+| 🇶🇦 | **Qatar** | `QA` | `QAT` |
+| 🇷🇪 | **Réunion** | `RE` | `REU` |
+| 🇷🇴 | **Romania** | `RO` | `ROU` |
+| 🇷🇺 | **Russian Federation** | `RU` | `RUS` |
+| 🇷🇼 | **Rwanda** | `RW` | `RWA` |
+| 🇧🇱 | **Saint Barthélemy** | `BL` | `BLM` |
+| 🇸🇭 | **Saint Helena, Ascension and Tristan da Cunha** | `SH` | `SHN` |
+| 🇰🇳 | **Saint Kitts and Nevis** | `KN` | `KNA` |
+| 🇱🇨 | **Saint Lucia** | `LC` | `LCA` |
+| 🇲🇫 | **Saint Martin (French part)** | `MF` | `MAF` |
+| 🇵🇲 | **Saint Pierre and Miquelon** | `PM` | `SPM` |
+| 🇻🇨 | **Saint Vincent and the Grenadines** | `VC` | `VCT` |
+| 🇼🇸 | **Samoa** | `WS` | `WSM` |
+| 🇸🇲 | **San Marino** | `SM` | `SMR` |
+| 🇸🇹 | **Sao Tome and Principe** | `ST` | `STP` |
+| 🇸🇳 | **Senegal** | `SN` | `SEN` |
+| 🇷🇸 | **Serbia** | `RS` | `SRB` |
+| 🇸🇨 | **Seychelles** | `SC` | `SYC` |
+| 🇸🇱 | **Sierra Leone** | `SL` | `SLE` |
+| 🇸🇽 | **Sint Maarten (Dutch part)** | `SX` | `SXM` |
+| 🇸🇰 | **Slovakia** | `SK` | `SVK` |
+| 🇸🇮 | **Slovenia** | `SI` | `SVN` |
+| 🇸🇧 | **Solomon Islands** | `SB` | `SLB` |
+| 🇸🇴 | **Somalia** | `SO` | `SOM` |
+| 🇬🇸 | **South Georgia and the South Sandwich Islands** | `GS` | `SGS` |
+| 🇸🇸 | **South Sudan** | `SS` | `SSD` |
+| 🇪🇸 | **Spain** | `ES` | `ESP` |
+| 🇱🇰 | **Sri Lanka** | `LK` | `LKA` |
+| 🇸🇩 | **Sudan** | `SD` | `SDN` |
+| 🇸🇷 | **Suriname** | `SR` | `SUR` |
+| 🇸🇯 | **Svalbard and Jan Mayen** | `SJ` | `SJM` |
+| 🇸🇪 | **Sweden** | `SE` | `SWE` |
+| 🇨🇭 | **Switzerland** | `CH` | `CHE` |
+| 🇸🇾 | **Syrian Arab Republic** | `SY` | `SYR` |
+| 🇹🇼 | **Taiwan (Province of China)** | `TW` | `TWN` |
+| 🇹🇯 | **Tajikistan** | `TJ` | `TJK` |
+| 🇹🇿 | **Tanzania, United Republic of** | `TZ` | `TZA` |
+| 🇹🇭 | **Thailand** | `TH` | `THA` |
+| 🇹🇱 | **Timor-Leste** | `TL` | `TLS` |
+| 🇹🇬 | **Togo** | `TG` | `TGO` |
+| 🇹🇰 | **Tokelau** | `TK` | `TKL` |
+| 🇹🇴 | **Tonga** | `TO` | `TON` |
+| 🇹🇹 | **Trinidad and Tobago** | `TT` | `TTO` |
+| 🇹🇳 | **Tunisia** | `TN` | `TUN` |
+| 🇹🇷 | **Türkiye** | `TR` | `TUR` |
+| 🇹🇲 | **Turkmenistan** | `TM` | `TKM` |
+| 🇹🇨 | **Turks and Caicos Islands** | `TC` | `TCA` |
+| 🇹🇻 | **Tuvalu** | `TV` | `TUV` |
+| 🇺🇬 | **Uganda** | `UG` | `UGA` |
+| 🇺🇦 | **Ukraine** | `UA` | `UKR` |
+| 🇺🇲 | **United States Minor Outlying Islands** | `UM` | `UMI` |
+| 🇺🇾 | **Uruguay** | `UY` | `URY` |
+| 🇺🇿 | **Uzbekistan** | `UZ` | `UZB` |
+| 🇻🇺 | **Vanuatu** | `VU` | `VUT` |
+| 🇻🇪 | **Venezuela (Bolivarian Republic of)** | `VE` | `VEN` |
+| 🇻🇳 | **Viet Nam** | `VN` | `VNM` |
+| 🇻🇬 | **Virgin Islands (British)** | `VG` | `VGB` |
+| 🇻🇮 | **Virgin Islands (U.S.)** | `VI` | `VIR` |
+| 🇼🇫 | **Wallis and Futuna** | `WF` | `WLF` |
+| 🇪🇭 | **Western Sahara** | `EH` | `ESH` |
+| 🇾🇪 | **Yemen** | `YE` | `YEM` |
+| 🇿🇲 | **Zambia** | `ZM` | `ZMB` |
+| 🇿🇼 | **Zimbabwe** | `ZW` | `ZWE` |
 
 </details>
 
