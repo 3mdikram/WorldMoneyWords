@@ -1,58 +1,96 @@
-# WorldMoneyWords
+<div align="center">
 
-Convert an amount to English words using the same three-argument API across PHP, Laravel, Python, Go, React, browsers, and Node.js.
+# 🌍 WorldMoneyWords
 
-| Platform | Package directory | Function |
-|---|---|---|
-| PHP | root | `$converter->convert($amount, $country, $currency)` |
-| Laravel | `laravel/` | `AmountToWords::convert($amount, $country, $currency)` |
-| Python | `python/` | `converter.convert(amount, country, currency)` |
-| Go | `go/` | `amountwords.Convert(amount, country, currency)` |
-| React/Node | `react/` | `amountToWords(amount, country, currency)` |
+**Convert monetary amounts into clear, human-readable words across multiple programming languages.**
 
-## PHP
+[![Tests](https://github.com/3mdikram/WorldMoneyWords/actions/workflows/tests.yml/badge.svg)](https://github.com/3mdikram/WorldMoneyWords/actions/workflows/tests.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![PHP](https://img.shields.io/badge/PHP-8.1%2B-777BB4?logo=php&logoColor=white)](https://www.php.net/)
+[![Countries](https://img.shields.io/badge/ISO_countries-250-1f6feb)](#country-and-currency-support)
+[![Languages](https://img.shields.io/badge/platforms-PHP_%7C_Python_%7C_Go_%7C_TypeScript-orange)](#platforms)
+
+[Quick start](#quick-start) · [Platforms](#platforms) · [Advanced usage](#advanced-php-usage) · [Contributing](CONTRIBUTING.md)
+
+</div>
+
+---
+
+```text
+Input:  1234.50, IND, INR
+Output: One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only
+```
+
+WorldMoneyWords provides one familiar three-value contract everywhere:
+
+```text
+convert(amount, countryCode, currencyCode)
+```
+
+## Why WorldMoneyWords?
+
+| Feature | Description |
+|---|---|
+| 🌐 Global country support | Validates all 250 ISO 3166-1 alpha-3 country codes |
+| 💱 Currency aware | Supports ISO 4217 names, minor units, and 0/2/3 decimal currencies |
+| 🎯 Financial accuracy | Exact decimal-string rounding avoids binary floating-point loss in PHP |
+| 🧩 Multi-platform | PHP, Laravel, Python, Go, React, browsers, and Node.js |
+| 📦 Batch and API friendly | Batch conversion and JSON-serializable detailed results |
+| 🔧 Extensible | Register or override currency names and minor units |
+| ✅ Tested | Automated tests and GitHub Actions CI |
+
+## Quick start
+
+### PHP
 
 ```bash
 composer require worldmoneywords/core
 ```
 
 ```php
+<?php
+
 use AmountToWords\AmountToWords;
 
 $converter = new AmountToWords();
 
 echo $converter->convert('1234.50', 'IND', 'INR');
 // One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only
+```
 
-echo $converter->convert('99.95', 'USA', 'USD');
+> [!TIP]
+> Pass financial amounts as strings to preserve every digit exactly.
+
+## Platforms
+
+| Platform | Package | Main API |
+|---|---|---|
+| PHP | `worldmoneywords/core` | `$converter->convert(...)` |
+| Laravel | `worldmoneywords/laravel` | `AmountToWords::convert(...)` |
+| Python | `worldmoneywords` | `converter.convert(...)` |
+| Go | `github.com/worldmoneywords/go` | `amountwords.Convert(...)` |
+| React / Node.js | `@worldmoneywords/core` | `amountToWords(...)` |
+
+<details>
+<summary><strong>Laravel example</strong></summary>
+
+```bash
+composer require worldmoneywords/laravel
+```
+
+```php
+use AmountToWords\Laravel\Facades\AmountToWords;
+
+echo AmountToWords::convert('99.95', 'USA', 'USD');
 // Ninety Nine US Dollars and Ninety Five Cents Only
 ```
 
-The country argument accepts all ISO 3166-1 alpha-3 values such as `IND`, `USA`, `GBR`, `ARE`, and `JPN`. Common currencies have precise major/minor names and zero-, two-, or three-decimal handling. Other ISO 4217 currencies use their English ICU display name and the generic `Minor Unit`; register a definition when a currency needs a specific minor-unit name.
+Laravel discovers the provider and facade automatically. See the [Laravel guide](laravel/README.md).
 
-More than 200 countries are included through the complete ISO 3166-1 dataset. Retrieve the supported list when building a dropdown or validating an API request:
+</details>
 
-```php
-$countries = $converter->supportedCountries();
-
-// ['ABW' => 'Aruba', 'AFG' => 'Afghanistan', ...]
-```
-
-Add or override a currency without changing the package:
-
-```php
-use AmountToWords\AmountToWords;
-use AmountToWords\Currency;
-
-$converter = (new AmountToWords())->addCurrency(
-    'XTS',
-    new Currency('Token', 'Tokens', 'Bit', 'Bits', 2),
-);
-```
-
-Requirements: PHP 8.1+ and the `intl` extension.
-
-## Python
+<details>
+<summary><strong>Python example</strong></summary>
 
 ```bash
 cd python
@@ -62,52 +100,68 @@ pip install .
 ```python
 from amount_to_words import AmountToWords
 
-text = AmountToWords().convert("1234.50", "IND", "INR")
+converter = AmountToWords()
+print(converter.convert("42.50", "GBR", "GBP"))
+# Forty Two Pounds and Fifty Pence Only
 ```
 
-## Go
+</details>
+
+<details>
+<summary><strong>Go example</strong></summary>
 
 ```go
-import amountwords "github.com/worldmoneywords/go"
+package main
 
-text, err := amountwords.Convert(1234.50, "IND", "INR")
+import (
+    "fmt"
+    amountwords "github.com/worldmoneywords/go"
+)
+
+func main() {
+    text, err := amountwords.Convert(42.50, "GBR", "GBP")
+    if err != nil {
+        panic(err)
+    }
+    fmt.Println(text)
+}
 ```
 
-## React, browser, and Node.js
+</details>
 
-```bash
-cd react
-npm install
-npm run build
-```
+<details>
+<summary><strong>React / TypeScript example</strong></summary>
 
 ```tsx
 import { amountToWords } from '@worldmoneywords/core';
 
-export function AmountLabel() {
-  return <span>{amountToWords('1234.50', 'IND', 'INR')}</span>;
+export function PaymentTotal() {
+  const words = amountToWords('1500.25', 'USA', 'USD');
+  return <p>{words}</p>;
 }
 ```
 
-## Laravel
+The TypeScript package has no React runtime dependency, so it also works in browsers and Node.js.
 
-See [`laravel/README.md`](laravel/README.md) for auto-discovery and facade usage.
+</details>
 
-## API
+## Core API
 
 ```php
 convert(int|float|string $amount, string $countryCode, string $currencyCode): string
 ```
 
-- `amount`: plain numeric value, without grouping commas or a currency symbol
-- `countryCode`: ISO 3166-1 alpha-3 code, case-insensitive
-- `currencyCode`: ISO 4217 code, case-insensitive
+| Argument | Example | Rules |
+|---|---|---|
+| `amount` | `'1,234.50'` | Plain or correctly grouped numeric value; strings are recommended |
+| `countryCode` | `'IND'` | ISO 3166-1 alpha-3 code, case-insensitive |
+| `currencyCode` | `'INR'` | ISO 4217 code, case-insensitive |
 
-Invalid input throws one of the exceptions in `AmountToWords\Exception`.
+Invalid PHP input throws a specific exception from `AmountToWords\Exception`.
 
-## Advanced functionality
+## Advanced PHP usage
 
-Formatted input, such as `1,234,567.89`, is accepted. Customize the wording without changing the original three-argument API:
+### Customize the sentence
 
 ```php
 use AmountToWords\ConversionOptions;
@@ -122,54 +176,118 @@ echo $converter->convertWithOptions('10.00', 'USA', 'USD', $options);
 // Ten US Dollars plus Zero Cents
 ```
 
-Use `convertDetailed()` for API responses:
+### Return structured API data
 
 ```php
 $result = $converter->convertDetailed('12.05', 'IND', 'INR');
-
-echo json_encode($result);
-// {"text":"Twelve Rupees and Five Paise Only","countryCode":"IND",...}
+echo json_encode($result, JSON_PRETTY_PRINT);
 ```
 
-Use `convertMany()` to process several amounts in one call:
+```json
+{
+  "text": "Twelve Rupees and Five Paise Only",
+  "countryCode": "IND",
+  "currencyCode": "INR",
+  "majorAmount": "12",
+  "minorAmount": "05"
+}
+```
+
+### Convert several amounts
 
 ```php
-$words = $converter->convertMany([
-    ['amount' => 1, 'country' => 'USA', 'currency' => 'USD'],
-    ['amount' => 2, 'country' => 'GBR', 'currency' => 'GBP'],
+$results = $converter->convertMany([
+    ['amount' => '1.00', 'country' => 'USA', 'currency' => 'USD'],
+    ['amount' => '2.00', 'country' => 'GBR', 'currency' => 'GBP'],
 ]);
 ```
 
-### Financial accuracy
+### Add a custom currency
 
-Pass financial values as strings to preserve every digit. Conversion uses decimal-string rounding, so large values do not pass through binary floating point and carry rounding is exact:
+```php
+use AmountToWords\Currency;
+
+$converter = $converter->addCurrency(
+    'XTS',
+    new Currency('Token', 'Tokens', 'Bit', 'Bits', 2),
+);
+```
+
+### Handle exact financial values
 
 ```php
 $converter->convert('9007199254740993.49', 'USA', 'USD');
-$converter->convert('1.999', 'USA', 'USD'); // Two US Dollars Only
+$converter->convert('1.999', 'USA', 'USD');
+// Two US Dollars Only
 ```
 
-Use discovery helpers to build validated API inputs and dropdowns:
+WorldMoneyWords performs decimal-string rounding in PHP, including correct carry behavior and negative-zero handling.
+
+## Country and currency support
+
+| Country | Code | Currency | Code |
+|---|---:|---|---:|
+| India | `IND` | Indian Rupee | `INR` |
+| United States | `USA` | US Dollar | `USD` |
+| United Kingdom | `GBR` | Pound Sterling | `GBP` |
+| United Arab Emirates | `ARE` | UAE Dirham | `AED` |
+| Japan | `JPN` | Japanese Yen | `JPY` |
+| Germany | `DEU` | Euro | `EUR` |
+
+Build dropdowns and validate input using the discovery API:
 
 ```php
-$converter->isSupportedCountry('IND');
-$converter->isSupportedCurrency('INR');
-$converter->supportedCountries();
-$converter->supportedCurrencies(); // name and fraction digits
+$converter->isSupportedCountry('IND');  // true
+$converter->isSupportedCurrency('INR'); // true
+$countries = $converter->supportedCountries();
+$currencies = $converter->supportedCurrencies();
 ```
+
+Unknown but valid ICU currencies use their English display name and generic `Minor Unit` wording. Register a custom definition when exact minor-unit terminology is required.
+
+## Requirements
+
+- PHP 8.1 or newer
+- PHP `intl` extension
+- Composer
+
+The language-specific packages contain their own runtime requirements.
 
 ## Development
 
 ```bash
+git clone https://github.com/3mdikram/WorldMoneyWords.git
+cd WorldMoneyWords
 composer install
 composer check
-php examples/basic.php
 ```
 
-Language-specific tests:
+Run each implementation's tests:
 
 ```bash
+# PHP
+composer test
+
+# Python
 cd python && PYTHONPATH=src python3 -m unittest discover -s tests
+
+# Go
 cd go && go test ./...
-cd react && npm test
+
+# TypeScript
+cd react && npm install && npm test
 ```
+
+## Contributing
+
+Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md), add tests for behavioral changes, and open a pull request.
+
+## License
+
+WorldMoneyWords is open-source software released under the [MIT License](LICENSE).
+
+<div align="center">
+
+Made for developers building invoices, payments, banking tools, receipts, and financial applications.
+
+</div>
