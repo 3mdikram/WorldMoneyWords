@@ -6,12 +6,12 @@ namespace AmountToWords;
 
 use InvalidArgumentException;
 
-final readonly class ConversionOptions
+final class ConversionOptions
 {
     public function __construct(
-        public bool $includeOnly = true,
-        public bool $includeZeroMinor = false,
-        public string $conjunction = 'and',
+        public readonly bool $includeOnly = true,
+        public readonly bool $includeZeroMinor = false,
+        public readonly string $conjunction = 'and',
     ) {
         if (trim($this->conjunction) === '') {
             throw new InvalidArgumentException('Conjunction cannot be empty.');

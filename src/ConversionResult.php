@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace AmountToWords;
 
-final readonly class ConversionResult implements \JsonSerializable
+final class ConversionResult implements \JsonSerializable
 {
     public function __construct(
-        public string $text,
-        public string $countryCode,
-        public string $currencyCode,
-        public string $majorAmount,
-        public string $minorAmount,
+        public readonly string $text,
+        public readonly string $countryCode,
+        public readonly string $currencyCode,
+        public readonly string $majorAmount,
+        public readonly string $minorAmount,
     ) {
     }
 

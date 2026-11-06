@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace AmountToWords;
 
-final readonly class Currency
+final class Currency
 {
     public function __construct(
-        public string $majorSingular,
-        public string $majorPlural,
-        public string $minorSingular,
-        public string $minorPlural,
-        public int $fractionDigits = 2,
+        public readonly string $majorSingular,
+        public readonly string $majorPlural,
+        public readonly string $minorSingular,
+        public readonly string $minorPlural,
+        public readonly int $fractionDigits = 2,
     ) {
     }
 
