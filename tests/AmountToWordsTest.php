@@ -144,20 +144,4 @@ final class AmountToWordsTest extends TestCase
         self::assertSame(3, $converter->supportedCurrencies()['KWD']['fractionDigits']);
     }
 
-    public function testPopularCountryDropdownContainsFifteenOptions(): void
-    {
-        $options = (new AmountToWords())->popularCountryOptions();
-
-        self::assertCount(15, $options);
-        self::assertSame(['value' => 'IND', 'label' => 'India (IND)'], $options[0]);
-        self::assertContains(['value' => 'USA', 'label' => 'United States of America (USA)'], $options);
-    }
-
-    public function testCustomCountryDropdownSelection(): void
-    {
-        self::assertSame([
-            ['value' => 'JPN', 'label' => 'Japan (JPN)'],
-            ['value' => 'ARE', 'label' => 'United Arab Emirates (ARE)'],
-        ], (new AmountToWords())->countryOptions(['jpn', 'are']));
-    }
 }

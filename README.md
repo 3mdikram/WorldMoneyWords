@@ -232,7 +232,10 @@ WorldMoneyWords performs decimal-string rounding in PHP, including correct carry
 
 ## Country and currency support
 
-The default dropdown list contains 15 commonly used countries:
+<details>
+<summary><strong>🌍 View 15 popular countries and currencies</strong></summary>
+
+<br>
 
 | Country | Country code | Currency | Currency code |
 |---|---:|---|---:|
@@ -252,29 +255,7 @@ The default dropdown list contains 15 commonly used countries:
 | South Africa | `ZAF` | Rand | `ZAR` |
 | New Zealand | `NZL` | New Zealand Dollar | `NZD` |
 
-Get UI-ready options in PHP:
-
-```php
-$options = $converter->popularCountryOptions(); // exactly 15
-$allOptions = $converter->countryOptions();     // all 250
-$customOptions = $converter->countryOptions(['IND', 'USA', 'GBR']);
-```
-
-React dropdown:
-
-```tsx
-import { POPULAR_COUNTRY_OPTIONS } from '@3mdikram/worldmoneywords';
-
-export function CountrySelect() {
-  return (
-    <select name="countryCode" defaultValue="IND">
-      {POPULAR_COUNTRY_OPTIONS.map(({ value, label }) => (
-        <option key={value} value={value}>{label}</option>
-      ))}
-    </select>
-  );
-}
-```
+</details>
 
 Build dropdowns and validate input using the discovery API:
 

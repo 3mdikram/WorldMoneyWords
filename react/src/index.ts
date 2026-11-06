@@ -1,12 +1,4 @@
 export interface Currency { majorSingular:string; majorPlural:string; minorSingular:string; minorPlural:string; fractionDigits:number }
-export interface CountryOption { value:string; label:string }
-export const POPULAR_COUNTRY_OPTIONS:CountryOption[]=[
-  {value:'IND',label:'India (IND)'},{value:'USA',label:'United States (USA)'},{value:'GBR',label:'United Kingdom (GBR)'},
-  {value:'ARE',label:'United Arab Emirates (ARE)'},{value:'CAN',label:'Canada (CAN)'},{value:'AUS',label:'Australia (AUS)'},
-  {value:'DEU',label:'Germany (DEU)'},{value:'FRA',label:'France (FRA)'},{value:'JPN',label:'Japan (JPN)'},
-  {value:'CHN',label:'China (CHN)'},{value:'SGP',label:'Singapore (SGP)'},{value:'SAU',label:'Saudi Arabia (SAU)'},
-  {value:'BRA',label:'Brazil (BRA)'},{value:'ZAF',label:'South Africa (ZAF)'},{value:'NZL',label:'New Zealand (NZL)'},
-];
 const currencies:Record<string,Currency>={INR:{majorSingular:'Rupee',majorPlural:'Rupees',minorSingular:'Paisa',minorPlural:'Paise',fractionDigits:2},USD:{majorSingular:'US Dollar',majorPlural:'US Dollars',minorSingular:'Cent',minorPlural:'Cents',fractionDigits:2},GBP:{majorSingular:'Pound',majorPlural:'Pounds',minorSingular:'Penny',minorPlural:'Pence',fractionDigits:2},EUR:{majorSingular:'Euro',majorPlural:'Euros',minorSingular:'Cent',minorPlural:'Cents',fractionDigits:2},AED:{majorSingular:'Dirham',majorPlural:'Dirhams',minorSingular:'Fil',minorPlural:'Fils',fractionDigits:2},JPY:{majorSingular:'Yen',majorPlural:'Yen',minorSingular:'',minorPlural:'',fractionDigits:0}};
 const ones=['Zero','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen']; const tens=['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety']; const scales=['','Thousand','Million','Billion','Trillion','Quadrillion'];
 function under1000(n:number){const p:string[]=[];if(n>=100){p.push(ones[Math.floor(n/100)],'Hundred');n%=100}if(n>=20){p.push(tens[Math.floor(n/10)]);if(n%10)p.push(ones[n%10])}else if(n)p.push(ones[n]);return p.join(' ')}
