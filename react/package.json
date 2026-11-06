@@ -1,5 +1,5 @@
 {
-  "name": "@worldmoneywords/core",
+  "name": "@3mdikram/worldmoneywords",
   "version": "1.0.0",
   "description": "Amount-to-words converter for React, browsers, and Node.js",
   "type": "module",

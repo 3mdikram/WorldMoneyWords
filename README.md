@@ -67,9 +67,9 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 |---|---|---|
 | PHP | `3mdikram/worldmoneywords` | `$converter->convert(...)` |
 | Laravel | `3mdikram/worldmoneywords-laravel` | `AmountToWords::convert(...)` |
-| Python | `worldmoneywords` | `converter.convert(...)` |
-| Go | `github.com/worldmoneywords/go` | `amountwords.Convert(...)` |
-| React / Node.js | `@worldmoneywords/core` | `amountToWords(...)` |
+| Python | `3mdikram-worldmoneywords` | `converter.convert(...)` |
+| Go | `github.com/3mdikram/WorldMoneyWords/go` | `amountwords.Convert(...)` |
+| React / Node.js | `@3mdikram/worldmoneywords` | `amountToWords(...)` |
 
 <details>
 <summary><strong>Laravel example</strong></summary>
@@ -93,8 +93,7 @@ Laravel discovers the provider and facade automatically. See the [Laravel guide]
 <summary><strong>Python example</strong></summary>
 
 ```bash
-cd python
-pip install .
+pip install 3mdikram-worldmoneywords
 ```
 
 ```python
@@ -110,12 +109,16 @@ print(converter.convert("42.50", "GBR", "GBP"))
 <details>
 <summary><strong>Go example</strong></summary>
 
+```bash
+go get github.com/3mdikram/WorldMoneyWords/go
+```
+
 ```go
 package main
 
 import (
     "fmt"
-    amountwords "github.com/worldmoneywords/go"
+    amountwords "github.com/3mdikram/WorldMoneyWords/go"
 )
 
 func main() {
@@ -132,8 +135,12 @@ func main() {
 <details>
 <summary><strong>React / TypeScript example</strong></summary>
 
+```bash
+npm install @3mdikram/worldmoneywords
+```
+
 ```tsx
-import { amountToWords } from '@worldmoneywords/core';
+import { amountToWords } from '@3mdikram/worldmoneywords';
 
 export function PaymentTotal() {
   const words = amountToWords('1500.25', 'USA', 'USD');

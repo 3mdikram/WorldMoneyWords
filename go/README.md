@@ -1,6 +1,12 @@
 # WorldMoneyWords for Go
 
+```bash
+go get github.com/3mdikram/WorldMoneyWords/go
+```
+
 ```go
+import amountwords "github.com/3mdikram/WorldMoneyWords/go"
+
 text, err := amountwords.Convert(1234.50, "IND", "INR")
 ```
 

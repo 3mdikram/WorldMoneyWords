@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "worldmoneywords"
+name = "3mdikram-worldmoneywords"
 version = "1.0.0"
 description = "Convert monetary amounts to English words using ISO country and currency codes"
 requires-python = ">=3.9"

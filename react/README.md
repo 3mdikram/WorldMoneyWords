@@ -1,7 +1,11 @@
 # WorldMoneyWords for React and JavaScript
 
+```bash
+npm install @3mdikram/worldmoneywords
+```
+
 ```tsx
-import { amountToWords } from '@worldmoneywords/core';
+import { amountToWords } from '@3mdikram/worldmoneywords';
 
 const text = amountToWords('1234.50', 'IND', 'INR');
 ```

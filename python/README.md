@@ -1,5 +1,9 @@
 # WorldMoneyWords for Python
 
+```bash
+pip install 3mdikram-worldmoneywords
+```
+
 ```python
 from amount_to_words import AmountToWords
 
