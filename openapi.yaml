@@ -1,0 +1,117 @@
+openapi: 3.1.0
+info:
+  title: WorldMoneyWords API
+  version: 1.0.0
+  description: Convert monetary amounts to words from any programming language.
+servers:
+  - url: http://localhost:8080
+paths:
+  /health:
+    get:
+      operationId: health
+      summary: Check service health
+      responses:
+        '200':
+          description: Service is healthy
+  /v1/convert:
+    post:
+      operationId: convertAmount
+      summary: Convert one monetary amount to words
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversionRequest'
+      responses:
+        '200':
+          description: Converted amount
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversionResult'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /v1/convert/batch:
+    post:
+      operationId: convertBatch
+      summary: Convert up to 100 monetary amounts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [items]
+              properties:
+                items:
+                  type: array
+                  maxItems: 100
+                  items:
+                    $ref: '#/components/schemas/ConversionRequest'
+      responses:
+        '200':
+          description: Converted amounts
+  /v1/countries:
+    get:
+      operationId: listCountries
+      summary: List supported ISO countries
+      responses:
+        '200':
+          description: Countries keyed by alpha-3 code
+  /v1/currencies:
+    get:
+      operationId: listCurrencies
+      summary: List supported currencies and fraction digits
+      responses:
+        '200':
+          description: Currency metadata keyed by ISO 4217 code
+components:
+  schemas:
+    ConversionRequest:
+      type: object
+      required: [amount, countryCode, currencyCode]
+      properties:
+        amount:
+          oneOf:
+            - type: string
+              examples: ['1234.50']
+            - type: number
+        countryCode:
+          type: string
+          pattern: '^[A-Za-z]{3}$'
+          examples: [IND]
+        currencyCode:
+          type: string
+          pattern: '^[A-Za-z]{3}$'
+          examples: [INR]
+        options:
+          type: object
+          properties:
+            includeOnly: {type: boolean, default: true}
+            includeZeroMinor: {type: boolean, default: false}
+            conjunction: {type: string, default: and}
+    ConversionResult:
+      type: object
+      required: [text, countryCode, currencyCode, majorAmount, minorAmount]
+      properties:
+        text: {type: string}
+        countryCode: {type: string}
+        currencyCode: {type: string}
+        majorAmount: {type: string}
+        minorAmount: {type: string}
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code: {type: string}
+            message: {type: string}
+  responses:
+    ValidationError:
+      description: Invalid request data
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
