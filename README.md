@@ -496,6 +496,24 @@ Unknown but valid ICU currencies use their English display name and generic `Min
 
 The language-specific packages contain their own runtime requirements.
 
+## Runnable examples
+
+| Platform | Example | Run command |
+|---|---|---|
+| PHP | [`examples/basic.php`](examples/basic.php) | `php examples/basic.php` |
+| Laravel | [`laravel/examples/usage.php`](laravel/examples/usage.php) | Use inside a Laravel application |
+| Python | [`python/examples/basic.py`](python/examples/basic.py) | `cd python && PYTHONPATH=src python3 examples/basic.py` |
+| Go | [`go/examples/basic/main.go`](go/examples/basic/main.go) | `cd go && go run ./examples/basic` |
+| Node.js | [`react/examples/basic.mjs`](react/examples/basic.mjs) | `cd react && npm run build && node examples/basic.mjs` |
+| React | [`react/examples/CountryAmount.tsx`](react/examples/CountryAmount.tsx) | Copy into a React application |
+
+The examples demonstrate output including:
+
+```text
+One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only
+Ten US Dollars plus Zero Cents
+```
+
 ## Development
 
 ```bash

@@ -5,6 +5,7 @@ declare(strict_types=1);
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 use AmountToWords\AmountToWords;
+use AmountToWords\ConversionOptions;
 
 $converter = new AmountToWords();
 
@@ -16,3 +17,11 @@ foreach ([
 ] as [$amount, $country, $currency]) {
     echo $converter->convert($amount, $country, $currency) . PHP_EOL;
 }
+
+$options = new ConversionOptions(
+    includeOnly: false,
+    includeZeroMinor: true,
+    conjunction: 'plus',
+);
+
+echo $converter->convert('10.00', 'US', 'USD', $options) . PHP_EOL;
