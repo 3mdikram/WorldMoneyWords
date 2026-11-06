@@ -46,7 +46,6 @@ convert(amount, countryCode, currencyCode, options?)
 | 📦 Batch friendly | Converts multiple monetary values in a single call |
 | 🔧 Extensible | Register or override currency names and minor units |
 | 🛡️ Clear validation | Provides specific errors for invalid amounts, countries, and currencies |
-| ✅ Tested | Automated tests and GitHub Actions CI |
 
 ## Quick start
 
