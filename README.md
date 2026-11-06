@@ -39,39 +39,6 @@ convert(amount, countryCode, currencyCode)
 | 🔧 Extensible | Register or override currency names and minor units |
 | ✅ Tested | Automated tests and GitHub Actions CI |
 
-## Use from any programming language
-
-The REST API and OpenAPI specification make WorldMoneyWords available to any language that can send an HTTP request—even when no native SDK exists.
-
-```bash
-composer install
-composer serve
-```
-
-```bash
-curl -X POST http://localhost:8080/v1/convert \
-  -H 'Content-Type: application/json' \
-  -d '{"amount":"1234.50","countryCode":"IND","currencyCode":"INR"}'
-```
-
-```json
-{
-  "text": "One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only",
-  "countryCode": "IND",
-  "currencyCode": "INR",
-  "majorAmount": "1234",
-  "minorAmount": "50"
-}
-```
-
-Run it with Docker instead:
-
-```bash
-docker compose up --build
-```
-
-Use [`openapi.yaml`](openapi.yaml) to generate clients for Java, C#, Kotlin, Swift, Rust, Ruby, Dart, C++, and other languages.
-
 ## Quick start
 
 ### PHP

@@ -1,8 +1,0 @@
-.git
-.github
-vendor
-react/node_modules
-react/dist
-python/build
-python/**/*.egg-info
-.phpunit.cache
