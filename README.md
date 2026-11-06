@@ -7,7 +7,7 @@
 [![Tests](https://github.com/3mdikram/WorldMoneyWords/actions/workflows/tests.yml/badge.svg)](https://github.com/3mdikram/WorldMoneyWords/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![PHP](https://img.shields.io/badge/PHP-8.1%2B-777BB4?logo=php&logoColor=white)](https://www.php.net/)
-[![Countries](https://img.shields.io/badge/ISO_countries-250-1f6feb)](#country-and-currency-support)
+[![Countries](https://img.shields.io/badge/important_countries-200-1f6feb)](#country-and-currency-support)
 [![Languages](https://img.shields.io/badge/platforms-PHP_%7C_Python_%7C_Go_%7C_TypeScript-orange)](#platforms)
 
 [Quick start](#quick-start) · [Platforms](#platforms) · [Advanced usage](#advanced-php-usage) · [Contributing](CONTRIBUTING.md)
@@ -31,7 +31,7 @@ convert(amount, countryCode, currencyCode)
 
 | Feature | Description |
 |---|---|
-| 🌐 Global country support | Accepts ISO 3166-1 Alpha-2 and Alpha-3 codes for all 250 countries |
+| 🌐 Important country support | Accepts ISO 3166-1 Alpha-2 and Alpha-3 codes for 200 important countries |
 | 💱 Currency aware | Supports ISO 4217 names, minor units, and 0/2/3 decimal currencies |
 | 🎯 Financial accuracy | Exact decimal-string rounding avoids binary floating-point loss in PHP |
 | 🧩 Multi-platform | PHP, Laravel, Python, Go, React, browsers, and Node.js |
@@ -68,7 +68,7 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 | PHP | `3mdikram/worldmoneywords` | `$converter->convert(...)` |
 | Laravel | `3mdikram/worldmoneywords-laravel` | `AmountToWords::convert(...)` |
 | Python | `3mdikram-worldmoneywords` | `converter.convert(...)` |
-| Go | `github.com/3mdikram/WorldMoneyWords/go` | `amountwords.Convert(...)` |
+| Go | `github.com/3mdikram/WorldMoneyWords/go/v2` | `amountwords.Convert(...)` |
 | React / Node.js | `@3mdikram/worldmoneywords` | `amountToWords(...)` |
 
 <details>
@@ -110,7 +110,7 @@ print(converter.convert("42.50", "GBR", "GBP"))
 <summary><strong>Go example</strong></summary>
 
 ```bash
-go get github.com/3mdikram/WorldMoneyWords/go
+go get github.com/3mdikram/WorldMoneyWords/go/v2
 ```
 
 ```go
@@ -118,7 +118,7 @@ package main
 
 import (
     "fmt"
-    amountwords "github.com/3mdikram/WorldMoneyWords/go"
+    amountwords "github.com/3mdikram/WorldMoneyWords/go/v2"
 )
 
 func main() {
@@ -253,25 +253,20 @@ WorldMoneyWords performs decimal-string rounding in PHP, including correct carry
 | 🇳🇿 | **New Zealand** | `NZ` | `NZL` | New Zealand Dollar | `NZD` |
 
 <details>
-<summary><strong>🌐 Browse all other 235 supported countries</strong></summary>
+<summary><strong>🌐 Browse all other 185 supported countries</strong></summary>
 
 <br>
 
 |  | Country | **Alpha-2** | **Alpha-3** | Currency | ISO currency |
 |:---:|---|:---:|:---:|---|:---:|
 | 🇦🇫 | **Afghanistan** | `AF` | `AFG` | Afghan Afghani | `AFN` |
-| 🇦🇽 | **Åland Islands** | `AX` | `ALA` | Euro | `EUR` |
 | 🇦🇱 | **Albania** | `AL` | `ALB` | Albanian Lek | `ALL` |
 | 🇩🇿 | **Algeria** | `DZ` | `DZA` | Algerian Dinar | `DZD` |
-| 🇦🇸 | **American Samoa** | `AS` | `ASM` | US Dollar | `USD` |
 | 🇦🇩 | **Andorra** | `AD` | `AND` | Euro | `EUR` |
 | 🇦🇴 | **Angola** | `AO` | `AGO` | Angolan Kwanza | `AOA` |
-| 🇦🇮 | **Anguilla** | `AI` | `AIA` | East Caribbean Dollar | `XCD` |
-| 🇦🇶 | **Antarctica** | `AQ` | `ATA` | — | — |
 | 🇦🇬 | **Antigua and Barbuda** | `AG` | `ATG` | East Caribbean Dollar | `XCD` |
 | 🇦🇷 | **Argentina** | `AR` | `ARG` | Argentine Peso | `ARS` |
 | 🇦🇲 | **Armenia** | `AM` | `ARM` | Armenian Dram | `AMD` |
-| 🇦🇼 | **Aruba** | `AW` | `ABW` | Aruban Florin | `AWG` |
 | 🇦🇹 | **Austria** | `AT` | `AUT` | Euro | `EUR` |
 | 🇦🇿 | **Azerbaijan** | `AZ` | `AZE` | Azerbaijani Manat | `AZN` |
 | 🇧🇸 | **Bahamas** | `BS` | `BHS` | Bahamian Dollar | `BSD` |
@@ -282,14 +277,10 @@ WorldMoneyWords performs decimal-string rounding in PHP, including correct carry
 | 🇧🇪 | **Belgium** | `BE` | `BEL` | Euro | `EUR` |
 | 🇧🇿 | **Belize** | `BZ` | `BLZ` | Belize Dollar | `BZD` |
 | 🇧🇯 | **Benin** | `BJ` | `BEN` | West African CFA Franc | `XOF` |
-| 🇧🇲 | **Bermuda** | `BM` | `BMU` | Bermudan Dollar | `BMD` |
 | 🇧🇹 | **Bhutan** | `BT` | `BTN` | Bhutanese Ngultrum, Indian Rupee | `BTN`, `INR` |
 | 🇧🇴 | **Bolivia (Plurinational State of)** | `BO` | `BOL` | Bolivian Boliviano | `BOB` |
-| 🇧🇶 | **Bonaire, Sint Eustatius and Saba** | `BQ` | `BES` | US Dollar | `USD` |
 | 🇧🇦 | **Bosnia and Herzegovina** | `BA` | `BIH` | Bosnia-Herzegovina Convertible Mark | `BAM` |
 | 🇧🇼 | **Botswana** | `BW` | `BWA` | Botswanan Pula | `BWP` |
-| 🇧🇻 | **Bouvet Island** | `BV` | `BVT` | Norwegian Krone | `NOK` |
-| 🇮🇴 | **British Indian Ocean Territory** | `IO` | `IOT` | US Dollar | `USD` |
 | 🇧🇳 | **Brunei Darussalam** | `BN` | `BRN` | Brunei Dollar | `BND` |
 | 🇧🇬 | **Bulgaria** | `BG` | `BGR` | Euro | `EUR` |
 | 🇧🇫 | **Burkina Faso** | `BF` | `BFA` | West African CFA Franc | `XOF` |
@@ -297,22 +288,17 @@ WorldMoneyWords performs decimal-string rounding in PHP, including correct carry
 | 🇨🇻 | **Cabo Verde** | `CV` | `CPV` | Cape Verdean Escudo | `CVE` |
 | 🇰🇭 | **Cambodia** | `KH` | `KHM` | Cambodian Riel | `KHR` |
 | 🇨🇲 | **Cameroon** | `CM` | `CMR` | Central African CFA Franc | `XAF` |
-| 🇰🇾 | **Cayman Islands** | `KY` | `CYM` | Cayman Islands Dollar | `KYD` |
 | 🇨🇫 | **Central African Republic** | `CF` | `CAF` | Central African CFA Franc | `XAF` |
 | 🇹🇩 | **Chad** | `TD` | `TCD` | Central African CFA Franc | `XAF` |
 | 🇨🇱 | **Chile** | `CL` | `CHL` | Chilean Peso | `CLP` |
-| 🇨🇽 | **Christmas Island** | `CX` | `CXR` | Australian Dollar | `AUD` |
-| 🇨🇨 | **Cocos (Keeling) Islands** | `CC` | `CCK` | Australian Dollar | `AUD` |
 | 🇨🇴 | **Colombia** | `CO` | `COL` | Colombian Peso | `COP` |
 | 🇰🇲 | **Comoros** | `KM` | `COM` | Comorian Franc | `KMF` |
 | 🇨🇬 | **Congo** | `CG` | `COG` | Central African CFA Franc | `XAF` |
 | 🇨🇩 | **Congo (Democratic Republic of the)** | `CD` | `COD` | Congolese Franc | `CDF` |
-| 🇨🇰 | **Cook Islands** | `CK` | `COK` | New Zealand Dollar | `NZD` |
 | 🇨🇷 | **Costa Rica** | `CR` | `CRI` | Costa Rican Colón | `CRC` |
 | 🇨🇮 | **Côte d'Ivoire** | `CI` | `CIV` | West African CFA Franc | `XOF` |
 | 🇭🇷 | **Croatia** | `HR` | `HRV` | Euro | `EUR` |
 | 🇨🇺 | **Cuba** | `CU` | `CUB` | Cuban Peso | `CUP` |
-| 🇨🇼 | **Curaçao** | `CW` | `CUW` | Caribbean guilder | `XCG` |
 | 🇨🇾 | **Cyprus** | `CY` | `CYP` | Euro | `EUR` |
 | 🇨🇿 | **Czechia** | `CZ` | `CZE` | Czech Koruna | `CZK` |
 | 🇩🇰 | **Denmark** | `DK` | `DNK` | Danish Krone | `DKK` |
@@ -327,30 +313,19 @@ WorldMoneyWords performs decimal-string rounding in PHP, including correct carry
 | 🇪🇪 | **Estonia** | `EE` | `EST` | Euro | `EUR` |
 | 🇪🇹 | **Ethiopia** | `ET` | `ETH` | Ethiopian Birr | `ETB` |
 | 🇸🇿 | **Eswatini** | `SZ` | `SWZ` | Swazi Lilangeni | `SZL` |
-| 🇫🇰 | **Falkland Islands (Malvinas)** | `FK` | `FLK` | Falkland Islands Pound | `FKP` |
-| 🇫🇴 | **Faroe Islands** | `FO` | `FRO` | Danish Krone | `DKK` |
 | 🇫🇯 | **Fiji** | `FJ` | `FJI` | Fijian Dollar | `FJD` |
 | 🇫🇮 | **Finland** | `FI` | `FIN` | Euro | `EUR` |
-| 🇬🇫 | **French Guiana** | `GF` | `GUF` | Euro | `EUR` |
-| 🇵🇫 | **French Polynesia** | `PF` | `PYF` | CFP Franc | `XPF` |
-| 🇹🇫 | **French Southern Territories** | `TF` | `ATF` | Euro | `EUR` |
 | 🇬🇦 | **Gabon** | `GA` | `GAB` | Central African CFA Franc | `XAF` |
 | 🇬🇲 | **Gambia** | `GM` | `GMB` | Gambian Dalasi | `GMD` |
 | 🇬🇪 | **Georgia** | `GE` | `GEO` | Georgian Lari | `GEL` |
 | 🇬🇭 | **Ghana** | `GH` | `GHA` | Ghanaian Cedi | `GHS` |
-| 🇬🇮 | **Gibraltar** | `GI` | `GIB` | Gibraltar Pound | `GIP` |
 | 🇬🇷 | **Greece** | `GR` | `GRC` | Euro | `EUR` |
-| 🇬🇱 | **Greenland** | `GL` | `GRL` | Danish Krone | `DKK` |
 | 🇬🇩 | **Grenada** | `GD` | `GRD` | East Caribbean Dollar | `XCD` |
-| 🇬🇵 | **Guadeloupe** | `GP` | `GLP` | Euro | `EUR` |
-| 🇬🇺 | **Guam** | `GU` | `GUM` | US Dollar | `USD` |
 | 🇬🇹 | **Guatemala** | `GT` | `GTM` | Guatemalan Quetzal | `GTQ` |
-| 🇬🇬 | **Guernsey** | `GG` | `GGY` | British Pound | `GBP` |
 | 🇬🇳 | **Guinea** | `GN` | `GIN` | Guinean Franc | `GNF` |
 | 🇬🇼 | **Guinea-Bissau** | `GW` | `GNB` | West African CFA Franc | `XOF` |
 | 🇬🇾 | **Guyana** | `GY` | `GUY` | Guyanaese Dollar | `GYD` |
 | 🇭🇹 | **Haiti** | `HT` | `HTI` | Haitian Gourde, US Dollar | `HTG`, `USD` |
-| 🇭🇲 | **Heard Island and McDonald Islands** | `HM` | `HMD` | Australian Dollar | `AUD` |
 | 🇻🇦 | **Holy See** | `VA` | `VAT` | Euro | `EUR` |
 | 🇭🇳 | **Honduras** | `HN` | `HND` | Honduran Lempira | `HNL` |
 | 🇭🇰 | **Hong Kong** | `HK` | `HKG` | Hong Kong Dollar | `HKD` |
@@ -360,11 +335,9 @@ WorldMoneyWords performs decimal-string rounding in PHP, including correct carry
 | 🇮🇷 | **Iran (Islamic Republic of)** | `IR` | `IRN` | Iranian Rial | `IRR` |
 | 🇮🇶 | **Iraq** | `IQ` | `IRQ` | Iraqi Dinar | `IQD` |
 | 🇮🇪 | **Ireland** | `IE` | `IRL` | Euro | `EUR` |
-| 🇮🇲 | **Isle of Man** | `IM` | `IMN` | British Pound | `GBP` |
 | 🇮🇱 | **Israel** | `IL` | `ISR` | Israeli New Shekel | `ILS` |
 | 🇮🇹 | **Italy** | `IT` | `ITA` | Euro | `EUR` |
 | 🇯🇲 | **Jamaica** | `JM` | `JAM` | Jamaican Dollar | `JMD` |
-| 🇯🇪 | **Jersey** | `JE` | `JEY` | British Pound | `GBP` |
 | 🇯🇴 | **Jordan** | `JO` | `JOR` | Jordanian Dinar | `JOD` |
 | 🇰🇿 | **Kazakhstan** | `KZ` | `KAZ` | Kazakhstani Tenge | `KZT` |
 | 🇰🇪 | **Kenya** | `KE` | `KEN` | Kenyan Shilling | `KES` |
@@ -392,17 +365,14 @@ WorldMoneyWords performs decimal-string rounding in PHP, including correct carry
 | 🇲🇱 | **Mali** | `ML` | `MLI` | West African CFA Franc | `XOF` |
 | 🇲🇹 | **Malta** | `MT` | `MLT` | Euro | `EUR` |
 | 🇲🇭 | **Marshall Islands** | `MH` | `MHL` | US Dollar | `USD` |
-| 🇲🇶 | **Martinique** | `MQ` | `MTQ` | Euro | `EUR` |
 | 🇲🇷 | **Mauritania** | `MR` | `MRT` | Mauritanian Ouguiya | `MRU` |
 | 🇲🇺 | **Mauritius** | `MU` | `MUS` | Mauritian Rupee | `MUR` |
-| 🇾🇹 | **Mayotte** | `YT` | `MYT` | Euro | `EUR` |
 | 🇲🇽 | **Mexico** | `MX` | `MEX` | Mexican Peso | `MXN` |
 | 🇫🇲 | **Micronesia (Federated States of)** | `FM` | `FSM` | US Dollar | `USD` |
 | 🇲🇩 | **Moldova (Republic of)** | `MD` | `MDA` | Moldovan Leu | `MDL` |
 | 🇲🇨 | **Monaco** | `MC` | `MCO` | Euro | `EUR` |
 | 🇲🇳 | **Mongolia** | `MN` | `MNG` | Mongolian Tugrik | `MNT` |
 | 🇲🇪 | **Montenegro** | `ME` | `MNE` | Euro | `EUR` |
-| 🇲🇸 | **Montserrat** | `MS` | `MSR` | East Caribbean Dollar | `XCD` |
 | 🇲🇦 | **Morocco** | `MA` | `MAR` | Moroccan Dirham | `MAD` |
 | 🇲🇿 | **Mozambique** | `MZ` | `MOZ` | Mozambican Metical | `MZN` |
 | 🇲🇲 | **Myanmar** | `MM` | `MMR` | Myanmar Kyat | `MMK` |
@@ -410,13 +380,9 @@ WorldMoneyWords performs decimal-string rounding in PHP, including correct carry
 | 🇳🇷 | **Naoero** | `NR` | `NRU` | Australian Dollar | `AUD` |
 | 🇳🇵 | **Nepal** | `NP` | `NPL` | Nepalese Rupee | `NPR` |
 | 🇳🇱 | **Netherlands** | `NL` | `NLD` | Euro | `EUR` |
-| 🇳🇨 | **New Caledonia** | `NC` | `NCL` | CFP Franc | `XPF` |
 | 🇳🇮 | **Nicaragua** | `NI` | `NIC` | Nicaraguan Córdoba | `NIO` |
 | 🇳🇪 | **Niger** | `NE` | `NER` | West African CFA Franc | `XOF` |
 | 🇳🇬 | **Nigeria** | `NG` | `NGA` | Nigerian Naira | `NGN` |
-| 🇳🇺 | **Niue** | `NU` | `NIU` | New Zealand Dollar | `NZD` |
-| 🇳🇫 | **Norfolk Island** | `NF` | `NFK` | Australian Dollar | `AUD` |
-| 🇲🇵 | **Northern Mariana Islands** | `MP` | `MNP` | US Dollar | `USD` |
 | 🇳🇴 | **Norway** | `NO` | `NOR` | Norwegian Krone | `NOK` |
 | 🇴🇲 | **Oman** | `OM` | `OMN` | Omani Rial | `OMR` |
 | 🇵🇰 | **Pakistan** | `PK` | `PAK` | Pakistani Rupee | `PKR` |
@@ -427,21 +393,14 @@ WorldMoneyWords performs decimal-string rounding in PHP, including correct carry
 | 🇵🇾 | **Paraguay** | `PY` | `PRY` | Paraguayan Guarani | `PYG` |
 | 🇵🇪 | **Peru** | `PE` | `PER` | Peruvian Sol | `PEN` |
 | 🇵🇭 | **Philippines** | `PH` | `PHL` | Philippine Peso | `PHP` |
-| 🇵🇳 | **Pitcairn** | `PN` | `PCN` | New Zealand Dollar | `NZD` |
 | 🇵🇱 | **Poland** | `PL` | `POL` | Polish Zloty | `PLN` |
 | 🇵🇹 | **Portugal** | `PT` | `PRT` | Euro | `EUR` |
-| 🇵🇷 | **Puerto Rico** | `PR` | `PRI` | US Dollar | `USD` |
 | 🇶🇦 | **Qatar** | `QA` | `QAT` | Qatari Riyal | `QAR` |
-| 🇷🇪 | **Réunion** | `RE` | `REU` | Euro | `EUR` |
 | 🇷🇴 | **Romania** | `RO` | `ROU` | Romanian Leu | `RON` |
 | 🇷🇺 | **Russian Federation** | `RU` | `RUS` | Russian Ruble | `RUB` |
 | 🇷🇼 | **Rwanda** | `RW` | `RWA` | Rwandan Franc | `RWF` |
-| 🇧🇱 | **Saint Barthélemy** | `BL` | `BLM` | Euro | `EUR` |
-| 🇸🇭 | **Saint Helena, Ascension and Tristan da Cunha** | `SH` | `SHN` | St. Helena Pound | `SHP` |
 | 🇰🇳 | **Saint Kitts and Nevis** | `KN` | `KNA` | East Caribbean Dollar | `XCD` |
 | 🇱🇨 | **Saint Lucia** | `LC` | `LCA` | East Caribbean Dollar | `XCD` |
-| 🇲🇫 | **Saint Martin (French part)** | `MF` | `MAF` | Euro | `EUR` |
-| 🇵🇲 | **Saint Pierre and Miquelon** | `PM` | `SPM` | Euro | `EUR` |
 | 🇻🇨 | **Saint Vincent and the Grenadines** | `VC` | `VCT` | East Caribbean Dollar | `XCD` |
 | 🇼🇸 | **Samoa** | `WS` | `WSM` | Samoan Tala | `WST` |
 | 🇸🇲 | **San Marino** | `SM` | `SMR` | Euro | `EUR` |
@@ -450,18 +409,15 @@ WorldMoneyWords performs decimal-string rounding in PHP, including correct carry
 | 🇷🇸 | **Serbia** | `RS` | `SRB` | Serbian Dinar | `RSD` |
 | 🇸🇨 | **Seychelles** | `SC` | `SYC` | Seychellois Rupee | `SCR` |
 | 🇸🇱 | **Sierra Leone** | `SL` | `SLE` | Sierra Leonean Leone | `SLE` |
-| 🇸🇽 | **Sint Maarten (Dutch part)** | `SX` | `SXM` | Caribbean guilder | `XCG` |
 | 🇸🇰 | **Slovakia** | `SK` | `SVK` | Euro | `EUR` |
 | 🇸🇮 | **Slovenia** | `SI` | `SVN` | Euro | `EUR` |
 | 🇸🇧 | **Solomon Islands** | `SB` | `SLB` | Solomon Islands Dollar | `SBD` |
 | 🇸🇴 | **Somalia** | `SO` | `SOM` | Somali Shilling | `SOS` |
-| 🇬🇸 | **South Georgia and the South Sandwich Islands** | `GS` | `SGS` | British Pound | `GBP` |
 | 🇸🇸 | **South Sudan** | `SS` | `SSD` | South Sudanese Pound | `SSP` |
 | 🇪🇸 | **Spain** | `ES` | `ESP` | Euro | `EUR` |
 | 🇱🇰 | **Sri Lanka** | `LK` | `LKA` | Sri Lankan Rupee | `LKR` |
 | 🇸🇩 | **Sudan** | `SD` | `SDN` | Sudanese Pound | `SDG` |
 | 🇸🇷 | **Suriname** | `SR` | `SUR` | Surinamese Dollar | `SRD` |
-| 🇸🇯 | **Svalbard and Jan Mayen** | `SJ` | `SJM` | Norwegian Krone | `NOK` |
 | 🇸🇪 | **Sweden** | `SE` | `SWE` | Swedish Krona | `SEK` |
 | 🇨🇭 | **Switzerland** | `CH` | `CHE` | Swiss Franc | `CHF` |
 | 🇸🇾 | **Syrian Arab Republic** | `SY` | `SYR` | Syrian Pound | `SYP` |
@@ -471,25 +427,19 @@ WorldMoneyWords performs decimal-string rounding in PHP, including correct carry
 | 🇹🇭 | **Thailand** | `TH` | `THA` | Thai Baht | `THB` |
 | 🇹🇱 | **Timor-Leste** | `TL` | `TLS` | US Dollar | `USD` |
 | 🇹🇬 | **Togo** | `TG` | `TGO` | West African CFA Franc | `XOF` |
-| 🇹🇰 | **Tokelau** | `TK` | `TKL` | New Zealand Dollar | `NZD` |
 | 🇹🇴 | **Tonga** | `TO` | `TON` | Tongan Paʻanga | `TOP` |
 | 🇹🇹 | **Trinidad and Tobago** | `TT` | `TTO` | Trinidad & Tobago Dollar | `TTD` |
 | 🇹🇳 | **Tunisia** | `TN` | `TUN` | Tunisian Dinar | `TND` |
 | 🇹🇷 | **Türkiye** | `TR` | `TUR` | Turkish Lira | `TRY` |
 | 🇹🇲 | **Turkmenistan** | `TM` | `TKM` | Turkmenistani Manat | `TMT` |
-| 🇹🇨 | **Turks and Caicos Islands** | `TC` | `TCA` | US Dollar | `USD` |
 | 🇹🇻 | **Tuvalu** | `TV` | `TUV` | Australian Dollar | `AUD` |
 | 🇺🇬 | **Uganda** | `UG` | `UGA` | Ugandan Shilling | `UGX` |
 | 🇺🇦 | **Ukraine** | `UA` | `UKR` | Ukrainian Hryvnia | `UAH` |
-| 🇺🇲 | **United States Minor Outlying Islands** | `UM` | `UMI` | US Dollar | `USD` |
 | 🇺🇾 | **Uruguay** | `UY` | `URY` | Uruguayan Peso | `UYU` |
 | 🇺🇿 | **Uzbekistan** | `UZ` | `UZB` | Uzbekistani Som | `UZS` |
 | 🇻🇺 | **Vanuatu** | `VU` | `VUT` | Vanuatu Vatu | `VUV` |
 | 🇻🇪 | **Venezuela (Bolivarian Republic of)** | `VE` | `VEN` | Venezuelan Bolívar | `VES` |
 | 🇻🇳 | **Viet Nam** | `VN` | `VNM` | Vietnamese Dong | `VND` |
-| 🇻🇬 | **Virgin Islands (British)** | `VG` | `VGB` | US Dollar | `USD` |
-| 🇻🇮 | **Virgin Islands (U.S.)** | `VI` | `VIR` | US Dollar | `USD` |
-| 🇼🇫 | **Wallis and Futuna** | `WF` | `WLF` | CFP Franc | `XPF` |
 | 🇪🇭 | **Western Sahara** | `EH` | `ESH` | Moroccan Dirham | `MAD` |
 | 🇾🇪 | **Yemen** | `YE` | `YEM` | Yemeni Rial | `YER` |
 | 🇿🇲 | **Zambia** | `ZM` | `ZMB` | Zambian Kwacha | `ZMW` |

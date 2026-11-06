@@ -16,3 +16,9 @@ func TestAlpha2Country(t *testing.T) {
 		t.Fatalf("got %q, %v", got, err)
 	}
 }
+
+func TestMinorTerritoryIsNotSupported(t *testing.T) {
+	if _, err := Convert(10, "AI", "USD"); err == nil {
+		t.Fatal("expected unsupported country error")
+	}
+}

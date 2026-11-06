@@ -55,6 +55,12 @@ final class AmountToWordsTest extends TestCase
         self::assertSame('USA', $converter->convertDetailed(1, 'US', 'USD')->countryCode);
     }
 
+    public function testRejectsMinorTerritoryOutsideSupportedCountries(): void
+    {
+        $this->expectException(InvalidCountryCodeException::class);
+        (new AmountToWords())->convert(10, 'AIA', 'USD');
+    }
+
     public function testCodesAreCaseInsensitive(): void
     {
         self::assertSame('One US Dollar Only', (new AmountToWords())->convert(1, 'usa', 'usd'));
@@ -79,7 +85,7 @@ final class AmountToWordsTest extends TestCase
         $converter = new AmountToWords();
         $countries = $converter->supportedCountries();
 
-        self::assertGreaterThanOrEqual(200, count($countries));
+        self::assertCount(200, $countries);
         self::assertArrayHasKey('IND', $countries);
         self::assertArrayHasKey('USA', $countries);
         self::assertArrayHasKey('GBR', $countries);

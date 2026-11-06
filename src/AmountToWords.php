@@ -127,7 +127,9 @@ final class AmountToWords
         $countries = [];
 
         foreach ((new ISO3166())->all() as $country) {
-            $countries[$country['alpha3']] = $country['name'];
+            if (in_array($country['alpha3'], SupportedCountries::ALPHA3, true)) {
+                $countries[$country['alpha3']] = $country['name'];
+            }
         }
 
         ksort($countries);
@@ -153,10 +155,16 @@ final class AmountToWords
 
         try {
             if (preg_match('/^[A-Z]{2}$/', $code)) {
-                return $iso->alpha2($code)['alpha3'];
+                $resolved = $iso->alpha2($code)['alpha3'];
+                if (in_array($resolved, SupportedCountries::ALPHA3, true)) {
+                    return $resolved;
+                }
             }
             if (preg_match('/^[A-Z]{3}$/', $code)) {
-                return $iso->alpha3($code)['alpha3'];
+                $resolved = $iso->alpha3($code)['alpha3'];
+                if (in_array($resolved, SupportedCountries::ALPHA3, true)) {
+                    return $resolved;
+                }
             }
         } catch (\Throwable) {
             // Convert all lookup failures to the library's public exception.

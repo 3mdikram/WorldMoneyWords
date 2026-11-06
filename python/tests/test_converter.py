@@ -11,5 +11,9 @@ class ConverterTest(unittest.TestCase):
     def test_alpha2_country(self):
         self.assertEqual("Ten Rupees Only", AmountToWords().convert("10", "IN", "INR"))
 
+    def test_minor_territory_is_not_supported(self):
+        with self.assertRaises(ValueError):
+            AmountToWords().convert("10", "AI", "USD")
+
 if __name__ == "__main__":
     unittest.main()
