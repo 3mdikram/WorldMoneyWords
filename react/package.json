@@ -1,0 +1,12 @@
+{
+  "name": "@worldmoneywords/core",
+  "version": "1.0.0",
+  "description": "Amount-to-words converter for React, browsers, and Node.js",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": "./dist/index.js",
+  "files": ["dist"],
+  "scripts": {"build": "tsc", "test": "npm run build && node --test test/*.test.js"},
+  "devDependencies": {"typescript": "^5.7.0"}
+}
