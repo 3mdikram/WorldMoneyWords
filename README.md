@@ -236,6 +236,30 @@ convert(int|float|string $amount, string $countryCode, string $currencyCode, ?Co
 | `amount` | `'1,234.50'` | Plain or correctly grouped numeric value; strings are recommended |
 | `countryCode` | `'IN'` or `'IND'` | ISO 3166-1 Alpha-2 or Alpha-3 code, case-insensitive |
 | `currencyCode` | `'INR'` | ISO 4217 code, case-insensitive |
+| `options` | `new ConversionOptions(...)` | Optional fourth argument used to customize the generated sentence |
+
+### Conversion options
+
+| Option | Type | Default | What it does | Example result |
+|---|:---:|:---:|---|---|
+| `includeOnly` | `boolean` | `true` | Adds `Only` to the end of the amount | `Ten US Dollars Only` |
+| `includeZeroMinor` | `boolean` | `false` | Includes the minor unit when its value is zero | `Ten US Dollars and Zero Cents Only` |
+| `conjunction` | `string` | `and` | Changes the word joining major and minor units | `Ten US Dollars plus Fifty Cents Only` |
+
+Use the options when you need wording tailored to invoices, cheques, banking forms, or local document rules:
+
+- Keep the defaults for standard financial wording.
+- Set `includeOnly` to `false` when a document does not require an `Only` suffix.
+- Set `includeZeroMinor` to `true` when zero cents, paise, or fils must be stated explicitly.
+- Change `conjunction` to wording such as `plus` when required by your output format.
+
+Option names follow each language's normal style:
+
+| PHP / TypeScript | Python | Go |
+|---|---|---|
+| `includeOnly` | `include_only` | `IncludeOnly` |
+| `includeZeroMinor` | `include_zero_minor` | `IncludeZeroMinor` |
+| `conjunction` | `conjunction` | `Conjunction` |
 
 Invalid PHP input throws a specific exception from `AmountToWords\Exception`.
 
