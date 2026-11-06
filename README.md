@@ -24,7 +24,7 @@ Output: One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only
 WorldMoneyWords provides one familiar three-value contract everywhere:
 
 ```text
-convert(amount, countryCode, currencyCode)
+convert(amount, countryCode, currencyCode, options?)
 ```
 
 ## Why WorldMoneyWords?
@@ -155,7 +155,7 @@ The TypeScript package has no React runtime dependency, so it also works in brow
 ## Core API
 
 ```php
-convert(int|float|string $amount, string $countryCode, string $currencyCode): string
+convert(int|float|string $amount, string $countryCode, string $currencyCode, ?ConversionOptions $options = null): string
 ```
 
 | Argument | Example | Rules |
@@ -179,8 +179,34 @@ $options = new ConversionOptions(
     conjunction: 'plus',
 );
 
-echo $converter->convertWithOptions('10.00', 'USA', 'USD', $options);
+echo $converter->convert('10.00', 'USA', 'USD', $options);
 // Ten US Dollars plus Zero Cents
+```
+
+The same optional fourth argument is available in every native implementation:
+
+```python
+from amount_to_words import AmountToWords, ConversionOptions
+
+options = ConversionOptions(include_only=False, include_zero_minor=True, conjunction="plus")
+text = AmountToWords().convert("10.00", "US", "USD", options)
+```
+
+```go
+options := amountwords.Options{
+    IncludeOnly: false,
+    IncludeZeroMinor: true,
+    Conjunction: "plus",
+}
+text, err := amountwords.Convert(10, "US", "USD", options)
+```
+
+```ts
+const text = amountToWords('10.00', 'US', 'USD', {
+  includeOnly: false,
+  includeZeroMinor: true,
+  conjunction: 'plus',
+});
 ```
 
 ### Return structured API data

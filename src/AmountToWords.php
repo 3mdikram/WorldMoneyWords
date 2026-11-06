@@ -25,9 +25,14 @@ final class AmountToWords
         );
     }
 
-    public function convert(int|float|string $amount, string $countryCode, string $currencyCode): string
+    public function convert(
+        int|float|string $amount,
+        string $countryCode,
+        string $currencyCode,
+        ?ConversionOptions $options = null,
+    ): string
     {
-        return $this->convertWithOptions($amount, $countryCode, $currencyCode);
+        return $this->convertWithOptions($amount, $countryCode, $currencyCode, $options);
     }
 
     public function convertWithOptions(

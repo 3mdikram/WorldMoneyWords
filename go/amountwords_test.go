@@ -22,3 +22,10 @@ func TestMinorTerritoryIsNotSupported(t *testing.T) {
 		t.Fatal("expected unsupported country error")
 	}
 }
+
+func TestOptions(t *testing.T) {
+	got, err := Convert(10, "US", "USD", Options{IncludeZeroMinor: true, Conjunction: "plus"})
+	if err != nil || got != "Ten US Dollars plus Zero Cents" {
+		t.Fatalf("got %q, %v", got, err)
+	}
+}

@@ -1,5 +1,5 @@
 import unittest
-from amount_to_words import AmountToWords
+from amount_to_words import AmountToWords, ConversionOptions
 
 class ConverterTest(unittest.TestCase):
     def test_inr(self):
@@ -14,6 +14,10 @@ class ConverterTest(unittest.TestCase):
     def test_minor_territory_is_not_supported(self):
         with self.assertRaises(ValueError):
             AmountToWords().convert("10", "AI", "USD")
+
+    def test_options(self):
+        options = ConversionOptions(include_only=False, include_zero_minor=True, conjunction="plus")
+        self.assertEqual("Ten US Dollars plus Zero Cents", AmountToWords().convert("10", "US", "USD", options))
 
 if __name__ == "__main__":
     unittest.main()

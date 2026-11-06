@@ -12,6 +12,14 @@ type Currency struct {
 	FractionDigits                                         int
 }
 
+type Options struct {
+	IncludeOnly      bool
+	IncludeZeroMinor bool
+	Conjunction      string
+}
+
+func DefaultOptions() Options { return Options{IncludeOnly: true, Conjunction: "and"} }
+
 var currencies = map[string]Currency{
 	"INR": {"Rupee", "Rupees", "Paisa", "Paise", 2}, "USD": {"US Dollar", "US Dollars", "Cent", "Cents", 2},
 	"GBP": {"Pound", "Pounds", "Penny", "Pence", 2}, "EUR": {"Euro", "Euros", "Cent", "Cents", 2},
@@ -62,7 +70,14 @@ func spell(n int64) (string, error) {
 	return strings.Join(p, " "), nil
 }
 
-func Convert(amount float64, countryCode, currencyCode string) (string, error) {
+func Convert(amount float64, countryCode, currencyCode string, supplied ...Options) (string, error) {
+	options := DefaultOptions()
+	if len(supplied) > 0 {
+		options = supplied[0]
+		if options.Conjunction == "" {
+			options.Conjunction = "and"
+		}
+	}
 	country, code := strings.ToUpper(strings.TrimSpace(countryCode)), strings.ToUpper(strings.TrimSpace(currencyCode))
 	if alpha3, ok := isoAlpha2To3[country]; ok {
 		country = alpha3
@@ -96,13 +111,16 @@ func Convert(amount float64, countryCode, currencyCode string) (string, error) {
 		majorName = c.MajorSingular
 	}
 	p = append(p, majorWords, majorName)
-	if minor > 0 {
+	if minor > 0 || (c.FractionDigits > 0 && options.IncludeZeroMinor) {
 		minorWords, _ := spell(minor)
 		minorName := c.MinorPlural
 		if minor == 1 {
 			minorName = c.MinorSingular
 		}
-		p = append(p, "and", minorWords, minorName)
+		p = append(p, options.Conjunction, minorWords, minorName)
 	}
-	return strings.Join(append(p, "Only"), " "), nil
+	if options.IncludeOnly {
+		p = append(p, "Only")
+	}
+	return strings.Join(p, " "), nil
 }

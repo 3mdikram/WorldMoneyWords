@@ -1,3 +1,3 @@
-from .converter import AmountToWords, Currency
+from .converter import AmountToWords, ConversionOptions, Currency
 
-__all__ = ["AmountToWords", "Currency"]
+__all__ = ["AmountToWords", "ConversionOptions", "Currency"]

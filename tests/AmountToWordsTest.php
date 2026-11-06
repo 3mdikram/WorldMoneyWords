@@ -108,7 +108,7 @@ final class AmountToWordsTest extends TestCase
         $options = new ConversionOptions(includeOnly: false, includeZeroMinor: true, conjunction: 'plus');
         self::assertSame(
             'Ten US Dollars plus Zero Cents',
-            (new AmountToWords())->convertWithOptions(10, 'USA', 'USD', $options),
+            (new AmountToWords())->convert(10, 'USA', 'USD', $options),
         );
     }
 

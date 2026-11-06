@@ -15,6 +15,16 @@ class Currency:
     minor_plural: str
     fraction_digits: int = 2
 
+@dataclass(frozen=True)
+class ConversionOptions:
+    include_only: bool = True
+    include_zero_minor: bool = False
+    conjunction: str = "and"
+
+    def __post_init__(self):
+        if not self.conjunction.strip():
+            raise ValueError("Conjunction cannot be empty")
+
 CURRENCIES = {
     "INR": Currency("Rupee", "Rupees", "Paisa", "Paise"),
     "USD": Currency("US Dollar", "US Dollars", "Cent", "Cents"),
@@ -59,7 +69,8 @@ class AmountToWords:
     def __init__(self, currencies: dict[str, Currency] | None = None):
         self.currencies = {**CURRENCIES, **(currencies or {})}
 
-    def convert(self, amount: int | float | str | Decimal, country_code: str, currency_code: str) -> str:
+    def convert(self, amount: int | float | str | Decimal, country_code: str, currency_code: str, options: ConversionOptions | None = None) -> str:
+        options = options or ConversionOptions()
         country_input = country_code.strip().upper()
         country = ISO_COUNTRY_CODES.get(country_input)
         code = currency_code.strip().upper()
@@ -80,6 +91,8 @@ class AmountToWords:
         minor = int((value - major) * (10 ** currency.fraction_digits))
         parts = ["Minus"] if negative else []
         parts += [_spell(major), currency.major_singular if major == 1 else currency.major_plural]
-        if minor:
-            parts += ["and", _spell(minor), currency.minor_singular if minor == 1 else currency.minor_plural]
-        return " ".join(filter(None, parts + ["Only"]))
+        if minor or (currency.fraction_digits > 0 and options.include_zero_minor):
+            parts += [options.conjunction, _spell(minor), currency.minor_singular if minor == 1 else currency.minor_plural]
+        if options.include_only:
+            parts.append("Only")
+        return " ".join(filter(None, parts))
