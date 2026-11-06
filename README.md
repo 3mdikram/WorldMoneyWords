@@ -34,9 +34,18 @@ convert(amount, countryCode, currencyCode, options?)
 | 🌐 Important country support | Accepts ISO 3166-1 Alpha-2 and Alpha-3 codes for 200 important countries |
 | 💱 Currency aware | Supports ISO 4217 names, minor units, and 0/2/3 decimal currencies |
 | 🎯 Financial accuracy | Exact decimal-string rounding avoids binary floating-point loss in PHP |
+| 🔄 Automatic code normalization | Converts Alpha-2 codes such as `IN` and `US` to canonical Alpha-3 codes |
+| ⚙️ Configurable wording | Control the `Only` suffix, zero minor units, and conjunction text |
+| 🔢 Formatted amount input | Accepts plain values and correctly grouped input such as `1,234,567.89` |
+| ➖ Negative amount support | Produces readable wording for refunds, adjustments, and negative balances |
+| ✍️ Correct grammar | Handles singular and plural major and minor currency units |
+| 🧾 Structured results | Returns JSON-serializable text, country, currency, major amount, and minor amount |
+| 📚 Discovery helpers | Lists supported countries and currencies for validation and form controls |
+| 🔠 Case insensitive | Accepts country and currency codes in upper or lowercase |
 | 🧩 Multi-platform | PHP, Laravel, Python, Go, React, browsers, and Node.js |
-| 📦 Batch and API friendly | Batch conversion and JSON-serializable detailed results |
+| 📦 Batch friendly | Converts multiple monetary values in a single call |
 | 🔧 Extensible | Register or override currency names and minor units |
+| 🛡️ Clear validation | Provides specific errors for invalid amounts, countries, and currencies |
 | ✅ Tested | Automated tests and GitHub Actions CI |
 
 ## Quick start
