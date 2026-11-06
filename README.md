@@ -42,7 +42,7 @@ convert(amount, countryCode, currencyCode, options?)
 | 🧾 Structured results | Returns JSON-serializable text, country, currency, major amount, and minor amount |
 | 📚 Discovery helpers | Lists supported countries and currencies for validation and form controls |
 | 🔠 Case insensitive | Accepts country and currency codes in upper or lowercase |
-| 🧩 Multi-platform | PHP, Laravel, Python, Go, React, browsers, and Node.js |
+| 🧩 Multi-platform | PHP, Laravel, Python, Go, Java, React, browsers, and Node.js |
 | 📦 Batch friendly | Converts multiple monetary values in a single call |
 | 🔧 Extensible | Register or override currency names and minor units |
 | 🛡️ Clear validation | Provides specific errors for invalid amounts, countries, and currencies |
@@ -77,6 +77,7 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 | Laravel | `3mdikram/worldmoneywords-laravel` | `AmountToWords::convert(...)` |
 | Python | `3mdikram-worldmoneywords` | `converter.convert(...)` |
 | Go | `github.com/3mdikram/WorldMoneyWords/go/v2` | `amountwords.Convert(...)` |
+| Java | `com.github.3mdikram:worldmoneywords` | `converter.convert(...)` |
 | React / Node.js | `@3mdikram/worldmoneywords` | `amountToWords(...)` |
 
 <details>
@@ -195,6 +196,41 @@ fmt.Println(text)
 </details>
 
 <details>
+<summary><strong>Java example</strong></summary>
+
+```bash
+cd java
+mvn install
+```
+
+#### 1. Default conversion
+
+```java
+import io.github.worldmoneywords.WorldMoneyWords;
+
+WorldMoneyWords converter = new WorldMoneyWords();
+String text = converter.convert("42.50", "GB", "GBP");
+// Forty Two Pounds and Fifty Pence Only
+```
+
+#### 2. Conversion with options
+
+```java
+import io.github.worldmoneywords.ConversionOptions;
+import io.github.worldmoneywords.WorldMoneyWords;
+
+WorldMoneyWords converter = new WorldMoneyWords();
+ConversionOptions options = new ConversionOptions(false, true, "plus");
+
+String text = converter.convert("10.00", "US", "USD", options);
+// Ten US Dollars plus Zero Cents
+```
+
+Requires Java 11 or newer. See the [Java guide](java/README.md).
+
+</details>
+
+<details>
 <summary><strong>React / TypeScript example</strong></summary>
 
 ```bash
@@ -263,11 +299,11 @@ Use the options when you need wording tailored to invoices, cheques, banking for
 
 Option names follow each language's normal style:
 
-| PHP / TypeScript | Python | Go |
-|---|---|---|
-| `includeOnly` | `include_only` | `IncludeOnly` |
-| `includeZeroMinor` | `include_zero_minor` | `IncludeZeroMinor` |
-| `conjunction` | `conjunction` | `Conjunction` |
+| PHP / TypeScript | Python | Go | Java |
+|---|---|---|---|
+| `includeOnly` | `include_only` | `IncludeOnly` | `includeOnly` |
+| `includeZeroMinor` | `include_zero_minor` | `IncludeZeroMinor` | `includeZeroMinor` |
+| `conjunction` | `conjunction` | `Conjunction` | `conjunction` |
 
 Invalid PHP input throws a specific exception from `AmountToWords\Exception`.
 
@@ -312,6 +348,11 @@ const text = amountToWords('10.00', 'US', 'USD', {
   includeZeroMinor: true,
   conjunction: 'plus',
 });
+```
+
+```java
+ConversionOptions options = new ConversionOptions(false, true, "plus");
+String text = new WorldMoneyWords().convert("10.00", "US", "USD", options);
 ```
 
 ### Return structured API data
@@ -621,6 +662,9 @@ cd python && PYTHONPATH=src python3 -m unittest discover -s tests
 
 # Go
 cd go && go test ./...
+
+# Java
+cd java && mvn verify
 
 # TypeScript
 cd react && npm install && npm test
