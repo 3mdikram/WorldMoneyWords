@@ -78,11 +78,29 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 composer require 3mdikram/worldmoneywords-laravel
 ```
 
+#### 1. Default conversion
+
 ```php
 use AmountToWords\Laravel\Facades\AmountToWords;
 
 echo AmountToWords::convert('99.95', 'USA', 'USD');
 // Ninety Nine US Dollars and Ninety Five Cents Only
+```
+
+#### 2. Conversion with options
+
+```php
+use AmountToWords\ConversionOptions;
+use AmountToWords\Laravel\Facades\AmountToWords;
+
+$options = new ConversionOptions(
+    includeOnly: false,
+    includeZeroMinor: true,
+    conjunction: 'plus',
+);
+
+echo AmountToWords::convert('10.00', 'US', 'USD', $options);
+// Ten US Dollars plus Zero Cents
 ```
 
 Laravel discovers the provider and facade automatically. See the [Laravel guide](laravel/README.md).
@@ -96,12 +114,29 @@ Laravel discovers the provider and facade automatically. See the [Laravel guide]
 pip install 3mdikram-worldmoneywords
 ```
 
+#### 1. Default conversion
+
 ```python
 from amount_to_words import AmountToWords
 
 converter = AmountToWords()
 print(converter.convert("42.50", "GBR", "GBP"))
 # Forty Two Pounds and Fifty Pence Only
+```
+
+#### 2. Conversion with options
+
+```python
+from amount_to_words import AmountToWords, ConversionOptions
+
+options = ConversionOptions(
+    include_only=False,
+    include_zero_minor=True,
+    conjunction="plus",
+)
+
+print(AmountToWords().convert("10.00", "US", "USD", options))
+# Ten US Dollars plus Zero Cents
 ```
 
 </details>
@@ -112,6 +147,8 @@ print(converter.convert("42.50", "GBR", "GBP"))
 ```bash
 go get github.com/3mdikram/WorldMoneyWords/go/v2
 ```
+
+#### 1. Default conversion
 
 ```go
 package main
@@ -130,6 +167,23 @@ func main() {
 }
 ```
 
+#### 2. Conversion with options
+
+```go
+options := amountwords.Options{
+    IncludeOnly:      false,
+    IncludeZeroMinor: true,
+    Conjunction:      "plus",
+}
+
+text, err := amountwords.Convert(10, "US", "USD", options)
+if err != nil {
+    panic(err)
+}
+fmt.Println(text)
+// Ten US Dollars plus Zero Cents
+```
+
 </details>
 
 <details>
@@ -139,12 +193,31 @@ func main() {
 npm install @3mdikram/worldmoneywords
 ```
 
+#### 1. Default conversion
+
 ```tsx
 import { amountToWords } from '@3mdikram/worldmoneywords';
 
 export function PaymentTotal() {
   const words = amountToWords('1500.25', 'USA', 'USD');
   return <p>{words}</p>;
+}
+```
+
+#### 2. Conversion with options
+
+```tsx
+import { amountToWords } from '@3mdikram/worldmoneywords';
+
+export function CustomPaymentTotal() {
+  const words = amountToWords('10.00', 'US', 'USD', {
+    includeOnly: false,
+    includeZeroMinor: true,
+    conjunction: 'plus',
+  });
+
+  return <p>{words}</p>;
+  // Ten US Dollars plus Zero Cents
 }
 ```
 
