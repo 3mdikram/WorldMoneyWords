@@ -1,17 +1,19 @@
 {
-  "name": "worldmoneywords/core",
+  "name": "3mdikram/worldmoneywords",
   "description": "Convert monetary amounts to words using ISO country and currency codes.",
   "type": "library",
   "license": "MIT",
   "keywords": ["amount", "currency", "money", "numbers", "words", "iso-3166", "iso-4217"],
   "authors": [
     {
-      "name": "Amount to Words Contributors"
+      "name": "Md Ikram",
+      "email": "mdikram@entitysport.com",
+      "homepage": "https://github.com/3mdikram"
     }
   ],
   "support": {
-    "issues": "https://github.com/worldmoneywords/core/issues",
-    "source": "https://github.com/worldmoneywords/core"
+    "issues": "https://github.com/3mdikram/WorldMoneyWords/issues",
+    "source": "https://github.com/3mdikram/WorldMoneyWords"
   },
   "require": {
     "php": "^8.1",

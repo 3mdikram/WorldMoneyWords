@@ -44,7 +44,7 @@ convert(amount, countryCode, currencyCode)
 ### PHP
 
 ```bash
-composer require worldmoneywords/core
+composer require 3mdikram/worldmoneywords
 ```
 
 ```php
@@ -65,8 +65,8 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 
 | Platform | Package | Main API |
 |---|---|---|
-| PHP | `worldmoneywords/core` | `$converter->convert(...)` |
-| Laravel | `worldmoneywords/laravel` | `AmountToWords::convert(...)` |
+| PHP | `3mdikram/worldmoneywords` | `$converter->convert(...)` |
+| Laravel | `3mdikram/worldmoneywords-laravel` | `AmountToWords::convert(...)` |
 | Python | `worldmoneywords` | `converter.convert(...)` |
 | Go | `github.com/worldmoneywords/go` | `amountwords.Convert(...)` |
 | React / Node.js | `@worldmoneywords/core` | `amountToWords(...)` |
@@ -75,7 +75,7 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 <summary><strong>Laravel example</strong></summary>
 
 ```bash
-composer require worldmoneywords/laravel
+composer require 3mdikram/worldmoneywords-laravel
 ```
 
 ```php

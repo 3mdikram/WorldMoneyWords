@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b1049fa45ef4c53a7d259d07e81ae01",
+    "content-hash": "5a252bfbf545386ac906155232d42cb3",
     "packages": [
         {
             "name": "league/iso3166",

@@ -1,7 +1,7 @@
 # WorldMoneyWords for Laravel
 
 ```bash
-composer require worldmoneywords/laravel
+composer require 3mdikram/worldmoneywords-laravel
 ```
 
 Laravel auto-discovers the provider and facade:
