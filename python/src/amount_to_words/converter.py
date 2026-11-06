@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 import re
-from .countries import ISO_COUNTRIES
+from .countries import ISO_COUNTRY_CODES
 
 ONES = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
 TENS = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"]
@@ -60,10 +60,11 @@ class AmountToWords:
         self.currencies = {**CURRENCIES, **(currencies or {})}
 
     def convert(self, amount: int | float | str | Decimal, country_code: str, currency_code: str) -> str:
-        country = country_code.strip().upper()
+        country_input = country_code.strip().upper()
+        country = ISO_COUNTRY_CODES.get(country_input)
         code = currency_code.strip().upper()
-        if not re.fullmatch(r"[A-Z]{3}", country) or country not in ISO_COUNTRIES:
-            raise ValueError("Unknown ISO 3166-1 alpha-3 country code")
+        if country is None:
+            raise ValueError("Unknown ISO 3166-1 Alpha-2 or Alpha-3 country code")
         if not re.fullmatch(r"[A-Z]{3}", code):
             raise ValueError("Currency code must be a three-letter ISO 4217 code")
         currency = self.currencies.get(code, Currency(code, code, "Minor Unit", "Minor Units"))

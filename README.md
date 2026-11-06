@@ -31,7 +31,7 @@ convert(amount, countryCode, currencyCode)
 
 | Feature | Description |
 |---|---|
-| 🌐 Global country support | Validates all 250 ISO 3166-1 alpha-3 country codes |
+| 🌐 Global country support | Accepts ISO 3166-1 Alpha-2 and Alpha-3 codes for all 250 countries |
 | 💱 Currency aware | Supports ISO 4217 names, minor units, and 0/2/3 decimal currencies |
 | 🎯 Financial accuracy | Exact decimal-string rounding avoids binary floating-point loss in PHP |
 | 🧩 Multi-platform | PHP, Laravel, Python, Go, React, browsers, and Node.js |
@@ -161,7 +161,7 @@ convert(int|float|string $amount, string $countryCode, string $currencyCode): st
 | Argument | Example | Rules |
 |---|---|---|
 | `amount` | `'1,234.50'` | Plain or correctly grouped numeric value; strings are recommended |
-| `countryCode` | `'IND'` | ISO 3166-1 alpha-3 code, case-insensitive |
+| `countryCode` | `'IN'` or `'IND'` | ISO 3166-1 Alpha-2 or Alpha-3 code, case-insensitive |
 | `currencyCode` | `'INR'` | ISO 4217 code, case-insensitive |
 
 Invalid PHP input throws a specific exception from `AmountToWords\Exception`.
@@ -503,6 +503,8 @@ Build dropdowns and validate input using the discovery API:
 
 ```php
 $converter->isSupportedCountry('IND');  // true
+$converter->isSupportedCountry('IN');   // true
+$converter->normalizeCountryCode('IN'); // IND
 $converter->isSupportedCurrency('INR'); // true
 $countries = $converter->supportedCountries();
 $currencies = $converter->supportedCurrencies();

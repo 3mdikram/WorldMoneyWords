@@ -9,3 +9,10 @@ func TestConvert(t *testing.T) {
 		t.Fatalf("got %q, %v", got, err)
 	}
 }
+
+func TestAlpha2Country(t *testing.T) {
+	got, err := Convert(10, "IN", "INR")
+	if err != nil || got != "Ten Rupees Only" {
+		t.Fatalf("got %q, %v", got, err)
+	}
+}

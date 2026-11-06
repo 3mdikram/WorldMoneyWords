@@ -64,8 +64,11 @@ func spell(n int64) (string, error) {
 
 func Convert(amount float64, countryCode, currencyCode string) (string, error) {
 	country, code := strings.ToUpper(strings.TrimSpace(countryCode)), strings.ToUpper(strings.TrimSpace(currencyCode))
+	if alpha3, ok := isoAlpha2To3[country]; ok {
+		country = alpha3
+	}
 	if _, ok := isoCountries[country]; !ok {
-		return "", fmt.Errorf("unknown ISO alpha-3 country code")
+		return "", fmt.Errorf("unknown ISO Alpha-2 or Alpha-3 country code")
 	}
 	if !isoCode.MatchString(code) {
 		return "", fmt.Errorf("currency code must be ISO 4217")

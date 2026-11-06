@@ -40,10 +40,19 @@ final class AmountToWordsTest extends TestCase
         );
     }
 
-    public function testRejectsNonAlpha3Country(): void
+    public function testRejectsUnknownCountry(): void
     {
         $this->expectException(InvalidCountryCodeException::class);
-        (new AmountToWords())->convert(10, 'IN', 'INR');
+        (new AmountToWords())->convert(10, 'ZZ', 'INR');
+    }
+
+    public function testAcceptsAlpha2CountryCode(): void
+    {
+        $converter = new AmountToWords();
+        self::assertSame('Ten Rupees Only', $converter->convert(10, 'IN', 'INR'));
+        self::assertSame('IND', $converter->normalizeCountryCode('in'));
+        self::assertTrue($converter->isSupportedCountry('US'));
+        self::assertSame('USA', $converter->convertDetailed(1, 'US', 'USD')->countryCode);
     }
 
     public function testCodesAreCaseInsensitive(): void

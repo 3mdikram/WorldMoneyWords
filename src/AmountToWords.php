@@ -38,7 +38,7 @@ final class AmountToWords
     ): string
     {
         $options ??= new ConversionOptions();
-        $countryCode = strtoupper(trim($countryCode));
+        $countryCode = $this->normalizeCountryCode($countryCode);
         $currencyCode = strtoupper(trim($currencyCode));
 
         $this->validateCountry($countryCode);
@@ -76,7 +76,7 @@ final class AmountToWords
         string $currencyCode,
         ?ConversionOptions $options = null,
     ): ConversionResult {
-        $countryCode = strtoupper(trim($countryCode));
+        $countryCode = $this->normalizeCountryCode($countryCode);
         $currencyCode = strtoupper(trim($currencyCode));
         $this->validateCountry($countryCode);
         $currency = $this->currency($currencyCode);
@@ -137,7 +137,35 @@ final class AmountToWords
 
     public function isSupportedCountry(string $countryCode): bool
     {
-        return isset($this->supportedCountries()[strtoupper(trim($countryCode))]);
+        try {
+            $this->normalizeCountryCode($countryCode);
+            return true;
+        } catch (InvalidCountryCodeException) {
+            return false;
+        }
+    }
+
+    /** Convert an ISO Alpha-2 or Alpha-3 country code to canonical Alpha-3. */
+    public function normalizeCountryCode(string $countryCode): string
+    {
+        $code = strtoupper(trim($countryCode));
+        $iso = new ISO3166();
+
+        try {
+            if (preg_match('/^[A-Z]{2}$/', $code)) {
+                return $iso->alpha2($code)['alpha3'];
+            }
+            if (preg_match('/^[A-Z]{3}$/', $code)) {
+                return $iso->alpha3($code)['alpha3'];
+            }
+        } catch (\Throwable) {
+            // Convert all lookup failures to the library's public exception.
+        }
+
+        throw new InvalidCountryCodeException(sprintf(
+            'Unknown ISO 3166-1 Alpha-2 or Alpha-3 country code: %s.',
+            $countryCode,
+        ));
     }
 
     /**
@@ -168,7 +196,7 @@ final class AmountToWords
     private function validateCountry(string $code): void
     {
         if (!preg_match('/^[A-Z]{3}$/', $code)) {
-            throw new InvalidCountryCodeException('Country code must be a three-letter ISO 3166-1 alpha-3 code.');
+            throw new InvalidCountryCodeException('Country code must resolve to ISO 3166-1 Alpha-3.');
         }
 
         try {
