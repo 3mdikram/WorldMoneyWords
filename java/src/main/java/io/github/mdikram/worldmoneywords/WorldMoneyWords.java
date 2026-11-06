@@ -1,4 +1,4 @@
-package io.github.worldmoneywords;
+package io.github.mdikram.worldmoneywords;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

@@ -1,4 +1,4 @@
-package io.github.worldmoneywords;
+package io.github.mdikram.worldmoneywords;
 
 public final class ConversionOptions {
     private final boolean includeOnly;

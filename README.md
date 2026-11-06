@@ -77,7 +77,7 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 | Laravel | `3mdikram/worldmoneywords-laravel` | `AmountToWords::convert(...)` |
 | Python | `3mdikram-worldmoneywords` | `converter.convert(...)` |
 | Go | `github.com/3mdikram/WorldMoneyWords/go/v2` | `amountwords.Convert(...)` |
-| Java | `com.github.3mdikram:worldmoneywords` | `converter.convert(...)` |
+| Java | `io.github.mdikram:worldmoneywords` | `converter.convert(...)` |
 | React / Node.js | `@3mdikram/worldmoneywords` | `amountToWords(...)` |
 
 <details>
@@ -206,7 +206,7 @@ mvn install
 #### 1. Default conversion
 
 ```java
-import io.github.worldmoneywords.WorldMoneyWords;
+import io.github.mdikram.worldmoneywords.WorldMoneyWords;
 
 WorldMoneyWords converter = new WorldMoneyWords();
 String text = converter.convert("42.50", "GB", "GBP");
@@ -216,8 +216,8 @@ String text = converter.convert("42.50", "GB", "GBP");
 #### 2. Conversion with options
 
 ```java
-import io.github.worldmoneywords.ConversionOptions;
-import io.github.worldmoneywords.WorldMoneyWords;
+import io.github.mdikram.worldmoneywords.ConversionOptions;
+import io.github.mdikram.worldmoneywords.WorldMoneyWords;
 
 WorldMoneyWords converter = new WorldMoneyWords();
 ConversionOptions options = new ConversionOptions(false, true, "plus");

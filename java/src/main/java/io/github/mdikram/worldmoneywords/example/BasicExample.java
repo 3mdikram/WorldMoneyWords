@@ -1,7 +1,7 @@
-package io.github.worldmoneywords.example;
+package io.github.mdikram.worldmoneywords.example;
 
-import io.github.worldmoneywords.ConversionOptions;
-import io.github.worldmoneywords.WorldMoneyWords;
+import io.github.mdikram.worldmoneywords.ConversionOptions;
+import io.github.mdikram.worldmoneywords.WorldMoneyWords;
 
 public final class BasicExample {
     public static void main(String[] args) {

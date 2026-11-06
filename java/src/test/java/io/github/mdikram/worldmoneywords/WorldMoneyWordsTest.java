@@ -1,4 +1,4 @@
-package io.github.worldmoneywords;
+package io.github.mdikram.worldmoneywords;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

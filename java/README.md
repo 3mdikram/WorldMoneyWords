@@ -2,13 +2,16 @@
 
 ```xml
 <dependency>
-  <groupId>com.github.3mdikram</groupId>
+  <groupId>io.github.mdikram</groupId>
   <artifactId>worldmoneywords</artifactId>
   <version>2.1.0</version>
 </dependency>
 ```
 
 ```java
+import io.github.mdikram.worldmoneywords.ConversionOptions;
+import io.github.mdikram.worldmoneywords.WorldMoneyWords;
+
 WorldMoneyWords converter = new WorldMoneyWords();
 String text = converter.convert("1234.50", "IN", "INR");
 

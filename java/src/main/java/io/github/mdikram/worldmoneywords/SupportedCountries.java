@@ -1,4 +1,4 @@
-package io.github.worldmoneywords;
+package io.github.mdikram.worldmoneywords;
 
 import java.util.HashMap;
 import java.util.Map;
