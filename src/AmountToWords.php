@@ -13,6 +13,13 @@ use Symfony\Component\Intl\Currencies;
 
 final class AmountToWords
 {
+    /** @var list<string> */
+    private const POPULAR_COUNTRY_CODES = [
+        'IND', 'USA', 'GBR', 'ARE', 'CAN',
+        'AUS', 'DEU', 'FRA', 'JPN', 'CHN',
+        'SGP', 'SAU', 'BRA', 'ZAF', 'NZL',
+    ];
+
     /** @var array<string, Currency> */
     private array $currencies;
 
@@ -138,6 +145,38 @@ final class AmountToWords
     public function isSupportedCountry(string $countryCode): bool
     {
         return isset($this->supportedCountries()[strtoupper(trim($countryCode))]);
+    }
+
+    /**
+     * Return country data ready for HTML select boxes and UI components.
+     *
+     * @param list<string>|null $countryCodes Null returns all countries.
+     * @return list<array{value: string, label: string}>
+     */
+    public function countryOptions(?array $countryCodes = null): array
+    {
+        $countries = $this->supportedCountries();
+        $codes = $countryCodes ?? array_keys($countries);
+        $options = [];
+
+        foreach ($codes as $code) {
+            $normalized = strtoupper(trim($code));
+            if (!isset($countries[$normalized])) {
+                throw new InvalidCountryCodeException(sprintf('Unknown ISO country code: %s.', $code));
+            }
+            $options[] = [
+                'value' => $normalized,
+                'label' => sprintf('%s (%s)', $countries[$normalized], $normalized),
+            ];
+        }
+
+        return $options;
+    }
+
+    /** @return list<array{value: string, label: string}> */
+    public function popularCountryOptions(): array
+    {
+        return $this->countryOptions(self::POPULAR_COUNTRY_CODES);
     }
 
     /**

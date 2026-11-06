@@ -232,14 +232,49 @@ WorldMoneyWords performs decimal-string rounding in PHP, including correct carry
 
 ## Country and currency support
 
-| Country | Code | Currency | Code |
+The default dropdown list contains 15 commonly used countries:
+
+| Country | Country code | Currency | Currency code |
 |---|---:|---|---:|
 | India | `IND` | Indian Rupee | `INR` |
 | United States | `USA` | US Dollar | `USD` |
 | United Kingdom | `GBR` | Pound Sterling | `GBP` |
 | United Arab Emirates | `ARE` | UAE Dirham | `AED` |
-| Japan | `JPN` | Japanese Yen | `JPY` |
+| Canada | `CAN` | Canadian Dollar | `CAD` |
+| Australia | `AUS` | Australian Dollar | `AUD` |
 | Germany | `DEU` | Euro | `EUR` |
+| France | `FRA` | Euro | `EUR` |
+| Japan | `JPN` | Japanese Yen | `JPY` |
+| China | `CHN` | Yuan | `CNY` |
+| Singapore | `SGP` | Singapore Dollar | `SGD` |
+| Saudi Arabia | `SAU` | Saudi Riyal | `SAR` |
+| Brazil | `BRA` | Brazilian Real | `BRL` |
+| South Africa | `ZAF` | Rand | `ZAR` |
+| New Zealand | `NZL` | New Zealand Dollar | `NZD` |
+
+Get UI-ready options in PHP:
+
+```php
+$options = $converter->popularCountryOptions(); // exactly 15
+$allOptions = $converter->countryOptions();     // all 250
+$customOptions = $converter->countryOptions(['IND', 'USA', 'GBR']);
+```
+
+React dropdown:
+
+```tsx
+import { POPULAR_COUNTRY_OPTIONS } from '@3mdikram/worldmoneywords';
+
+export function CountrySelect() {
+  return (
+    <select name="countryCode" defaultValue="IND">
+      {POPULAR_COUNTRY_OPTIONS.map(({ value, label }) => (
+        <option key={value} value={value}>{label}</option>
+      ))}
+    </select>
+  );
+}
+```
 
 Build dropdowns and validate input using the discovery API:
 
