@@ -115,9 +115,9 @@ final class AmountToWordsTest extends TestCase
     public function testHindiLanguageOptionWorksForEveryCountry(): void
     {
         $converter = new AmountToWords();
-        $options = new ConversionOptions(language: 'hi');
         foreach (array_keys($converter->supportedCountries()) as $countryCode) {
-            self::assertSame('एक हज़ार दो सौ चौंतीस भारतीय रुपया और पचास उप-इकाई मात्र', $converter->convert('1234.50', $countryCode, 'INR', $options));
+            self::assertSame('एक हज़ार दो सौ चौंतीस भारतीय रुपया और पचास उप-इकाई मात्र', $converter->convert('1234.50', $countryCode, 'INR', new ConversionOptions(language: 'hi')));
+            self::assertSame('ألف ومائتان وأربعة وثلاثون دولار أمريكي و خمسون وحدة فرعية فقط', $converter->convert('1234.50', $countryCode, 'USD', new ConversionOptions(language: 'ar')));
         }
     }
 

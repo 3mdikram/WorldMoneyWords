@@ -40,3 +40,17 @@ func TestHindiAndArabic(t *testing.T) {
 		t.Fatalf("got %q, %v", ar, err)
 	}
 }
+
+func TestAllLanguagesWorkForAll200Countries(t *testing.T) {
+	if len(isoAlpha2To3) != 200 {
+		t.Fatalf("got %d countries", len(isoAlpha2To3))
+	}
+	for country := range isoAlpha2To3 {
+		for _, language := range []string{"en", "hi", "ar"} {
+			text, err := Convert(42.50, country, "USD", Options{IncludeOnly: true, Conjunction: "and", Language: language})
+			if err != nil || text == "" {
+				t.Fatalf("%s/%s: %q, %v", country, language, text, err)
+			}
+		}
+	}
+}

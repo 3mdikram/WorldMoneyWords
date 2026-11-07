@@ -89,6 +89,19 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 | Java | `io.github.3mdikram:worldmoneywords` | `converter.convert(...)` |
 | React / Node.js | `@3mdikram/worldmoneywords` | `amountToWords(...)` |
 
+### Multilingual support matrix
+
+| Platform | `EN` | `HI` | `AR` | 200-country validation |
+|---|:---:|:---:|:---:|:---:|
+| PHP | ✅ | ✅ | ✅ | ✅ |
+| Laravel | ✅ | ✅ | ✅ | ✅ |
+| Python | ✅ | ✅ | ✅ | ✅ |
+| Go | ✅ | ✅ | ✅ | ✅ |
+| Java | ✅ | ✅ | ✅ | ✅ |
+| React / TypeScript / Node.js | ✅ | ✅ | ✅ | ✅ |
+
+Every native implementation runs the same three language options across all 200 Alpha-2/Alpha-3 country mappings. Laravel uses the tested PHP core implementation.
+
 <details>
 <summary><strong>Laravel example</strong></summary>
 

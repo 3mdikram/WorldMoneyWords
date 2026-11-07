@@ -25,4 +25,16 @@ class WorldMoneyWordsTest {
         assertEquals("एक हज़ार दो सौ चौंतीस भारतीय रुपया और पचास उप-इकाइयाँ मात्र", converter.convert("1234.50", "IN", "INR", new ConversionOptions(true, false, "and", "hi")));
         assertEquals("ألف ومائتان وأربعة وثلاثون دولار أمريكي و خمسون وحدات فرعية فقط", converter.convert("1234.50", "US", "USD", new ConversionOptions(true, false, "and", "ar")));
     }
+
+    @Test void allLanguagesWorkForAll200Countries() {
+        int countries = 0;
+        for (String country : SupportedCountries.alpha2Codes()) {
+            countries++;
+            for (String language : new String[]{"en", "hi", "ar"}) {
+                String text = converter.convert("42.50", country, "USD", new ConversionOptions(true, false, "and", language));
+                if (text.isEmpty()) throw new AssertionError(country + "/" + language);
+            }
+        }
+        assertEquals(200, countries);
+    }
 }

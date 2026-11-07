@@ -1,5 +1,6 @@
 import unittest
 from amount_to_words import AmountToWords, ConversionOptions
+from amount_to_words.countries import ALPHA2_TO_ALPHA3
 
 class ConverterTest(unittest.TestCase):
     def test_inr(self):
@@ -22,6 +23,13 @@ class ConverterTest(unittest.TestCase):
     def test_hindi_and_arabic(self):
         self.assertEqual("एक हज़ार दो सौ चौंतीस भारतीय रुपया और पचास उप-इकाइयाँ मात्र", AmountToWords().convert("1234.50", "IN", "INR", ConversionOptions(language="hi")))
         self.assertEqual("ألف ومائتان وأربعة وثلاثون دولار أمريكي و خمسون وحدات فرعية فقط", AmountToWords().convert("1234.50", "US", "USD", ConversionOptions(language="ar")))
+
+    def test_all_languages_work_for_all_200_countries(self):
+        self.assertEqual(200, len(ALPHA2_TO_ALPHA3))
+        converter = AmountToWords()
+        for country in ALPHA2_TO_ALPHA3:
+            for language in ("en", "hi", "ar"):
+                self.assertTrue(converter.convert("42.50", country, "USD", ConversionOptions(language=language)))
 
 if __name__ == "__main__":
     unittest.main()

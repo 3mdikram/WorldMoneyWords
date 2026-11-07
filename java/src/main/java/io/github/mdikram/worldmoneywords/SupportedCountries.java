@@ -206,6 +206,8 @@ final class SupportedCountries {
         Map.entry("ZM", "ZMB"),
         Map.entry("ZW", "ZWE")
     );
+
+    static Iterable<String> alpha2Codes() { return ALPHA2_TO_ALPHA3.keySet(); }
     private static final Map<String, String> CODES = createCodes();
 
     private SupportedCountries() {}
