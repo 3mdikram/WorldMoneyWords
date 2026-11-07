@@ -1,6 +1,6 @@
 {
   "name": "@3mdikram/worldmoneywords",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "Amount-to-words converter for React, browsers, and Node.js",
   "license": "MIT",
   "author": "Md Ikram",

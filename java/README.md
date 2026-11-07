@@ -4,7 +4,7 @@
 <dependency>
   <groupId>io.github.3mdikram</groupId>
   <artifactId>worldmoneywords</artifactId>
-  <version>2.4.0</version>
+  <version>2.5.0</version>
 </dependency>
 ```
 

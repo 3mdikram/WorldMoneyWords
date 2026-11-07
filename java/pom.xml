@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.3mdikram</groupId>
   <artifactId>worldmoneywords</artifactId>
-  <version>2.4.0</version>
+  <version>2.5.0</version>
   <name>WorldMoneyWords for Java</name>
   <description>Convert monetary amounts to words using ISO country and currency codes.</description>
   <url>https://github.com/3mdikram/WorldMoneyWords</url>
