@@ -1,9 +1,9 @@
 {
   "name": "3mdikram/worldmoneywords",
-  "description": "Amount-to-words and money-to-text converter for PHP and Laravel invoices, cheques, receipts, and payments, with 200-country ISO support; also available for Python, Go, Java, React, TypeScript, browsers, and Node.js.",
+  "description": "Multilingual amount-to-words and money-to-text converter with English, Hindi, and Arabic output for PHP and Laravel invoices, cheques, receipts, and payments, plus 200-country ISO support and packages for Python, Go, Java, React, TypeScript, browsers, and Node.js.",
   "type": "library",
   "license": "MIT",
-  "keywords": ["amount-to-words", "amount-in-words", "amount-to-text", "amount-converter", "spell-amount", "number-to-words", "number-to-text", "number-converter", "spell-number", "money-to-words", "money-to-text", "money-converter", "currency-to-words", "currency-converter", "multi-currency", "international-currency", "cheque-amount", "cheque-writing", "check-writing", "invoice-amount", "payment-amount", "financial-tools", "currency", "php", "laravel", "python", "go", "java", "react", "typescript", "nodejs", "invoice", "cheque", "receipt", "iso-3166", "iso-4217"],
+  "keywords": ["amount-to-words", "amount-in-words", "amount-to-text", "amount-converter", "spell-amount", "number-to-words", "number-to-text", "number-converter", "spell-number", "money-to-words", "money-to-text", "money-converter", "currency-to-words", "currency-converter", "multi-currency", "international-currency", "multilingual", "language-support", "english", "hindi", "arabic", "cheque-amount", "cheque-writing", "check-writing", "invoice-amount", "payment-amount", "financial-tools", "currency", "php", "laravel", "python", "go", "java", "react", "typescript", "nodejs", "invoice", "cheque", "receipt", "iso-3166", "iso-4217"],
   "authors": [
     {
       "name": "Md Ikram",
