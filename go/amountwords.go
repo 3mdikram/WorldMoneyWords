@@ -13,10 +13,11 @@ type Currency struct {
 }
 
 type Options struct {
-	IncludeOnly      bool
-	IncludeZeroMinor bool
-	Conjunction      string
-	Language         string
+	IncludeOnly       bool
+	IncludeZeroMinor  bool
+	Conjunction       string
+	Language          string
+	ShortCurrencyName bool
 }
 
 type LanguagePack struct {
@@ -56,6 +57,7 @@ var hindi = strings.Split("शून्य|एक|दो|तीन|चार|प
 var arabic19 = strings.Split("صفر|واحد|اثنان|ثلاثة|أربعة|خمسة|ستة|سبعة|ثمانية|تسعة|عشرة|أحد عشر|اثنا عشر|ثلاثة عشر|أربعة عشر|خمسة عشر|ستة عشر|سبعة عشر|ثمانية عشر|تسعة عشر", "|")
 var arabicTens = []string{"", "", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون"}
 var localizedCurrencies = map[string]map[string]string{"hi": {"INR": "भारतीय रुपया", "USD": "अमेरिकी डॉलर", "GBP": "ब्रिटिश पाउंड", "EUR": "यूरो", "AED": "यूएई दिरहम", "JPY": "जापानी येन"}, "ar": {"INR": "روبية هندية", "USD": "دولار أمريكي", "GBP": "جنيه إسترليني", "EUR": "يورو", "AED": "درهم إماراتي", "JPY": "ين ياباني"}}
+var shortCurrencies = map[string]map[string][2]string{"en": {"INR": {"Rupee", "Rupees"}, "USD": {"Dollar", "Dollars"}, "GBP": {"Pound", "Pounds"}, "EUR": {"Euro", "Euros"}, "AED": {"Dirham", "Dirhams"}, "JPY": {"Yen", "Yen"}}, "hi": {"INR": {"रुपया", "रुपये"}, "USD": {"डॉलर", "डॉलर"}, "GBP": {"पाउंड", "पाउंड"}, "EUR": {"यूरो", "यूरो"}, "AED": {"दिरहम", "दिरहम"}, "JPY": {"येन", "येन"}}, "ar": {"INR": {"روبية", "روبية"}, "USD": {"دولار", "دولار"}, "GBP": {"جنيه", "جنيه"}, "EUR": {"يورو", "يورو"}, "AED": {"درهم", "درهم"}, "JPY": {"ين", "ين"}}}
 
 func underThousand(n int64) string {
 	p := []string{}
@@ -247,6 +249,15 @@ func Convert(amount float64, countryCode, currencyCode string, supplied ...Optio
 			majorName = name
 		} else {
 			majorName = code
+		}
+	}
+	if options.ShortCurrencyName {
+		if names, ok := shortCurrencies[options.Language][code]; ok {
+			if major == 1 {
+				majorName = names[0]
+			} else {
+				majorName = names[1]
+			}
 		}
 	}
 	p = append(p, majorWords, majorName)

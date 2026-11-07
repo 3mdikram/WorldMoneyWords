@@ -422,7 +422,7 @@ convert(int|float|string $amount, string $countryCode, string $currencyCode, ?Co
 | `amount` | Integer, decimal, or numeric string | `'1,234.50'` | Amount to convert; strings are recommended for financial precision |
 | `countryCode` | ISO 3166-1 Alpha-2 or Alpha-3 | `'IN'` or `'IND'` | Validates and normalizes the country, case-insensitively |
 | `currencyCode` | Three-letter ISO 4217 code | `'INR'` | Selects the major unit, minor unit, and decimal precision |
-| `options` | `ConversionOptions` or platform equivalent | `new ConversionOptions(language: 'hi')` | Controls suffixes, minor units, conjunctions, and output language |
+| `options` | `ConversionOptions` or platform equivalent | `new ConversionOptions(shortCurrencyName: true)` | Controls suffixes, minor units, conjunctions, currency naming, and output language |
 
 ### Conversion options
 
@@ -432,6 +432,7 @@ convert(int|float|string $amount, string $countryCode, string $currencyCode, ?Co
 | `includeZeroMinor` | `boolean` | `false` | Includes the minor unit when its value is zero | `Ten US Dollars and Zero Cents Only` |
 | `conjunction` | `string` | `and` | Changes the word joining major and minor units | `Ten US Dollars plus Fifty Cents Only` |
 | `language` | `string` | `en` | Uses English by default. Pass `hi`, `ar`, or a registered language code to request that output explicitly | `एक हज़ार भारतीय रुपया मात्र` |
+| `shortCurrencyName` | `boolean` | `false` | Removes the country qualifier from supported currency names | `Ten Dollars plus Zero Cents` |
 
 Use the options when you need wording tailored to invoices, cheques, banking forms, or local document rules:
 
@@ -439,6 +440,7 @@ Use the options when you need wording tailored to invoices, cheques, banking for
 - Set `includeOnly` to `false` when a document does not require an `Only` suffix.
 - Set `includeZeroMinor` to `true` when zero cents, paise, or fils must be stated explicitly.
 - Change `conjunction` to wording such as `plus` when required by your output format.
+- Set `shortCurrencyName` to `true` to use `Dollars` instead of `US Dollars` and equivalent localized short names.
 
 Option names follow each language's normal style:
 
@@ -448,6 +450,21 @@ Option names follow each language's normal style:
 | Zero minor unit | `includeZeroMinor` | `include_zero_minor` | `IncludeZeroMinor` | `includeZeroMinor` |
 | Conjunction | `conjunction` | `conjunction` | `Conjunction` | `conjunction` |
 | Output language | `language` | `language` | `Language` | `language` |
+| Short currency name | `shortCurrencyName` | `short_currency_name` | `ShortCurrencyName` | `shortCurrencyName` |
+
+### Short currency name
+
+```php
+$options = new ConversionOptions(
+    includeOnly: false,
+    includeZeroMinor: true,
+    conjunction: 'plus',
+    shortCurrencyName: true,
+);
+
+echo $converter->convert('10.00', 'US', 'USD', $options);
+// Ten Dollars plus Zero Cents
+```
 
 ### Hindi and Arabic output
 

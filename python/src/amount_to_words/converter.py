@@ -22,6 +22,7 @@ class ConversionOptions:
     include_zero_minor: bool = False
     conjunction: str = "and"
     language: str = "en"
+    short_currency_name: bool = False
 
     def __post_init__(self):
         if not self.conjunction.strip():
@@ -126,6 +127,11 @@ LOCALIZED_CURRENCIES = {
     "hi": {"INR":"भारतीय रुपया", "USD":"अमेरिकी डॉलर", "GBP":"ब्रिटिश पाउंड", "EUR":"यूरो", "AED":"यूएई दिरहम", "JPY":"जापानी येन"},
     "ar": {"INR":"روبية هندية", "USD":"دولار أمريكي", "GBP":"جنيه إسترليني", "EUR":"يورو", "AED":"درهم إماراتي", "JPY":"ين ياباني"},
 }
+SHORT_CURRENCIES = {
+    "en": {"INR":("Rupee","Rupees"), "USD":("Dollar","Dollars"), "GBP":("Pound","Pounds"), "EUR":("Euro","Euros"), "AED":("Dirham","Dirhams"), "JPY":("Yen","Yen")},
+    "hi": {"INR":("रुपया","रुपये"), "USD":("डॉलर","डॉलर"), "GBP":("पाउंड","पाउंड"), "EUR":("यूरो","यूरो"), "AED":("दिरहम","दिरहम"), "JPY":("येन","येन")},
+    "ar": {"INR":("روبية","روبية"), "USD":("دولار","دولار"), "GBP":("جنيه","جنيه"), "EUR":("يورو","يورو"), "AED":("درهم","درهم"), "JPY":("ين","ين")},
+}
 
 class AmountToWords:
     def __init__(self, currencies: dict[str, Currency] | None = None, language_packs: list[LanguagePack] | None = None):
@@ -162,6 +168,7 @@ class AmountToWords:
         major_name = currency.major_singular if major == 1 else currency.major_plural
         if pack: major_name = pack.currency_name(code, major == 1)
         elif language != "en": major_name = LOCALIZED_CURRENCIES[language].get(code, code)
+        if options.short_currency_name: major_name = SHORT_CURRENCIES.get(language, {}).get(code, (major_name, major_name))[0 if major == 1 else 1]
         parts += [pack.spell(major) if pack else _spell_localized(major, language), major_name]
         if minor or (currency.fraction_digits > 0 and options.include_zero_minor):
             conjunction = labels[1] if options.conjunction == "and" else options.conjunction

@@ -25,6 +25,11 @@ class WorldMoneyWordsTest {
         assertEquals("Ten US Dollars plus Zero Cents", converter.convert("10.00", "US", "USD", options));
     }
 
+    @Test void usesShortCurrencyName() {
+        ConversionOptions options = new ConversionOptions(false, true, "plus", "en", true);
+        assertEquals("Ten Dollars plus Zero Cents", converter.convert("10.00", "US", "USD", options));
+    }
+
     @Test void normalizesAlpha2AndRejectsMinorTerritory() {
         assertEquals("IND", converter.normalizeCountryCode("in"));
         assertThrows(IllegalArgumentException.class, () -> converter.convert("10", "AI", "USD"));

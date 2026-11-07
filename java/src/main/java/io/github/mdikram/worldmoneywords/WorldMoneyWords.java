@@ -48,6 +48,7 @@ public final class WorldMoneyWords {
         if (negative && value.signum() != 0) result.append(labels[0]).append(' ');
         String majorWords = pack != null ? pack.spell(major) : language.equals("en") ? spell(major) : LocalizedWords.spell(major, language);
         String majorName = pack != null ? pack.currencyName(code, major.equals(BigInteger.ONE)) : language.equals("en") ? (major.equals(BigInteger.ONE) ? currency.majorSingular : currency.majorPlural) : LocalizedWords.currency(code, language);
+        if (options.shortCurrencyName()) majorName = shortCurrencyName(code, language, major.equals(BigInteger.ONE), majorName);
         result.append(majorWords).append(' ').append(majorName);
         if (minor.signum() > 0 || (currency.fractionDigits > 0 && options.includeZeroMinor())) {
             String conjunction = options.conjunction().equals("and") ? labels[1] : options.conjunction();
@@ -104,6 +105,15 @@ public final class WorldMoneyWords {
             String name = currency.getDisplayName(Locale.ENGLISH);
             return new CurrencyWords(name, name, "Minor Unit", "Minor Units", digits);
         } catch (RuntimeException error) { throw new IllegalArgumentException("Unknown ISO currency code: " + code, error); }
+    }
+
+    private static String shortCurrencyName(String code, String language, boolean singular, String fallback) {
+        Map<String,String[]> names = new HashMap<>();
+        if (language.equals("en")) { names.put("INR",new String[]{"Rupee","Rupees"}); names.put("USD",new String[]{"Dollar","Dollars"}); names.put("GBP",new String[]{"Pound","Pounds"}); names.put("EUR",new String[]{"Euro","Euros"}); names.put("AED",new String[]{"Dirham","Dirhams"}); names.put("JPY",new String[]{"Yen","Yen"}); }
+        else if (language.equals("hi")) { names.put("INR",new String[]{"रुपया","रुपये"}); names.put("USD",new String[]{"डॉलर","डॉलर"}); names.put("GBP",new String[]{"पाउंड","पाउंड"}); names.put("EUR",new String[]{"यूरो","यूरो"}); names.put("AED",new String[]{"दिरहम","दिरहम"}); names.put("JPY",new String[]{"येन","येन"}); }
+        else if (language.equals("ar")) { names.put("INR",new String[]{"روبية","روبية"}); names.put("USD",new String[]{"دولار","دولار"}); names.put("GBP",new String[]{"جنيه","جنيه"}); names.put("EUR",new String[]{"يورو","يورو"}); names.put("AED",new String[]{"درهم","درهم"}); names.put("JPY",new String[]{"ين","ين"}); }
+        String[] value = names.get(code);
+        return value == null ? fallback : value[singular ? 0 : 1];
     }
 
     private static Map<String, CurrencyWords> currencies() {

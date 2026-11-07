@@ -65,8 +65,11 @@ final class AmountToWords
         }
 
         $parts[] = $languagePack?->spell($majorAbsolute) ?? $this->spellLocalized($majorAbsolute, $language);
-        $parts[] = $languagePack?->currencyName($currencyCode, $majorAbsolute === '1')
+        $majorName = $languagePack?->currencyName($currencyCode, $majorAbsolute === '1')
             ?? $this->localizedCurrencyName($currencyCode, $currency, $majorAbsolute === '1', $language);
+        $parts[] = $options->shortCurrencyName
+            ? $this->shortCurrencyName($currencyCode, $language, $majorAbsolute === '1', $majorName)
+            : $majorName;
 
         if ($currency->fractionDigits > 0 && ((int) $minor > 0 || $options->includeZeroMinor)) {
             $parts[] = $options->conjunction === 'and'
@@ -123,6 +126,21 @@ final class AmountToWords
 
         $name = Currencies::getName($code, $language);
         return $name === $code ? $code : $name;
+    }
+
+    private function shortCurrencyName(string $code, string $language, bool $singular, string $fallback): string
+    {
+        $names = [
+            'en' => [
+                'INR' => ['Rupee', 'Rupees'], 'USD' => ['Dollar', 'Dollars'],
+                'GBP' => ['Pound', 'Pounds'], 'EUR' => ['Euro', 'Euros'],
+                'AED' => ['Dirham', 'Dirhams'], 'JPY' => ['Yen', 'Yen'],
+            ],
+            'hi' => ['INR' => ['रुपया', 'रुपये'], 'USD' => ['डॉलर', 'डॉलर'], 'GBP' => ['पाउंड', 'पाउंड'], 'EUR' => ['यूरो', 'यूरो'], 'AED' => ['दिरहम', 'दिरहम'], 'JPY' => ['येन', 'येन']],
+            'ar' => ['INR' => ['روبية', 'روبية'], 'USD' => ['دولار', 'دولار'], 'GBP' => ['جنيه', 'جنيه'], 'EUR' => ['يورو', 'يورو'], 'AED' => ['درهم', 'درهم'], 'JPY' => ['ين', 'ين']],
+        ];
+
+        return $names[$language][$code][$singular ? 0 : 1] ?? $fallback;
     }
 
     public function convertDetailed(

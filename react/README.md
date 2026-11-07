@@ -10,7 +10,7 @@ import { amountToWords } from '@3mdikram/worldmoneywords';
 const text = amountToWords('1234.50', 'IN', 'INR');
 ```
 
-Pass an optional fourth object with `includeOnly`, `includeZeroMinor`, `conjunction`, and `language` (`en`, `hi`, `ar`, or a registered language code) properties. Unsupported language writers fall back to English.
+Pass an optional fourth object with `includeOnly`, `includeZeroMinor`, `conjunction`, `shortCurrencyName`, and `language` (`en`, `hi`, `ar`, or a registered language code) properties. Set `shortCurrencyName: true` to output `Dollars` instead of `US Dollars`.
 
 ```ts
 amountToWords('1234.50', 'IN', 'INR', { language: 'hi' });

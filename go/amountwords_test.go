@@ -34,6 +34,13 @@ func TestOptions(t *testing.T) {
 	}
 }
 
+func TestShortCurrencyNameOption(t *testing.T) {
+	got, err := Convert(10, "US", "USD", Options{IncludeZeroMinor: true, Conjunction: "plus", ShortCurrencyName: true})
+	if err != nil || got != "Ten Dollars plus Zero Cents" {
+		t.Fatalf("got %q, %v", got, err)
+	}
+}
+
 func TestHindiAndArabic(t *testing.T) {
 	hi, err := Convert(1234.50, "IN", "INR", Options{IncludeOnly: true, Language: "hi", Conjunction: "and"})
 	if err != nil || hi != "एक हज़ार दो सौ चौंतीस भारतीय रुपया और पचास उप-इकाइयाँ मात्र" {

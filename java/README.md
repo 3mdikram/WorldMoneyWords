@@ -22,4 +22,6 @@ String custom = converter.convert("10.00", "US", "USD", options);
 Use `new ConversionOptions(true, false, "and", "hi")` for Hindi or replace `hi` with `ar` for Arabic.
 Pass `en`, `hi`, `ar`, or a registered language code explicitly. Unsupported language writers fall back to English.
 
+Use `new ConversionOptions(false, true, "plus", "en", true)` to output a short currency name such as `Dollars` instead of `US Dollars`.
+
 Requires Java 11 or newer.

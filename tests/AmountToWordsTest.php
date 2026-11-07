@@ -128,6 +128,12 @@ final class AmountToWordsTest extends TestCase
         );
     }
 
+    public function testShortCurrencyNameOption(): void
+    {
+        $options = new ConversionOptions(includeOnly: false, includeZeroMinor: true, conjunction: 'plus', shortCurrencyName: true);
+        self::assertSame('Ten Dollars plus Zero Cents', (new AmountToWords())->convert('10.00', 'US', 'USD', $options));
+    }
+
     public function testHindiLanguageOptionWorksForEveryCountry(): void
     {
         $converter = new AmountToWords();

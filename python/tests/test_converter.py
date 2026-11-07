@@ -25,6 +25,10 @@ class ConverterTest(unittest.TestCase):
         options = ConversionOptions(include_only=False, include_zero_minor=True, conjunction="plus")
         self.assertEqual("Ten US Dollars plus Zero Cents", AmountToWords().convert("10", "US", "USD", options))
 
+    def test_short_currency_name_option(self):
+        options = ConversionOptions(include_only=False, include_zero_minor=True, conjunction="plus", short_currency_name=True)
+        self.assertEqual("Ten Dollars plus Zero Cents", AmountToWords().convert("10", "US", "USD", options))
+
     def test_hindi_and_arabic(self):
         self.assertEqual("एक हज़ार दो सौ चौंतीस भारतीय रुपया और पचास उप-इकाइयाँ मात्र", AmountToWords().convert("1234.50", "IN", "INR", ConversionOptions(language="hi")))
         self.assertEqual("ألف ومائتان وأربعة وثلاثون دولار أمريكي و خمسون وحدات فرعية فقط", AmountToWords().convert("1234.50", "US", "USD", ConversionOptions(language="ar")))
