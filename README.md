@@ -195,7 +195,7 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 | ☕ **Java** | `io.github.3mdikram:worldmoneywords` | `converter.convert(...)` |
 | ⚛️ **React / Node.js** | `npm install @3mdikram/worldmoneywords` | `amountToWords(...)` |
 
-<details>
+<details open>
 <summary><strong>🔺 Laravel examples</strong> — installation, options, language, and short names</summary>
 
 ```bash
@@ -260,7 +260,7 @@ Laravel discovers the provider and facade automatically. See the [Laravel guide]
 
 </details>
 
-<details>
+<details open>
 <summary><strong>🐍 Python examples</strong> — installation, options, language, and short names</summary>
 
 ```bash
@@ -320,7 +320,7 @@ print(AmountToWords().convert("10.00", "US", "USD", options))
 
 </details>
 
-<details>
+<details open>
 <summary><strong>🐹 Go examples</strong> — installation, options, language, and short names</summary>
 
 ```bash
@@ -400,7 +400,7 @@ fmt.Println(text)
 
 </details>
 
-<details>
+<details open>
 <summary><strong>☕ Java examples</strong> — installation, options, language, and short names</summary>
 
 ```bash
@@ -461,7 +461,7 @@ Requires Java 11 or newer. See the [Java guide](java/README.md).
 
 </details>
 
-<details>
+<details open>
 <summary><strong>⚛️ React / TypeScript examples</strong> — installation, options, language, and short names</summary>
 
 ```bash
