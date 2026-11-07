@@ -6,8 +6,26 @@ build-backend = "setuptools.build_meta"
 name = "3mdikram-worldmoneywords"
 version = "2.1.0"
 description = "Convert monetary amounts to English words using ISO country and currency codes"
+readme = "README.md"
 requires-python = ">=3.9"
-license = {text = "MIT"}
+license = "MIT"
+authors = [
+  {name = "Md Ikram"}
+]
+keywords = ["amount", "currency", "money", "numbers", "words", "iso-3166", "iso-4217"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Software Development :: Libraries :: Python Modules"
+]
+
+[project.urls]
+Homepage = "https://github.com/3mdikram/WorldMoneyWords"
+Repository = "https://github.com/3mdikram/WorldMoneyWords"
+Issues = "https://github.com/3mdikram/WorldMoneyWords/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
