@@ -181,10 +181,11 @@ $options = new ConversionOptions(
     includeOnly: false,
     includeZeroMinor: true,
     conjunction: 'plus',
+    shortCurrencyName: true,
 );
 
 echo AmountToWords::convert('10.00', 'US', 'USD', $options);
-// Ten US Dollars plus Zero Cents
+// Ten Dollars plus Zero Cents
 ```
 
 #### 3. Conversion with language
@@ -229,10 +230,11 @@ options = ConversionOptions(
     include_only=False,
     include_zero_minor=True,
     conjunction="plus",
+    short_currency_name=True,
 )
 
 print(AmountToWords().convert("10.00", "US", "USD", options))
-# Ten US Dollars plus Zero Cents
+# Ten Dollars plus Zero Cents
 ```
 
 #### 3. Conversion with language
@@ -277,9 +279,10 @@ func main() {
 
 ```go
 options := amountwords.Options{
-    IncludeOnly:      false,
-    IncludeZeroMinor: true,
-    Conjunction:      "plus",
+    IncludeOnly:       false,
+    IncludeZeroMinor:  true,
+    Conjunction:       "plus",
+    ShortCurrencyName: true,
 }
 
 text, err := amountwords.Convert(10, "US", "USD", options)
@@ -287,7 +290,7 @@ if err != nil {
     panic(err)
 }
 fmt.Println(text)
-// Ten US Dollars plus Zero Cents
+// Ten Dollars plus Zero Cents
 ```
 
 #### 3. Conversion with language
@@ -334,10 +337,10 @@ import io.github.mdikram.worldmoneywords.ConversionOptions;
 import io.github.mdikram.worldmoneywords.WorldMoneyWords;
 
 WorldMoneyWords converter = new WorldMoneyWords();
-ConversionOptions options = new ConversionOptions(false, true, "plus");
+ConversionOptions options = new ConversionOptions(false, true, "plus", "en", true);
 
 String text = converter.convert("10.00", "US", "USD", options);
-// Ten US Dollars plus Zero Cents
+// Ten Dollars plus Zero Cents
 ```
 
 #### 3. Conversion with language
@@ -385,10 +388,11 @@ export function CustomPaymentTotal() {
     includeOnly: false,
     includeZeroMinor: true,
     conjunction: 'plus',
+    shortCurrencyName: true,
   });
 
   return <p>{words}</p>;
-  // Ten US Dollars plus Zero Cents
+  // Ten Dollars plus Zero Cents
 }
 ```
 
