@@ -37,7 +37,7 @@ convert(amount, countryCode, currencyCode, options?)
 
 ## Official-language packs
 
-WorldMoneyWords includes English (`en`), Hindi (`hi`), and Arabic (`ar`). Additional languages can be added without changing the converter by registering a language pack.
+WorldMoneyWords provides consistent native amount wording in English (`en`), Hindi (`hi`), and Arabic (`ar`) across every supported platform.
 
 A language pack is responsible for the complete financial wording of a language:
 
