@@ -37,15 +37,24 @@ convert(amount, countryCode, currencyCode, options?)
 
 ## Official-language packs
 
-WorldMoneyWords does not treat an English fallback as native-language support. A language pack supplies its own number writer, currency-name resolver, negative/conjunction/suffix labels, and singular/plural minor-unit labels. Registered packs can then be selected with the normal `language` option.
+WorldMoneyWords includes English (`en`), Hindi (`hi`), and Arabic (`ar`). Additional languages can be added without changing the converter by registering a language pack.
 
-### Built-in and extensible support
+A language pack is responsible for the complete financial wording of a language:
 
-| Support type | Languages | Behavior |
-|---|---|---|
-| Built in | English (`en`), Hindi (`hi`), Arabic (`ar`) | Native amount wording is available immediately |
-| Language pack | Any valid language tag, such as `ur`, `fr`, or `ja` | Uses the registered native writer and labels |
-| Unknown code | Any unregistered language | Safely falls back to English |
+- Cardinal-number grammar, including large-number scales
+- Major currency names and singular/plural forms
+- Minor currency-unit wording
+- Negative, conjunction, and final-suffix labels
+- Native script and language-specific punctuation
+
+> [!NOTE]
+> A country being accepted does not mean its language writer is built in. Country validation and output-language support are separate. An unregistered language code safely falls back to English.
+
+### How to add a language
+
+1. Implement the platform’s `LanguagePack` contract.
+2. Register the pack with the converter.
+3. Pass its language code through the normal `language` option.
 
 | Platform | Extension API |
 |---|---|
@@ -55,9 +64,7 @@ WorldMoneyWords does not treat an English fallback as native-language support. A
 | Java | Implement `LanguagePack`, then call `converter.registerLanguagePack(pack)` |
 | React / TypeScript / Node.js | Create `LanguagePack`, then call `registerLanguagePack(pack)` |
 
-Invalid language tags, missing writers, and empty labels are rejected. Built-in `en`, `hi`, and `ar` output remains backward compatible.
-
-### PHP language-pack example
+### PHP integration template
 
 ```php
 use AmountToWords\AmountToWords;
@@ -65,16 +72,23 @@ use AmountToWords\ConversionOptions;
 use AmountToWords\LanguagePack;
 
 $urdu = new class implements LanguagePack {
-    public function code(): string { return 'ur'; }
+    public function code(): string
+    {
+        return 'ur';
+    }
+
     public function spell(string $number): string
     {
-        // Call your tested Urdu number-grammar implementation here.
+        // Supply a tested native number writer.
         return UrduNumberWriter::spell($number);
     }
+
     public function currencyName(string $code, bool $singular): string
     {
+        // Return the reviewed Urdu currency name.
         return UrduCurrencyNames::name($code, $singular);
     }
+
     public function labels(): array
     {
         return [
@@ -95,10 +109,11 @@ echo $converter->convert(
     'PKR',
     new ConversionOptions(language: 'ur'),
 );
+// Output is produced by the registered Urdu writer.
 ```
 
 > [!IMPORTANT]
-> Registering a language tag alone is not enough. The pack must contain a linguistically correct number writer and reviewed currency terminology before it should be described as supported.
+> Only describe a language as supported after its grammar, currency terminology, decimals, negative values, and large-number output have been reviewed and tested. Registering a language code alone is not native-language support.
 
 ## Why WorldMoneyWords?
 
