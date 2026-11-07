@@ -75,7 +75,7 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 |---|---|---|
 | PHP | `3mdikram/worldmoneywords` | `$converter->convert(...)` |
 | Laravel | `3mdikram/worldmoneywords-laravel` | `AmountToWords::convert(...)` |
-| Python | `3mdikram-worldmoneywords` | `converter.convert(...)` |
+| Python | `worldmoneywords` | `converter.convert(...)` |
 | Go | `github.com/3mdikram/WorldMoneyWords/go/v2` | `amountwords.Convert(...)` |
 | Java | `io.github.mdikram:worldmoneywords` | `converter.convert(...)` |
 | React / Node.js | `@3mdikram/worldmoneywords` | `amountToWords(...)` |
@@ -120,7 +120,7 @@ Laravel discovers the provider and facade automatically. See the [Laravel guide]
 <summary><strong>Python example</strong></summary>
 
 ```bash
-pip install 3mdikram-worldmoneywords
+pip install worldmoneywords
 ```
 
 #### 1. Default conversion

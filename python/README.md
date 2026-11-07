@@ -1,7 +1,7 @@
 # WorldMoneyWords for Python
 
 ```bash
-pip install 3mdikram-worldmoneywords
+pip install worldmoneywords
 ```
 
 ```python
