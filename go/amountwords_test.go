@@ -59,8 +59,8 @@ func TestAllLanguagesWorkForAll200Countries(t *testing.T) {
 	}
 }
 
-func TestAutoLanguageAndEnglishFallback(t *testing.T) {
-	cases := []struct{ country, language, prefix string }{{"IN", "auto", "दस"}, {"SA", "auto", "عشرة"}, {"PK", "auto", "Ten"}, {"PK", "ur", "Ten"}}
+func TestUnavailableLanguageFallsBackToEnglish(t *testing.T) {
+	cases := []struct{ country, language, prefix string }{{"PK", "ur", "Ten"}}
 	for _, c := range cases {
 		text, err := Convert(10, c.country, "USD", Options{IncludeOnly: true, Conjunction: "and", Language: c.language})
 		if err != nil || !strings.HasPrefix(text, c.prefix) {

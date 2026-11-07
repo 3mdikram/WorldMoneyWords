@@ -47,7 +47,7 @@ final class AmountToWords
     {
         $options ??= new ConversionOptions();
         $countryCode = $this->normalizeCountryCode($countryCode);
-        $language = $this->resolveLanguage($options->language, $countryCode);
+        $language = $this->resolveLanguage($options->language);
         $languagePack = $this->languagePacks[$language] ?? null;
         $currencyCode = strtoupper(trim($currencyCode));
 
@@ -87,20 +87,11 @@ final class AmountToWords
         return implode(' ', array_filter($parts, static fn (string $part): bool => $part !== ''));
     }
 
-    private function resolveLanguage(string $requested, string $countryCode): string
+    private function resolveLanguage(string $requested): string
     {
         $language = strtolower(trim($requested));
         if (in_array($language, ['en', 'hi', 'ar'], true) || isset($this->languagePacks[$language])) {
             return $language;
-        }
-        if ($language !== 'auto') {
-            return 'en';
-        }
-        if ($countryCode === 'IND') {
-            return 'hi';
-        }
-        if (in_array($countryCode, ['ARE','BHR','DZA','EGY','IRQ','JOR','KWT','LBN','LBY','MAR','MRT','OMN','PSE','QAT','SAU','SDN','SOM','SYR','TCD','TUN','YEM'], true)) {
-            return 'ar';
         }
         return 'en';
     }
@@ -184,8 +175,8 @@ final class AmountToWords
     public function addLanguagePack(LanguagePack $pack): self
     {
         $code = strtolower(trim($pack->code()));
-        if ($code === '' || $code === 'auto' || !preg_match('/^[a-z]{2,8}(?:-[a-z0-9]{2,8})*$/', $code)) {
-            throw new \InvalidArgumentException('Language pack code must be a valid language tag and cannot be auto.');
+        if ($code === '' || !preg_match('/^[a-z]{2,8}(?:-[a-z0-9]{2,8})*$/', $code)) {
+            throw new \InvalidArgumentException('Language pack code must be a valid language tag.');
         }
 
         $labels = $pack->labels();

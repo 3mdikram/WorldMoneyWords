@@ -30,8 +30,8 @@ var languagePacks = map[string]LanguagePack{}
 func RegisterLanguagePack(pack LanguagePack) error {
 	code := strings.ToLower(strings.TrimSpace(pack.Code))
 	valid := regexp.MustCompile(`^[a-z]{2,8}(?:-[a-z0-9]{2,8})*$`)
-	if code == "auto" || !valid.MatchString(code) {
-		return fmt.Errorf("language pack code must be a valid language tag and cannot be auto")
+	if !valid.MatchString(code) {
+		return fmt.Errorf("language pack code must be a valid language tag")
 	}
 	if pack.Spell == nil || pack.CurrencyName == nil || strings.TrimSpace(pack.Minus) == "" || strings.TrimSpace(pack.Conjunction) == "" || strings.TrimSpace(pack.Only) == "" || strings.TrimSpace(pack.MinorSingular) == "" || strings.TrimSpace(pack.MinorPlural) == "" {
 		return fmt.Errorf("language pack functions and labels are required")
@@ -56,7 +56,6 @@ var hindi = strings.Split("शून्य|एक|दो|तीन|चार|प
 var arabic19 = strings.Split("صفر|واحد|اثنان|ثلاثة|أربعة|خمسة|ستة|سبعة|ثمانية|تسعة|عشرة|أحد عشر|اثنا عشر|ثلاثة عشر|أربعة عشر|خمسة عشر|ستة عشر|سبعة عشر|ثمانية عشر|تسعة عشر", "|")
 var arabicTens = []string{"", "", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون"}
 var localizedCurrencies = map[string]map[string]string{"hi": {"INR": "भारतीय रुपया", "USD": "अमेरिकी डॉलर", "GBP": "ब्रिटिश पाउंड", "EUR": "यूरो", "AED": "यूएई दिरहम", "JPY": "जापानी येन"}, "ar": {"INR": "روبية هندية", "USD": "دولار أمريكي", "GBP": "جنيه إسترليني", "EUR": "يورو", "AED": "درهم إماراتي", "JPY": "ين ياباني"}}
-var arabicCountries = map[string]struct{}{"ARE": {}, "BHR": {}, "DZA": {}, "EGY": {}, "IRQ": {}, "JOR": {}, "KWT": {}, "LBN": {}, "LBY": {}, "MAR": {}, "MRT": {}, "OMN": {}, "PSE": {}, "QAT": {}, "SAU": {}, "SDN": {}, "SOM": {}, "SYR": {}, "TCD": {}, "TUN": {}, "YEM": {}}
 
 func underThousand(n int64) string {
 	p := []string{}
@@ -205,14 +204,6 @@ func Convert(amount float64, countryCode, currencyCode string, supplied ...Optio
 	requested := strings.ToLower(strings.TrimSpace(options.Language))
 	if _, custom := languagePacks[requested]; requested == "en" || requested == "hi" || requested == "ar" || custom {
 		options.Language = requested
-	} else if requested == "auto" {
-		if country == "IND" {
-			options.Language = "hi"
-		} else if _, ok := arabicCountries[country]; ok {
-			options.Language = "ar"
-		} else {
-			options.Language = "en"
-		}
 	} else {
 		options.Language = "en"
 	}

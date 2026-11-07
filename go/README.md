@@ -10,7 +10,7 @@ import amountwords "github.com/3mdikram/WorldMoneyWords/go/v2"
 text, err := amountwords.Convert(1234.50, "IN", "INR")
 ```
 
-Pass an optional `Options` value as the fourth argument to customize the suffix, zero minor units, conjunction, and output `Language` (`en`, `hi`, `ar`, or `auto`). Unsupported language writers fall back to English.
+Pass an optional `Options` value as the fourth argument to customize the suffix, zero minor units, conjunction, and output `Language` (`en`, `hi`, `ar`, or a registered language code). Unsupported language writers fall back to English.
 
 ```go
 text, err := amountwords.Convert(1234.50, "IN", "INR", amountwords.Options{IncludeOnly: true, Conjunction: "and", Language: "hi"})

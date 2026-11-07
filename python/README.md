@@ -11,7 +11,7 @@ converter = AmountToWords()
 print(converter.convert("1234.50", "IN", "INR"))
 ```
 
-An optional fourth `ConversionOptions` argument controls the suffix, zero minor units, conjunction, and output `language` (`en`, `hi`, `ar`, or `auto`). Unsupported language writers fall back to English.
+An optional fourth `ConversionOptions` argument controls the suffix, zero minor units, conjunction, and output `language` (`en`, `hi`, `ar`, or a registered language code). Unsupported language writers fall back to English.
 
 ```python
 converter.convert("1234.50", "IN", "INR", ConversionOptions(language="hi"))

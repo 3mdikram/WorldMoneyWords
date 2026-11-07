@@ -42,8 +42,8 @@ class LanguagePack:
 
     def __post_init__(self):
         normalized = self.code.strip().lower()
-        if normalized == "auto" or not re.fullmatch(r"[a-z]{2,8}(?:-[a-z0-9]{2,8})*", normalized):
-            raise ValueError("Language pack code must be a valid language tag and cannot be auto")
+        if not re.fullmatch(r"[a-z]{2,8}(?:-[a-z0-9]{2,8})*", normalized):
+            raise ValueError("Language pack code must be a valid language tag")
         for value in (self.minus, self.conjunction, self.only, self.minor_singular, self.minor_plural):
             if not value.strip(): raise ValueError("Language pack labels cannot be empty")
         object.__setattr__(self, "code", normalized)
@@ -142,7 +142,7 @@ class AmountToWords:
         code = currency_code.strip().upper()
         if country is None:
             raise ValueError("Unknown ISO 3166-1 Alpha-2 or Alpha-3 country code")
-        language = _resolve_language(options.language, country, self.language_packs)
+        language = _resolve_language(options.language, self.language_packs)
         pack = self.language_packs.get(language)
         if not re.fullmatch(r"[A-Z]{3}", code):
             raise ValueError("Currency code must be a three-letter ISO 4217 code")
@@ -172,10 +172,7 @@ class AmountToWords:
             parts.append(labels[2])
         return " ".join(filter(None, parts))
 
-def _resolve_language(requested: str, country: str, language_packs: dict[str, LanguagePack] | None = None) -> str:
+def _resolve_language(requested: str, language_packs: dict[str, LanguagePack] | None = None) -> str:
     language = requested.strip().lower()
     if language in {"en", "hi", "ar"} or language in (language_packs or {}): return language
-    if language != "auto": return "en"
-    if country == "IND": return "hi"
-    if country in {"ARE","BHR","DZA","EGY","IRQ","JOR","KWT","LBN","LBY","MAR","MRT","OMN","PSE","QAT","SAU","SDN","SOM","SYR","TCD","TUN","YEM"}: return "ar"
     return "en"

@@ -36,11 +36,8 @@ class ConverterTest(unittest.TestCase):
             for language in ("en", "hi", "ar"):
                 self.assertTrue(converter.convert("42.50", country, "USD", ConversionOptions(language=language)))
 
-    def test_auto_language_and_english_fallback(self):
+    def test_unavailable_language_falls_back_to_english(self):
         converter = AmountToWords()
-        self.assertTrue(converter.convert("10", "IN", "INR", ConversionOptions(language="auto")).startswith("दस"))
-        self.assertTrue(converter.convert("10", "SA", "SAR", ConversionOptions(language="auto")).startswith("عشرة"))
-        self.assertTrue(converter.convert("10", "PK", "PKR", ConversionOptions(language="auto")).startswith("Ten"))
         self.assertTrue(converter.convert("10", "PK", "PKR", ConversionOptions(language="ur")).startswith("Ten"))
 
 if __name__ == "__main__":

@@ -20,6 +20,6 @@ String custom = converter.convert("10.00", "US", "USD", options);
 ```
 
 Use `new ConversionOptions(true, false, "and", "hi")` for Hindi or replace `hi` with `ar` for Arabic.
-Use `auto` for country-aware selection. Unsupported local language writers fall back to English.
+Pass `en`, `hi`, `ar`, or a registered language code explicitly. Unsupported language writers fall back to English.
 
 Requires Java 11 or newer.

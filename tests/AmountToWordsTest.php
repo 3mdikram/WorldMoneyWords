@@ -145,12 +145,9 @@ final class AmountToWordsTest extends TestCase
         );
     }
 
-    public function testAutomaticLanguageAndEnglishFallback(): void
+    public function testUnavailableLanguageFallsBackToEnglish(): void
     {
         $converter = new AmountToWords();
-        self::assertSame('दस भारतीय रुपया मात्र', $converter->convert('10', 'IN', 'INR', new ConversionOptions(language: 'auto')));
-        self::assertSame('عشرة ريال سعودي فقط', $converter->convert('10', 'SA', 'SAR', new ConversionOptions(language: 'auto')));
-        self::assertSame('Ten Pakistani Rupees Only', $converter->convert('10', 'PK', 'PKR', new ConversionOptions(language: 'auto')));
         self::assertSame('Ten Pakistani Rupees Only', $converter->convert('10', 'PK', 'PKR', new ConversionOptions(language: 'ur')));
     }
 

@@ -18,7 +18,7 @@ public final class WorldMoneyWords {
     public WorldMoneyWords registerLanguagePack(LanguagePack pack) {
         if (pack == null) throw new IllegalArgumentException("Language pack is required");
         String code = pack.code().trim().toLowerCase();
-        if (code.equals("auto") || !code.matches("[a-z]{2,8}(?:-[a-z0-9]{2,8})*")) throw new IllegalArgumentException("Language pack code must be a valid language tag and cannot be auto");
+        if (!code.matches("[a-z]{2,8}(?:-[a-z0-9]{2,8})*")) throw new IllegalArgumentException("Language pack code must be a valid language tag");
         if (java.util.List.of(pack.minus(), pack.conjunction(), pack.only(), pack.minorSingular(), pack.minorPlural()).stream().anyMatch(value -> value == null || value.trim().isEmpty())) throw new IllegalArgumentException("Language pack labels cannot be empty");
         languagePacks.put(code, pack);
         return this;
@@ -41,7 +41,7 @@ public final class WorldMoneyWords {
         value = value.abs();
         BigInteger major = value.toBigInteger();
         BigInteger minor = value.subtract(new BigDecimal(major)).movePointRight(currency.fractionDigits).toBigInteger();
-        String language = resolveLanguage(options.language(), country);
+        String language = resolveLanguage(options.language());
         LanguagePack pack = languagePacks.get(language);
         String[] labels = pack != null ? new String[]{pack.minus(),pack.conjunction(),pack.only(),pack.minorSingular(),pack.minorPlural()} : language.equals("en") ? new String[]{"Minus","and","Only","Minor Unit","Minor Units"} : LocalizedWords.labels(language);
         StringBuilder result = new StringBuilder();
@@ -61,12 +61,10 @@ public final class WorldMoneyWords {
 
     public String normalizeCountryCode(String code) { return SupportedCountries.normalize(code); }
 
-    private String resolveLanguage(String requested, String country) {
+    private String resolveLanguage(String requested) {
         String language = requested.trim().toLowerCase();
         if (language.equals("en") || language.equals("hi") || language.equals("ar") || languagePacks.containsKey(language)) return language;
-        if (!language.equals("auto")) return "en";
-        if (country.equals("IND")) return "hi";
-        return java.util.Set.of("ARE","BHR","DZA","EGY","IRQ","JOR","KWT","LBN","LBY","MAR","MRT","OMN","PSE","QAT","SAU","SDN","SOM","SYR","TCD","TUN","YEM").contains(country) ? "ar" : "en";
+        return "en";
     }
 
     private static String spell(BigInteger number) {
