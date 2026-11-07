@@ -695,12 +695,6 @@ WorldMoneyWords performs decimal-string rounding in PHP, including correct carry
 
 ## 🌍 Country and currency support
 
-> **Quick reference:** These 15 commonly used countries stay visible. Expand the section below to browse every other supported ISO country.
->
-> **Country-language codes:** Each row shows the country’s primary language from CLDR territory data. Built-in writers are `EN`, `HI`, and `AR`; another code uses its registered language pack or the documented English fallback.
->
-> Country-language matching is based on [Unicode CLDR territory-language data](https://unicode.org/cldr/charts/latest/supplemental/territory_language_information.html).
-
 |  | Country | **Alpha-2** | **Alpha-3** | Currency | ISO currency | Primary language |
 |:---:|---|:---:|:---:|---|:---:|---|
 | 🇮🇳 | **India** | `IN` | `IND` | Indian Rupee | `INR` | `HI` |
