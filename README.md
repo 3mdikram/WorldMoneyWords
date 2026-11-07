@@ -181,11 +181,10 @@ $options = new ConversionOptions(
     includeOnly: false,
     includeZeroMinor: true,
     conjunction: 'plus',
-    shortCurrencyName: true,
 );
 
 echo AmountToWords::convert('10.00', 'US', 'USD', $options);
-// Ten Dollars plus Zero Cents
+// Ten US Dollars plus Zero Cents
 ```
 
 #### 3. Conversion with language
@@ -198,6 +197,23 @@ $options = new ConversionOptions(language: 'hi');
 
 echo AmountToWords::convert('10', 'IN', 'INR', $options);
 // दस भारतीय रुपया मात्र
+```
+
+#### 4. Conversion with short currency name
+
+```php
+use AmountToWords\ConversionOptions;
+use AmountToWords\Laravel\Facades\AmountToWords;
+
+$options = new ConversionOptions(
+    includeOnly: false,
+    includeZeroMinor: true,
+    conjunction: 'plus',
+    shortCurrencyName: true,
+);
+
+echo AmountToWords::convert('10.00', 'US', 'USD', $options);
+// Ten Dollars plus Zero Cents
 ```
 
 Laravel discovers the provider and facade automatically. See the [Laravel guide](laravel/README.md).
