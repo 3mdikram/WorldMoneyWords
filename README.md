@@ -77,7 +77,7 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 | Laravel | `3mdikram/worldmoneywords-laravel` | `AmountToWords::convert(...)` |
 | Python | `worldmoneywords` | `converter.convert(...)` |
 | Go | `github.com/3mdikram/WorldMoneyWords/go/v2` | `amountwords.Convert(...)` |
-| Java | `io.github.mdikram:worldmoneywords` | `converter.convert(...)` |
+| Java | `io.github.3mdikram:worldmoneywords` | `converter.convert(...)` |
 | React / Node.js | `@3mdikram/worldmoneywords` | `amountToWords(...)` |
 
 <details>
