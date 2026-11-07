@@ -120,7 +120,7 @@ echo $converter->convert(
 | 🧩 Multi-platform | PHP, Laravel, Python, Go, Java, React, browsers, and Node.js |
 | 📦 Batch friendly | Converts multiple monetary values in a single call |
 | 🔧 Extensible | Register or override currency names and minor units |
-| 🧠 Official-language packs | Add native number grammar, currency wording, and labels through a public language-pack API on every platform |
+| 🧠 Custom language support | Add native number grammar, currency wording, and local labels for your required languages |
 | 🛡️ Clear validation | Provides specific errors for invalid amounts, countries, and currencies |
 
 ## Quick start
