@@ -125,6 +125,12 @@ echo $converter->convert(
 | 🔄 Automatic code normalization | Converts Alpha-2 codes such as `IN` and `US` to canonical Alpha-3 codes |
 | ⚙️ Configurable wording | Control the `Only` suffix, zero minor units, and conjunction text |
 | 🗣️ Multilingual output | Generate amount wording in English (`en`), Hindi (`hi`), or Arabic (`ar`) for every supported country |
+| 🎛️ Explicit language selection | Keeps English as the default and changes language only when the caller supplies a language code |
+| 🏷️ Short currency names | Optionally produces `Dollars` instead of `US Dollars`, with equivalent built-in localized names |
+| 🌍 Country-independent language | Uses the requested language without silently changing it from the supplied country code |
+| 🧠 Reusable language packs | Adds reviewed number grammar, currency terminology, and local labels through a dedicated interface |
+| 🧯 Safe language fallback | Uses English when a requested language writer is unavailable |
+| ✅ Validated language extensions | Rejects malformed language tags, missing writers, and empty required labels |
 | 🔢 Formatted amount input | Accepts plain values and correctly grouped input such as `1,234,567.89` |
 | ➖ Negative amount support | Produces readable wording for refunds, adjustments, and negative balances |
 | ✍️ Correct grammar | Handles singular and plural major and minor currency units |
@@ -132,6 +138,7 @@ echo $converter->convert(
 | 📚 Discovery helpers | Lists supported countries and currencies for validation and form controls |
 | 🔠 Case insensitive | Accepts country and currency codes in upper or lowercase |
 | 🧩 Multi-platform | PHP, Laravel, Python, Go, Java, React, browsers, and Node.js |
+| 🔁 Consistent platform options | Provides equivalent language, suffix, minor-unit, conjunction, and short-name controls in every runtime |
 | 📦 Batch friendly | Converts multiple monetary values in a single call |
 | 🔧 Extensible | Register or override currency names and minor units |
 | 🧠 Custom language support | Add native number grammar, currency wording, and local labels for your required languages |
