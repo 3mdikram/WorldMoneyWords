@@ -10,7 +10,7 @@
 [![Countries](https://img.shields.io/badge/important_countries-200-1f6feb)](#country-and-currency-support)
 [![Languages](https://img.shields.io/badge/platforms-PHP_%7C_Python_%7C_Go_%7C_Java_%7C_TypeScript-orange)](#platforms)
 
-[Quick start](#quick-start) · [Platforms](#platforms) · [Advanced usage](#advanced-php-usage) · [Contributing](CONTRIBUTING.md)
+[Quick start](#quick-start) · [Platforms](#platforms) · [Language packs](#official-language-packs) · [Advanced usage](#advanced-php-usage) · [Contributing](CONTRIBUTING.md)
 
 </div>
 
@@ -35,9 +35,18 @@ The same simple contract is available on every supported platform:
 convert(amount, countryCode, currencyCode, options?)
 ```
 
-### Add an official-language pack
+## Official-language packs
 
 WorldMoneyWords does not treat an English fallback as native-language support. A language pack supplies its own number writer, currency-name resolver, negative/conjunction/suffix labels, and singular/plural minor-unit labels. Registered packs can then be selected with the normal `language` option.
+
+### Built-in and extensible support
+
+| Support type | Languages | Behavior |
+|---|---|---|
+| Built in | English (`en`), Hindi (`hi`), Arabic (`ar`) | Native amount wording is available immediately |
+| Automatic | `auto` | Selects a built-in country language when available; otherwise uses English |
+| Language pack | Any valid language tag, such as `ur`, `fr`, or `ja` | Uses the registered native writer and labels |
+| Unknown code | Any unregistered language | Safely falls back to English |
 
 | Platform | Extension API |
 |---|---|
@@ -48,6 +57,49 @@ WorldMoneyWords does not treat an English fallback as native-language support. A
 | React / TypeScript / Node.js | Create `LanguagePack`, then call `registerLanguagePack(pack)` |
 
 Invalid language tags, the reserved `auto` code, missing writers, and empty labels are rejected. Built-in `en`, `hi`, and `ar` output remains backward compatible.
+
+### PHP language-pack example
+
+```php
+use AmountToWords\AmountToWords;
+use AmountToWords\ConversionOptions;
+use AmountToWords\LanguagePack;
+
+$urdu = new class implements LanguagePack {
+    public function code(): string { return 'ur'; }
+    public function spell(string $number): string
+    {
+        // Call your tested Urdu number-grammar implementation here.
+        return UrduNumberWriter::spell($number);
+    }
+    public function currencyName(string $code, bool $singular): string
+    {
+        return UrduCurrencyNames::name($code, $singular);
+    }
+    public function labels(): array
+    {
+        return [
+            'minus' => 'منفی',
+            'conjunction' => 'اور',
+            'only' => 'صرف',
+            'minorSingular' => 'ذیلی اکائی',
+            'minorPlural' => 'ذیلی اکائیاں',
+        ];
+    }
+};
+
+$converter = (new AmountToWords())->addLanguagePack($urdu);
+
+echo $converter->convert(
+    '1250.50',
+    'PK',
+    'PKR',
+    new ConversionOptions(language: 'ur'),
+);
+```
+
+> [!IMPORTANT]
+> Registering a language tag alone is not enough. The pack must contain a linguistically correct number writer and reviewed currency terminology before it should be described as supported.
 
 ## Why WorldMoneyWords?
 
@@ -459,11 +511,11 @@ WorldMoneyWords performs decimal-string rounding in PHP, including correct carry
 
 > **Quick reference:** These 15 commonly used countries stay visible. Expand the section below to browse every other supported ISO country.
 >
-> **Country-language codes:** Each row shows the country's primary language. The table shows each country’s primary local language code. Implemented writers are `EN`, `HI`, and `AR`; other language codes use the documented English fallback until their writer is added.
+> **Country-language codes:** Each row shows the country’s primary language from CLDR territory data. Built-in writers are `EN`, `HI`, and `AR`; another code uses its registered language pack or the documented English fallback.
 >
 > Country-language matching is based on [Unicode CLDR territory-language data](https://unicode.org/cldr/charts/latest/supplemental/territory_language_information.html).
 
-|  | Country | **Alpha-2** | **Alpha-3** | Currency | ISO currency | Local language |
+|  | Country | **Alpha-2** | **Alpha-3** | Currency | ISO currency | Primary language |
 |:---:|---|:---:|:---:|---|:---:|---|
 | 🇮🇳 | **India** | `IN` | `IND` | Indian Rupee | `INR` | `HI` |
 | 🇺🇸 | **United States** | `US` | `USA` | US Dollar | `USD` | `EN` |
@@ -486,7 +538,7 @@ WorldMoneyWords performs decimal-string rounding in PHP, including correct carry
 
 <br>
 
-|  | Country | **Alpha-2** | **Alpha-3** | Currency | ISO currency | Local language |
+|  | Country | **Alpha-2** | **Alpha-3** | Currency | ISO currency | Primary language |
 |:---:|---|:---:|:---:|---|:---:|---|
 | 🇦🇫 | **Afghanistan** | `AF` | `AFG` | Afghan Afghani | `AFN` | `FA` |
 | 🇦🇱 | **Albania** | `AL` | `ALB` | Albanian Lek | `ALL` | `SQ` |
