@@ -4,7 +4,7 @@
 <dependency>
   <groupId>io.github.3mdikram</groupId>
   <artifactId>worldmoneywords</artifactId>
-  <version>2.2.0</version>
+  <version>2.3.0</version>
 </dependency>
 ```
 
@@ -18,5 +18,7 @@ String text = converter.convert("1234.50", "IN", "INR");
 ConversionOptions options = new ConversionOptions(false, true, "plus");
 String custom = converter.convert("10.00", "US", "USD", options);
 ```
+
+Use `new ConversionOptions(true, false, "and", "hi")` for Hindi or replace `hi` with `ar` for Arabic.
 
 Requires Java 11 or newer.

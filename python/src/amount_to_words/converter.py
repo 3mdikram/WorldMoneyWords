@@ -20,10 +20,13 @@ class ConversionOptions:
     include_only: bool = True
     include_zero_minor: bool = False
     conjunction: str = "and"
+    language: str = "en"
 
     def __post_init__(self):
         if not self.conjunction.strip():
             raise ValueError("Conjunction cannot be empty")
+        if self.language.lower() not in {"en", "hi", "ar"}:
+            raise ValueError("Language must be en, hi, or ar")
 
 CURRENCIES = {
     "INR": Currency("Rupee", "Rupees", "Paisa", "Paise"),
@@ -65,12 +68,52 @@ def _spell(value: int) -> str:
             raise ValueError("Amount is outside the supported range")
     return " ".join(reversed(chunks))
 
+HI_0_99 = "शून्य|एक|दो|तीन|चार|पाँच|छह|सात|आठ|नौ|दस|ग्यारह|बारह|तेरह|चौदह|पन्द्रह|सोलह|सत्रह|अठारह|उन्नीस|बीस|इक्कीस|बाईस|तेईस|चौबीस|पच्चीस|छब्बीस|सत्ताईस|अट्ठाईस|उनतीस|तीस|इकतीस|बत्तीस|तैंतीस|चौंतीस|पैंतीस|छत्तीस|सैंतीस|अड़तीस|उनतालीस|चालीस|इकतालीस|बयालीस|तैंतालीस|चौवालीस|पैंतालीस|छियालीस|सैंतालीस|अड़तालीस|उनचास|पचास|इक्यावन|बावन|तिरेपन|चौवन|पचपन|छप्पन|सत्तावन|अट्ठावन|उनसठ|साठ|इकसठ|बासठ|तिरेसठ|चौंसठ|पैंसठ|छियासठ|सड़सठ|अड़सठ|उनहत्तर|सत्तर|इकहत्तर|बहत्तर|तिहत्तर|चौहत्तर|पचहत्तर|छिहत्तर|सतहत्तर|अठहत्तर|उनासी|अस्सी|इक्यासी|बयासी|तिरासी|चौरासी|पचासी|छियासी|सत्तासी|अट्ठासी|नवासी|नब्बे|इक्यानबे|बानबे|तिरानबे|चौरानबे|पंचानबे|छियानबे|सत्तानबे|अट्ठानबे|निन्यानबे".split("|")
+AR_0_19 = "صفر|واحد|اثنان|ثلاثة|أربعة|خمسة|ستة|سبعة|ثمانية|تسعة|عشرة|أحد عشر|اثنا عشر|ثلاثة عشر|أربعة عشر|خمسة عشر|ستة عشر|سبعة عشر|ثمانية عشر|تسعة عشر".split("|")
+AR_TENS = ["", "", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون"]
+
+def _under_100_localized(value: int, language: str) -> str:
+    if language == "hi": return HI_0_99[value]
+    if value < 20: return AR_0_19[value]
+    return AR_TENS[value // 10] if value % 10 == 0 else f"{AR_0_19[value % 10]} و{AR_TENS[value // 10]}"
+
+def _under_1000_localized(value: int, language: str) -> str:
+    parts = []
+    if value >= 100:
+        hundreds = value // 100
+        if language == "hi": parts.append(("एक" if hundreds == 1 else HI_0_99[hundreds]) + " सौ")
+        else: parts.append({1:"مائة",2:"مائتان"}.get(hundreds, AR_0_19[hundreds] + " مائة"))
+        value %= 100
+    if value: parts.append(_under_100_localized(value, language))
+    return (" و" if language == "ar" else " ").join(parts)
+
+def _spell_localized(value: int, language: str) -> str:
+    if language == "en": return _spell(value)
+    if value == 0: return HI_0_99[0] if language == "hi" else AR_0_19[0]
+    scales = ["", "हज़ार", "मिलियन", "बिलियन", "ट्रिलियन", "क्वाड्रिलियन"] if language == "hi" else ["", "ألف", "مليون", "مليار", "تريليون", "كوادريليون"]
+    chunks, scale = [], 0
+    while value:
+        chunk = value % 1000
+        if chunk:
+            part = "" if language == "ar" and chunk == 1 and scale > 0 else _under_1000_localized(chunk, language)
+            if scales[scale]: part = (part + " " if part else "") + scales[scale]
+            chunks.append(part)
+        value //= 1000; scale += 1
+        if scale >= len(scales) and value: raise ValueError("Amount is outside the supported range")
+    return (" و" if language == "ar" else " ").join(reversed(chunks))
+
+LOCALIZED_CURRENCIES = {
+    "hi": {"INR":"भारतीय रुपया", "USD":"अमेरिकी डॉलर", "GBP":"ब्रिटिश पाउंड", "EUR":"यूरो", "AED":"यूएई दिरहम", "JPY":"जापानी येन"},
+    "ar": {"INR":"روبية هندية", "USD":"دولار أمريكي", "GBP":"جنيه إسترليني", "EUR":"يورو", "AED":"درهم إماراتي", "JPY":"ين ياباني"},
+}
+
 class AmountToWords:
     def __init__(self, currencies: dict[str, Currency] | None = None):
         self.currencies = {**CURRENCIES, **(currencies or {})}
 
     def convert(self, amount: int | float | str | Decimal, country_code: str, currency_code: str, options: ConversionOptions | None = None) -> str:
         options = options or ConversionOptions()
+        language = options.language.lower()
         country_input = country_code.strip().upper()
         country = ISO_COUNTRY_CODES.get(country_input)
         code = currency_code.strip().upper()
@@ -89,10 +132,16 @@ class AmountToWords:
         value = abs(value)
         major = int(value)
         minor = int((value - major) * (10 ** currency.fraction_digits))
-        parts = ["Minus"] if negative else []
-        parts += [_spell(major), currency.major_singular if major == 1 else currency.major_plural]
+        labels = {"en": ("Minus", "and", "Only", "Minor Unit", "Minor Units"), "hi": ("ऋण", "और", "मात्र", "उप-इकाई", "उप-इकाइयाँ"), "ar": ("سالب", "و", "فقط", "وحدة فرعية", "وحدات فرعية")}[language]
+        parts = [labels[0]] if negative else []
+        major_name = currency.major_singular if major == 1 else currency.major_plural
+        if language != "en": major_name = LOCALIZED_CURRENCIES[language].get(code, code)
+        parts += [_spell_localized(major, language), major_name]
         if minor or (currency.fraction_digits > 0 and options.include_zero_minor):
-            parts += [options.conjunction, _spell(minor), currency.minor_singular if minor == 1 else currency.minor_plural]
+            conjunction = labels[1] if options.conjunction == "and" else options.conjunction
+            minor_name = currency.minor_singular if minor == 1 else currency.minor_plural
+            if language != "en": minor_name = labels[3] if minor == 1 else labels[4]
+            parts += [conjunction, _spell_localized(minor, language), minor_name]
         if options.include_only:
-            parts.append("Only")
+            parts.append(labels[2])
         return " ".join(filter(None, parts))

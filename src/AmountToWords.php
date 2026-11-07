@@ -43,6 +43,7 @@ final class AmountToWords
     ): string
     {
         $options ??= new ConversionOptions();
+        $language = strtolower($options->language);
         $countryCode = $this->normalizeCountryCode($countryCode);
         $currencyCode = strtoupper(trim($currencyCode));
 
@@ -56,23 +57,56 @@ final class AmountToWords
 
         $parts = [];
         if ($negative) {
-            $parts[] = 'Minus';
+            $parts[] = ['en' => 'Minus', 'hi' => 'ऋण', 'ar' => 'سالب'][$language];
         }
 
-        $parts[] = $this->spell($majorAbsolute);
-        $parts[] = $majorAbsolute === '1' ? $currency->majorSingular : $currency->majorPlural;
+        $parts[] = $this->spellLocalized($majorAbsolute, $language);
+        $parts[] = $this->localizedCurrencyName($currencyCode, $currency, $majorAbsolute === '1', $language);
 
         if ($currency->fractionDigits > 0 && ((int) $minor > 0 || $options->includeZeroMinor)) {
-            $parts[] = $options->conjunction;
-            $parts[] = $this->spell($minor);
-            $parts[] = (int) $minor === 1 ? $currency->minorSingular : $currency->minorPlural;
+            $parts[] = $options->conjunction === 'and'
+                ? ['en' => 'and', 'hi' => 'और', 'ar' => 'و'][$language]
+                : $options->conjunction;
+            $parts[] = $this->spellLocalized($minor, $language);
+            $parts[] = $language === 'en'
+                ? ((int) $minor === 1 ? $currency->minorSingular : $currency->minorPlural)
+                : ['hi' => 'उप-इकाई', 'ar' => 'وحدة فرعية'][$language];
         }
 
         if ($options->includeOnly) {
-            $parts[] = 'Only';
+            $parts[] = ['en' => 'Only', 'hi' => 'मात्र', 'ar' => 'فقط'][$language];
         }
 
         return implode(' ', array_filter($parts, static fn (string $part): bool => $part !== ''));
+    }
+
+    private function spellLocalized(string $number, string $language): string
+    {
+        if ($language === 'en') {
+            return $this->spell($number);
+        }
+
+        $formatter = new NumberFormatter($language, NumberFormatter::SPELLOUT);
+        $formatted = $formatter->format((int) $number);
+        if ($formatted === false) {
+            return $this->spell($number);
+        }
+
+        return $formatted;
+    }
+
+    private function localizedCurrencyName(
+        string $code,
+        Currency $currency,
+        bool $singular,
+        string $language,
+    ): string {
+        if ($language === 'en') {
+            return $singular ? $currency->majorSingular : $currency->majorPlural;
+        }
+
+        $name = Currencies::getName($code, $language);
+        return $name === $code ? $code : $name;
     }
 
     public function convertDetailed(

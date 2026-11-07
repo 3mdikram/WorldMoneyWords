@@ -20,4 +20,9 @@ class WorldMoneyWordsTest {
         assertEquals("IND", converter.normalizeCountryCode("in"));
         assertThrows(IllegalArgumentException.class, () -> converter.convert("10", "AI", "USD"));
     }
+
+    @Test void supportsHindiAndArabic() {
+        assertEquals("एक हज़ार दो सौ चौंतीस भारतीय रुपया और पचास उप-इकाइयाँ मात्र", converter.convert("1234.50", "IN", "INR", new ConversionOptions(true, false, "and", "hi")));
+        assertEquals("ألف ومائتان وأربعة وثلاثون دولار أمريكي و خمسون وحدات فرعية فقط", converter.convert("1234.50", "US", "USD", new ConversionOptions(true, false, "and", "ar")));
+    }
 }

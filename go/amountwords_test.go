@@ -29,3 +29,14 @@ func TestOptions(t *testing.T) {
 		t.Fatalf("got %q, %v", got, err)
 	}
 }
+
+func TestHindiAndArabic(t *testing.T) {
+	hi, err := Convert(1234.50, "IN", "INR", Options{IncludeOnly: true, Language: "hi", Conjunction: "and"})
+	if err != nil || hi != "एक हज़ार दो सौ चौंतीस भारतीय रुपया और पचास उप-इकाइयाँ मात्र" {
+		t.Fatalf("got %q, %v", hi, err)
+	}
+	ar, err := Convert(1234.50, "US", "USD", Options{IncludeOnly: true, Language: "ar", Conjunction: "and"})
+	if err != nil || ar != "ألف ومائتان وأربعة وثلاثون دولار أمريكي و خمسون وحدات فرعية فقط" {
+		t.Fatalf("got %q, %v", ar, err)
+	}
+}

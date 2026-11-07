@@ -31,14 +31,20 @@ public final class WorldMoneyWords {
         value = value.abs();
         BigInteger major = value.toBigInteger();
         BigInteger minor = value.subtract(new BigDecimal(major)).movePointRight(currency.fractionDigits).toBigInteger();
+        String language = options.language();
+        String[] labels = language.equals("en") ? new String[]{"Minus","and","Only","Minor Unit","Minor Units"} : LocalizedWords.labels(language);
         StringBuilder result = new StringBuilder();
-        if (negative && value.signum() != 0) result.append("Minus ");
-        result.append(spell(major)).append(' ').append(major.equals(BigInteger.ONE) ? currency.majorSingular : currency.majorPlural);
+        if (negative && value.signum() != 0) result.append(labels[0]).append(' ');
+        String majorWords = language.equals("en") ? spell(major) : LocalizedWords.spell(major, language);
+        String majorName = language.equals("en") ? (major.equals(BigInteger.ONE) ? currency.majorSingular : currency.majorPlural) : LocalizedWords.currency(code, language);
+        result.append(majorWords).append(' ').append(majorName);
         if (minor.signum() > 0 || (currency.fractionDigits > 0 && options.includeZeroMinor())) {
-            result.append(' ').append(options.conjunction()).append(' ').append(spell(minor)).append(' ')
-                .append(minor.equals(BigInteger.ONE) ? currency.minorSingular : currency.minorPlural);
+            String conjunction = options.conjunction().equals("and") ? labels[1] : options.conjunction();
+            String minorWords = language.equals("en") ? spell(minor) : LocalizedWords.spell(minor, language);
+            String minorName = language.equals("en") ? (minor.equals(BigInteger.ONE) ? currency.minorSingular : currency.minorPlural) : (minor.equals(BigInteger.ONE) ? labels[3] : labels[4]);
+            result.append(' ').append(conjunction).append(' ').append(minorWords).append(' ').append(minorName);
         }
-        if (options.includeOnly()) result.append(" Only");
+        if (options.includeOnly()) result.append(' ').append(labels[2]);
         return result.toString();
     }
 

@@ -44,6 +44,7 @@ convert(amount, countryCode, currencyCode, options?)
 | 🎯 Financial accuracy | Exact decimal-string rounding avoids binary floating-point loss in PHP |
 | 🔄 Automatic code normalization | Converts Alpha-2 codes such as `IN` and `US` to canonical Alpha-3 codes |
 | ⚙️ Configurable wording | Control the `Only` suffix, zero minor units, and conjunction text |
+| 🗣️ Multilingual output | Generate amount wording in English (`en`), Hindi (`hi`), or Arabic (`ar`) for every supported country |
 | 🔢 Formatted amount input | Accepts plain values and correctly grouped input such as `1,234,567.89` |
 | ➖ Negative amount support | Produces readable wording for refunds, adjustments, and negative balances |
 | ✍️ Correct grammar | Handles singular and plural major and minor currency units |
@@ -297,6 +298,7 @@ convert(int|float|string $amount, string $countryCode, string $currencyCode, ?Co
 | `includeOnly` | `boolean` | `true` | Adds `Only` to the end of the amount | `Ten US Dollars Only` |
 | `includeZeroMinor` | `boolean` | `false` | Includes the minor unit when its value is zero | `Ten US Dollars and Zero Cents Only` |
 | `conjunction` | `string` | `and` | Changes the word joining major and minor units | `Ten US Dollars plus Fifty Cents Only` |
+| `language` | `string` | `en` | Selects English (`en`), Hindi (`hi`), or Arabic (`ar`) output | `एक हज़ार भारतीय रुपया मात्र` |
 
 Use the options when you need wording tailored to invoices, cheques, banking forms, or local document rules:
 
@@ -307,11 +309,24 @@ Use the options when you need wording tailored to invoices, cheques, banking for
 
 Option names follow each language's normal style:
 
-| PHP / TypeScript | Python | Go | Java |
-|---|---|---|---|
-| `includeOnly` | `include_only` | `IncludeOnly` | `includeOnly` |
-| `includeZeroMinor` | `include_zero_minor` | `IncludeZeroMinor` | `includeZeroMinor` |
-| `conjunction` | `conjunction` | `Conjunction` | `conjunction` |
+| Option | PHP / TypeScript | Python | Go | Java |
+|---|---|---|---|---|
+| Only suffix | `includeOnly` | `include_only` | `IncludeOnly` | `includeOnly` |
+| Zero minor unit | `includeZeroMinor` | `include_zero_minor` | `IncludeZeroMinor` | `includeZeroMinor` |
+| Conjunction | `conjunction` | `conjunction` | `Conjunction` | `conjunction` |
+| Output language | `language` | `language` | `Language` | `language` |
+
+### Hindi and Arabic output
+
+```php
+$hindi = $converter->convert('1234.50', 'IN', 'INR', new ConversionOptions(language: 'hi'));
+// एक हज़ार दो सौ चौंतीस भारतीय रुपया और पचास उप-इकाई मात्र
+
+$arabic = $converter->convert('1234.50', 'US', 'USD', new ConversionOptions(language: 'ar'));
+// ألف ومائتان وأربعة وثلاثون دولار أمريكي و خمسون وحدة فرعية فقط
+```
+
+Language selection changes only the generated wording. ISO Alpha-2/Alpha-3 country validation remains available for all 200 supported countries.
 
 Invalid PHP input throws a specific exception from `AmountToWords\Exception`.
 

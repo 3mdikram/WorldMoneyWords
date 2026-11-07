@@ -16,9 +16,10 @@ type Options struct {
 	IncludeOnly      bool
 	IncludeZeroMinor bool
 	Conjunction      string
+	Language         string
 }
 
-func DefaultOptions() Options { return Options{IncludeOnly: true, Conjunction: "and"} }
+func DefaultOptions() Options { return Options{IncludeOnly: true, Conjunction: "and", Language: "en"} }
 
 var currencies = map[string]Currency{
 	"INR": {"Rupee", "Rupees", "Paisa", "Paise", 2}, "USD": {"US Dollar", "US Dollars", "Cent", "Cents", 2},
@@ -29,6 +30,10 @@ var ones = []string{"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven
 var tens = []string{"", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"}
 var scales = []string{"", "Thousand", "Million", "Billion", "Trillion", "Quadrillion"}
 var isoCode = regexp.MustCompile(`^[A-Z]{3}$`)
+var hindi = strings.Split("शून्य|एक|दो|तीन|चार|पाँच|छह|सात|आठ|नौ|दस|ग्यारह|बारह|तेरह|चौदह|पन्द्रह|सोलह|सत्रह|अठारह|उन्नीस|बीस|इक्कीस|बाईस|तेईस|चौबीस|पच्चीस|छब्बीस|सत्ताईस|अट्ठाईस|उनतीस|तीस|इकतीस|बत्तीस|तैंतीस|चौंतीस|पैंतीस|छत्तीस|सैंतीस|अड़तीस|उनतालीस|चालीस|इकतालीस|बयालीस|तैंतालीस|चौवालीस|पैंतालीस|छियालीस|सैंतालीस|अड़तालीस|उनचास|पचास|इक्यावन|बावन|तिरेपन|चौवन|पचपन|छप्पन|सत्तावन|अट्ठावन|उनसठ|साठ|इकसठ|बासठ|तिरेसठ|चौंसठ|पैंसठ|छियासठ|सड़सठ|अड़सठ|उनहत्तर|सत्तर|इकहत्तर|बहत्तर|तिहत्तर|चौहत्तर|पचहत्तर|छिहत्तर|सतहत्तर|अठहत्तर|उनासी|अस्सी|इक्यासी|बयासी|तिरासी|चौरासी|पचासी|छियासी|सत्तासी|अट्ठासी|नवासी|नब्बे|इक्यानबे|बानबे|तिरानबे|चौरानबे|पंचानबे|छियानबे|सत्तानबे|अट्ठानबे|निन्यानबे", "|")
+var arabic19 = strings.Split("صفر|واحد|اثنان|ثلاثة|أربعة|خمسة|ستة|سبعة|ثمانية|تسعة|عشرة|أحد عشر|اثنا عشر|ثلاثة عشر|أربعة عشر|خمسة عشر|ستة عشر|سبعة عشر|ثمانية عشر|تسعة عشر", "|")
+var arabicTens = []string{"", "", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون"}
+var localizedCurrencies = map[string]map[string]string{"hi": {"INR": "भारतीय रुपया", "USD": "अमेरिकी डॉलर", "GBP": "ब्रिटिश पाउंड", "EUR": "यूरो", "AED": "यूएई दिरहम", "JPY": "जापानी येन"}, "ar": {"INR": "روبية هندية", "USD": "دولار أمريكي", "GBP": "جنيه إسترليني", "EUR": "يورو", "AED": "درهم إماراتي", "JPY": "ين ياباني"}}
 
 func underThousand(n int64) string {
 	p := []string{}
@@ -70,6 +75,92 @@ func spell(n int64) (string, error) {
 	return strings.Join(p, " "), nil
 }
 
+func localizedUnder100(n int64, language string) string {
+	if language == "hi" {
+		return hindi[n]
+	}
+	if n < 20 {
+		return arabic19[n]
+	}
+	if n%10 == 0 {
+		return arabicTens[n/10]
+	}
+	return arabic19[n%10] + " و" + arabicTens[n/10]
+}
+func localizedUnder1000(n int64, language string) string {
+	p := []string{}
+	if n >= 100 {
+		h := n / 100
+		if language == "hi" {
+			one := hindi[h]
+			if h == 1 {
+				one = "एक"
+			}
+			p = append(p, one+" सौ")
+		} else if h == 1 {
+			p = append(p, "مائة")
+		} else if h == 2 {
+			p = append(p, "مائتان")
+		} else {
+			p = append(p, arabic19[h]+" مائة")
+		}
+		n %= 100
+	}
+	if n > 0 {
+		p = append(p, localizedUnder100(n, language))
+	}
+	separator := " "
+	if language == "ar" {
+		separator = " و"
+	}
+	return strings.Join(p, separator)
+}
+func localizedSpell(n int64, language string) (string, error) {
+	if language == "en" {
+		return spell(n)
+	}
+	if n == 0 {
+		if language == "hi" {
+			return hindi[0], nil
+		}
+		return arabic19[0], nil
+	}
+	var ss []string
+	if language == "hi" {
+		ss = []string{"", "हज़ार", "मिलियन", "बिलियन", "ट्रिलियन", "क्वाड्रिलियन"}
+	} else {
+		ss = []string{"", "ألف", "مليون", "مليار", "تريليون", "كوادريليون"}
+	}
+	p := []string{}
+	i := 0
+	for n > 0 {
+		if i >= len(ss) {
+			return "", fmt.Errorf("amount outside supported range")
+		}
+		c := n % 1000
+		if c > 0 {
+			s := ""
+			if !(language == "ar" && c == 1 && i > 0) {
+				s = localizedUnder1000(c, language)
+			}
+			if ss[i] != "" {
+				if s != "" {
+					s += " "
+				}
+				s += ss[i]
+			}
+			p = append([]string{s}, p...)
+		}
+		n /= 1000
+		i++
+	}
+	separator := " "
+	if language == "ar" {
+		separator = " و"
+	}
+	return strings.Join(p, separator), nil
+}
+
 func Convert(amount float64, countryCode, currencyCode string, supplied ...Options) (string, error) {
 	options := DefaultOptions()
 	if len(supplied) > 0 {
@@ -77,6 +168,13 @@ func Convert(amount float64, countryCode, currencyCode string, supplied ...Optio
 		if options.Conjunction == "" {
 			options.Conjunction = "and"
 		}
+	}
+	if options.Language == "" {
+		options.Language = "en"
+	}
+	options.Language = strings.ToLower(options.Language)
+	if options.Language != "en" && options.Language != "hi" && options.Language != "ar" {
+		return "", fmt.Errorf("language must be en, hi, or ar")
 	}
 	country, code := strings.ToUpper(strings.TrimSpace(countryCode)), strings.ToUpper(strings.TrimSpace(currencyCode))
 	if alpha3, ok := isoAlpha2To3[country]; ok {
@@ -98,29 +196,48 @@ func Convert(amount float64, countryCode, currencyCode string, supplied ...Optio
 	rounded = math.Abs(rounded)
 	major := int64(rounded)
 	minor := int64(math.Round((rounded - float64(major)) * factor))
-	majorWords, err := spell(major)
+	majorWords, err := localizedSpell(major, options.Language)
 	if err != nil {
 		return "", err
 	}
 	p := []string{}
+	labels := map[string][]string{"en": {"Minus", "and", "Only", "Minor Unit", "Minor Units"}, "hi": {"ऋण", "और", "मात्र", "उप-इकाई", "उप-इकाइयाँ"}, "ar": {"سالب", "و", "فقط", "وحدة فرعية", "وحدات فرعية"}}[options.Language]
 	if negative {
-		p = append(p, "Minus")
+		p = append(p, labels[0])
 	}
 	majorName := c.MajorPlural
 	if major == 1 {
 		majorName = c.MajorSingular
 	}
+	if options.Language != "en" {
+		if name, ok := localizedCurrencies[options.Language][code]; ok {
+			majorName = name
+		} else {
+			majorName = code
+		}
+	}
 	p = append(p, majorWords, majorName)
 	if minor > 0 || (c.FractionDigits > 0 && options.IncludeZeroMinor) {
-		minorWords, _ := spell(minor)
+		minorWords, _ := localizedSpell(minor, options.Language)
 		minorName := c.MinorPlural
 		if minor == 1 {
 			minorName = c.MinorSingular
 		}
-		p = append(p, options.Conjunction, minorWords, minorName)
+		if options.Language != "en" {
+			if minor == 1 {
+				minorName = labels[3]
+			} else {
+				minorName = labels[4]
+			}
+		}
+		conjunction := options.Conjunction
+		if conjunction == "and" {
+			conjunction = labels[1]
+		}
+		p = append(p, conjunction, minorWords, minorName)
 	}
 	if options.IncludeOnly {
-		p = append(p, "Only")
+		p = append(p, labels[2])
 	}
 	return strings.Join(p, " "), nil
 }
