@@ -1,12 +1,32 @@
 {
   "name": "@3mdikram/worldmoneywords",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Amount-to-words converter for React, browsers, and Node.js",
+  "license": "MIT",
+  "author": "Md Ikram",
+  "homepage": "https://github.com/3mdikram/WorldMoneyWords#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/3mdikram/WorldMoneyWords.git",
+    "directory": "react"
+  },
+  "bugs": {
+    "url": "https://github.com/3mdikram/WorldMoneyWords/issues"
+  },
+  "keywords": ["amount-to-words", "currency", "money", "react", "typescript", "iso-4217"],
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "exports": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
   "files": ["dist"],
+  "sideEffects": false,
+  "publishConfig": {"access": "public"},
   "scripts": {"build": "tsc", "test": "npm run build && node --test test/*.test.js"},
   "devDependencies": {"typescript": "^5.7.0"}
 }
