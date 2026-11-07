@@ -2,7 +2,9 @@
 
 # 🌍 WorldMoneyWords
 
-**Convert money amounts into accurate, human-readable words for invoices, cheques, receipts, banking forms, and financial documents.**
+**Turn currency amounts into clear, document-ready words for invoices, cheques, receipts, payments, and banking workflows.**
+
+One consistent API for PHP, Laravel, Python, Go, Java, React, TypeScript, browsers, and Node.js—with ISO country codes, global currencies, multilingual output, and customizable financial wording.
 
 [![Tests](https://github.com/3mdikram/WorldMoneyWords/actions/workflows/tests.yml/badge.svg)](https://github.com/3mdikram/WorldMoneyWords/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
