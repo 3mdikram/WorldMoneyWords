@@ -12,7 +12,7 @@ license = "MIT"
 authors = [
   {name = "Md Ikram"}
 ]
-keywords = ["amount", "currency", "money", "numbers", "words", "iso-3166", "iso-4217"]
+keywords = ["amount-to-words", "amount-to-text", "money-to-words", "money-to-text", "number-to-words", "currency-to-words", "currency-converter", "multilingual", "english", "hindi", "arabic", "invoice", "cheque", "iso-3166", "iso-4217"]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Developers",

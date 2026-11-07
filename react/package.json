@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/3mdikram/WorldMoneyWords/issues"
   },
-  "keywords": ["amount-to-words", "currency", "money", "react", "typescript", "iso-4217"],
+  "keywords": ["amount-to-words", "amount-to-text", "money-to-words", "money-to-text", "number-to-words", "currency-to-words", "currency-converter", "multilingual", "english", "hindi", "arabic", "react", "typescript", "javascript", "nodejs", "browser", "invoice", "cheque", "iso-3166", "iso-4217"],
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

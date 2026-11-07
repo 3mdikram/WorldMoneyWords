@@ -1,4 +1,6 @@
-# WorldMoneyWords for React and JavaScript
+# WorldMoneyWords for React, TypeScript, Node.js, and browsers
+
+JavaScript and TypeScript amount-to-words, money-to-text, number-to-words, and currency-to-words library with multilingual output and ISO 3166/4217 support for 200 countries.
 
 ```bash
 npm install @3mdikram/worldmoneywords

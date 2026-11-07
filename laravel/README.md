@@ -1,5 +1,7 @@
 # WorldMoneyWords for Laravel
 
+Laravel amount-to-words, money-to-text, number-to-words, and currency-to-words package with multilingual output and ISO 3166/4217 support for 200 countries.
+
 ```bash
 composer require 3mdikram/worldmoneywords-laravel
 ```

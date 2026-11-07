@@ -1,5 +1,7 @@
 # WorldMoneyWords for Java
 
+Java amount-to-words, money-to-text, number-to-words, and currency-to-words library with multilingual output and ISO 3166/4217 support for 200 countries.
+
 ```xml
 <dependency>
   <groupId>io.github.3mdikram</groupId>

@@ -5,7 +5,7 @@
   <artifactId>worldmoneywords</artifactId>
   <version>2.5.0</version>
   <name>WorldMoneyWords for Java</name>
-  <description>Java amount-to-words library with multilingual currency wording and 200-country ISO support.</description>
+  <description>Java amount-to-words, money-to-text, number-to-words, and currency-to-words library with multilingual output and ISO 3166/4217 support for 200 countries.</description>
   <url>https://github.com/3mdikram/WorldMoneyWords</url>
   <licenses><license><name>MIT License</name><url>https://opensource.org/licenses/MIT</url></license></licenses>
   <developers>
