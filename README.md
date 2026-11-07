@@ -158,14 +158,14 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 
 ### Multilingual support matrix
 
-| Platform | `EN` | `HI` | `AR` | 200-country validation |
-|---|:---:|:---:|:---:|:---:|
-| PHP | ✅ | ✅ | ✅ | ✅ |
-| Laravel | ✅ | ✅ | ✅ | ✅ |
-| Python | ✅ | ✅ | ✅ | ✅ |
-| Go | ✅ | ✅ | ✅ | ✅ |
-| Java | ✅ | ✅ | ✅ | ✅ |
-| React / TypeScript / Node.js | ✅ | ✅ | ✅ | ✅ |
+| Platform | `EN` | `HI` | `AR` |
+|---|:---:|:---:|:---:|
+| PHP | ✅ | ✅ | ✅ |
+| Laravel | ✅ | ✅ | ✅ |
+| Python | ✅ | ✅ | ✅ |
+| Go | ✅ | ✅ | ✅ |
+| Java | ✅ | ✅ | ✅ |
+| React / TypeScript / Node.js | ✅ | ✅ | ✅ |
 
 Every native implementation runs the same three language options across all 200 Alpha-2/Alpha-3 country mappings. Laravel uses the tested PHP core implementation.
 
