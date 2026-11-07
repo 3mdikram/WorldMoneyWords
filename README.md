@@ -187,6 +187,18 @@ echo AmountToWords::convert('10.00', 'US', 'USD', $options);
 // Ten US Dollars plus Zero Cents
 ```
 
+#### 3. Conversion with language
+
+```php
+use AmountToWords\ConversionOptions;
+use AmountToWords\Laravel\Facades\AmountToWords;
+
+$options = new ConversionOptions(language: 'hi');
+
+echo AmountToWords::convert('10', 'IN', 'INR', $options);
+// दस भारतीय रुपया मात्र
+```
+
 Laravel discovers the provider and facade automatically. See the [Laravel guide](laravel/README.md).
 
 </details>
@@ -221,6 +233,16 @@ options = ConversionOptions(
 
 print(AmountToWords().convert("10.00", "US", "USD", options))
 # Ten US Dollars plus Zero Cents
+```
+
+#### 3. Conversion with language
+
+```python
+from amount_to_words import AmountToWords, ConversionOptions
+
+options = ConversionOptions(language="hi")
+print(AmountToWords().convert("10", "IN", "INR", options))
+# दस भारतीय रुपया मात्र
 ```
 
 </details>
@@ -268,6 +290,23 @@ fmt.Println(text)
 // Ten US Dollars plus Zero Cents
 ```
 
+#### 3. Conversion with language
+
+```go
+options := amountwords.Options{
+    IncludeOnly: true,
+    Conjunction: "and",
+    Language:    "hi",
+}
+
+text, err := amountwords.Convert(10, "IN", "INR", options)
+if err != nil {
+    panic(err)
+}
+fmt.Println(text)
+// दस भारतीय रुपया मात्र
+```
+
 </details>
 
 <details>
@@ -299,6 +338,19 @@ ConversionOptions options = new ConversionOptions(false, true, "plus");
 
 String text = converter.convert("10.00", "US", "USD", options);
 // Ten US Dollars plus Zero Cents
+```
+
+#### 3. Conversion with language
+
+```java
+import io.github.mdikram.worldmoneywords.ConversionOptions;
+import io.github.mdikram.worldmoneywords.WorldMoneyWords;
+
+WorldMoneyWords converter = new WorldMoneyWords();
+ConversionOptions options = new ConversionOptions(true, false, "and", "hi");
+
+String text = converter.convert("10", "IN", "INR", options);
+// दस भारतीय रुपया मात्र
 ```
 
 Requires Java 11 or newer. See the [Java guide](java/README.md).
@@ -337,6 +389,21 @@ export function CustomPaymentTotal() {
 
   return <p>{words}</p>;
   // Ten US Dollars plus Zero Cents
+}
+```
+
+#### 3. Conversion with language
+
+```tsx
+import { amountToWords } from '@3mdikram/worldmoneywords';
+
+export function HindiPaymentTotal() {
+  const words = amountToWords('10', 'IN', 'INR', {
+    language: 'hi',
+  });
+
+  return <p>{words}</p>;
+  // दस भारतीय रुपया मात्र
 }
 ```
 
