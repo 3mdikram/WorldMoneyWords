@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "worldmoneywords"
-version = "2.5.2"
+version = "2.5.1"
 description = "Python amount-to-words library with multilingual currency wording and 200-country ISO support"
 readme = "README.md"
 requires-python = ">=3.9"
