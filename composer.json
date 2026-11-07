@@ -1,9 +1,9 @@
 {
   "name": "3mdikram/worldmoneywords",
-  "description": "Convert monetary amounts to words using ISO country and currency codes.",
+  "description": "Convert money amounts to words in PHP and Laravel for invoices, cheques, and financial documents, with 200-country ISO code support.",
   "type": "library",
   "license": "MIT",
-  "keywords": ["amount", "currency", "money", "numbers", "words", "iso-3166", "iso-4217"],
+  "keywords": ["amount-to-words", "number-to-words", "money-to-words", "currency", "php", "laravel", "invoice", "cheque", "iso-3166", "iso-4217"],
   "authors": [
     {
       "name": "Md Ikram",

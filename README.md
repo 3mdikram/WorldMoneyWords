@@ -2,7 +2,7 @@
 
 # 🌍 WorldMoneyWords
 
-**Convert monetary amounts into clear, human-readable words across multiple programming languages.**
+**Convert money amounts into accurate, human-readable words for invoices, cheques, receipts, banking forms, and financial documents.**
 
 [![Tests](https://github.com/3mdikram/WorldMoneyWords/actions/workflows/tests.yml/badge.svg)](https://github.com/3mdikram/WorldMoneyWords/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
@@ -21,7 +21,11 @@ Input:  1234.50, IND, INR
 Output: One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only
 ```
 
-WorldMoneyWords provides one familiar three-value contract everywhere:
+WorldMoneyWords is an amount-to-words library for PHP, Laravel, Python, Go, Java, React, TypeScript, browsers, and Node.js. Give it an amount, an ISO country code, and an ISO currency code; it returns correctly formatted wording with the appropriate major and minor currency units.
+
+It supports 200 important countries, ISO 3166-1 Alpha-2 and Alpha-3 country codes, ISO 4217 currency codes, exact decimal-string handling in PHP, negative values, configurable wording, and singular/plural grammar.
+
+The same simple contract is available on every supported platform:
 
 ```text
 convert(amount, countryCode, currencyCode, options?)
