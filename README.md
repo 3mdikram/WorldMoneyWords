@@ -156,19 +156,6 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 | Java | `io.github.3mdikram:worldmoneywords` | `converter.convert(...)` |
 | React / Node.js | `@3mdikram/worldmoneywords` | `amountToWords(...)` |
 
-### Multilingual support matrix
-
-| Platform | `EN` | `HI` | `AR` |
-|---|:---:|:---:|:---:|
-| PHP | ✅ | ✅ | ✅ |
-| Laravel | ✅ | ✅ | ✅ |
-| Python | ✅ | ✅ | ✅ |
-| Go | ✅ | ✅ | ✅ |
-| Java | ✅ | ✅ | ✅ |
-| React / TypeScript / Node.js | ✅ | ✅ | ✅ |
-
-Every native implementation runs the same three language options across all 200 Alpha-2/Alpha-3 country mappings. Laravel uses the tested PHP core implementation.
-
 <details>
 <summary><strong>Laravel example</strong></summary>
 
@@ -364,12 +351,12 @@ The TypeScript package has no React runtime dependency, so it also works in brow
 convert(int|float|string $amount, string $countryCode, string $currencyCode, ?ConversionOptions $options = null): string
 ```
 
-| Argument | Example | Rules |
-|---|---|---|
-| `amount` | `'1,234.50'` | Plain or correctly grouped numeric value; strings are recommended |
-| `countryCode` | `'IN'` or `'IND'` | ISO 3166-1 Alpha-2 or Alpha-3 code, case-insensitive |
-| `currencyCode` | `'INR'` | ISO 4217 code, case-insensitive |
-| `options` | `new ConversionOptions(...)` | Optional fourth argument used to customize the generated sentence |
+| Argument | Accepted values | Example | Purpose |
+|---|---|---|---|
+| `amount` | Integer, decimal, or numeric string | `'1,234.50'` | Amount to convert; strings are recommended for financial precision |
+| `countryCode` | ISO 3166-1 Alpha-2 or Alpha-3 | `'IN'` or `'IND'` | Validates and normalizes the country, case-insensitively |
+| `currencyCode` | Three-letter ISO 4217 code | `'INR'` | Selects the major unit, minor unit, and decimal precision |
+| `options` | `ConversionOptions` or platform equivalent | `new ConversionOptions(language: 'hi')` | Controls suffixes, minor units, conjunctions, and output language |
 
 ### Conversion options
 
@@ -378,7 +365,7 @@ convert(int|float|string $amount, string $countryCode, string $currencyCode, ?Co
 | `includeOnly` | `boolean` | `true` | Adds `Only` to the end of the amount | `Ten US Dollars Only` |
 | `includeZeroMinor` | `boolean` | `false` | Includes the minor unit when its value is zero | `Ten US Dollars and Zero Cents Only` |
 | `conjunction` | `string` | `and` | Changes the word joining major and minor units | `Ten US Dollars plus Fifty Cents Only` |
-| `language` | `string` | `en` | Selects `en`, `hi`, `ar`, or country-aware `auto`; unavailable writers fall back to English | `एक हज़ार भारतीय रुपया मात्र` |
+| `language` | `string` | `en` | Selects built-in `en`, `hi`, `ar`, country-aware `auto`, or a registered language-pack code; unavailable writers fall back to English | `एक हज़ार भारतीय रुपया मात्र` |
 
 Use the options when you need wording tailored to invoices, cheques, banking forms, or local document rules:
 
