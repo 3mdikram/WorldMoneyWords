@@ -36,7 +36,11 @@ Common searches and use cases include **amount in words**, **amount converter**,
 
 It supports 200 important countries, ISO 3166-1 Alpha-2 and Alpha-3 country codes, ISO 4217 currency codes, exact decimal-string handling in PHP, negative values, configurable wording, and singular/plural grammar.
 
-The same simple API is available on every supported platform:
+Choose English, Hindi, or Arabic explicitly, register reviewed language packs, or safely fall back to English when a writer is unavailable. Output can include full currency names such as `US Dollars` or short names such as `Dollars`, with control over the `Only` suffix, zero minor units, and conjunction wording.
+
+WorldMoneyWords also supports custom currencies, batch conversion, structured results, case-insensitive codes, formatted numeric input, and consistent options across every runtime. Country validation and output-language selection remain independent, so the supplied country code never silently changes the requested language.
+
+The same predictable API shape is available on every supported platform:
 
 ```text
 convert(amount, countryCode, currencyCode, options?)
