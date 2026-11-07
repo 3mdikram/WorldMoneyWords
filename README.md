@@ -163,9 +163,6 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 // One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only
 ```
 
-> [!TIP]
-> Pass financial amounts as strings to preserve every digit exactly.
-
 ## Platforms
 
 | Platform | Package | Main API |
