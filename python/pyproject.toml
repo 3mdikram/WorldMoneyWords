@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "worldmoneywords"
-version = "2.1.1"
+version = "2.1.2"
 description = "Convert monetary amounts to English words using ISO country and currency codes"
 readme = "README.md"
 requires-python = ">=3.9"
