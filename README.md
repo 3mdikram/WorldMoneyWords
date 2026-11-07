@@ -29,7 +29,7 @@ Common searches and use cases include **amount in words**, **amount converter**,
 
 It supports 200 important countries, ISO 3166-1 Alpha-2 and Alpha-3 country codes, ISO 4217 currency codes, exact decimal-string handling in PHP, negative values, configurable wording, and singular/plural grammar.
 
-The same simple contract is available on every supported platform:
+The same simple API is available on every supported platform:
 
 ```text
 convert(amount, countryCode, currencyCode, options?)
@@ -52,7 +52,7 @@ A language pack is responsible for the complete financial wording of a language:
 
 ### How to add a language
 
-1. Implement the platform’s `LanguagePack` contract.
+1. Implement the platform’s `LanguagePack` interface.
 2. Register the pack with the converter.
 3. Pass its language code through the normal `language` option.
 
