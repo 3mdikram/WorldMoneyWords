@@ -44,7 +44,7 @@ WorldMoneyWords does not treat an English fallback as native-language support. A
 | Support type | Languages | Behavior |
 |---|---|---|
 | Built in | English (`en`), Hindi (`hi`), Arabic (`ar`) | Native amount wording is available immediately |
-| Automatic | `auto` | Selects a built-in country language when available; otherwise uses English |
+| Automatic | `auto` | Matches the country to an available built-in language only when the caller explicitly requests `auto`; otherwise uses English |
 | Language pack | Any valid language tag, such as `ur`, `fr`, or `ja` | Uses the registered native writer and labels |
 | Unknown code | Any unregistered language | Safely falls back to English |
 
@@ -365,7 +365,7 @@ convert(int|float|string $amount, string $countryCode, string $currencyCode, ?Co
 | `includeOnly` | `boolean` | `true` | Adds `Only` to the end of the amount | `Ten US Dollars Only` |
 | `includeZeroMinor` | `boolean` | `false` | Includes the minor unit when its value is zero | `Ten US Dollars and Zero Cents Only` |
 | `conjunction` | `string` | `and` | Changes the word joining major and minor units | `Ten US Dollars plus Fifty Cents Only` |
-| `language` | `string` | `en` | Selects built-in `en`, `hi`, `ar`, country-aware `auto`, or a registered language-pack code; unavailable writers fall back to English | `एक हज़ार भारतीय रुपया मात्र` |
+| `language` | `string` | `en` | Uses English by default. Pass `hi`, `ar`, a registered language code, or explicitly pass `auto` to match an available writer from the country code | `एक हज़ार भारतीय रुपया मात्र` |
 
 Use the options when you need wording tailored to invoices, cheques, banking forms, or local document rules:
 
@@ -395,7 +395,22 @@ $arabic = $converter->convert('1234.50', 'US', 'USD', new ConversionOptions(lang
 
 Language selection changes only the generated wording. ISO Alpha-2/Alpha-3 country validation remains available for all 200 supported countries.
 
-Use `language: 'auto'` to choose an implemented local writer from the country code. India selects Hindi, Arabic-language countries select Arabic, and every unavailable language safely falls back to English. An explicit unsupported code such as `ur` also falls back to English until that writer is added.
+Language matching is opt-in. Omitting `language` always keeps the default English output, regardless of the country code. Pass `language: 'auto'` explicitly to match an implemented writer from the country: India selects Hindi, Arabic-language countries select Arabic, and countries without an available writer fall back to English. An explicit unsupported code such as `ur` also falls back to English until that writer is registered.
+
+```php
+// No language option: always English.
+echo $converter->convert('10', 'IN', 'INR');
+// Ten Rupees Only
+
+// Explicit auto option: match an available writer using the country code.
+echo $converter->convert(
+    '10',
+    'IN',
+    'INR',
+    new ConversionOptions(language: 'auto'),
+);
+// दस भारतीय रुपया मात्र
+```
 
 Invalid PHP input throws a specific exception from `AmountToWords\Exception`.
 
