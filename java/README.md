@@ -167,20 +167,21 @@ echo $converter->convert(
 
 ## 🚀 Quick start
 
-### PHP
+### Java
 
-```bash
-composer require 3mdikram/worldmoneywords
+```xml
+<dependency>
+  <groupId>io.github.3mdikram</groupId>
+  <artifactId>worldmoneywords</artifactId>
+  <version>2.2.0</version>
+</dependency>
 ```
 
-```php
-<?php
+```java
+import io.github.mdikram.worldmoneywords.WorldMoneyWords;
 
-use AmountToWords\AmountToWords;
-
-$converter = new AmountToWords();
-
-echo $converter->convert('1234.50', 'IND', 'INR');
+WorldMoneyWords converter = new WorldMoneyWords();
+String words = converter.convert("1234.50", "IND", "INR");
 // One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only
 ```
 
@@ -946,9 +947,8 @@ Unknown but valid ICU currencies use their English display name and generic `Min
 
 ## ✅ Requirements
 
-- PHP 8.1 or newer
-- PHP `intl` extension
-- Composer
+- Java 11 or newer
+- Maven 3.8 or newer
 
 The language-specific packages contain their own runtime requirements.
 
@@ -957,8 +957,8 @@ The language-specific packages contain their own runtime requirements.
 ```bash
 git clone https://github.com/3mdikram/WorldMoneyWords.git
 cd WorldMoneyWords
-composer install
-composer check
+cd java
+mvn verify
 ```
 
 Run each implementation's tests:
