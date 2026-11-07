@@ -10,16 +10,21 @@
 [![Countries](https://img.shields.io/badge/important_countries-200-1f6feb)](#country-and-currency-support)
 [![Languages](https://img.shields.io/badge/platforms-PHP_%7C_Python_%7C_Go_%7C_Java_%7C_TypeScript-orange)](#platforms)
 
-[Quick start](#quick-start) · [Platforms](#platforms) · [Language packs](#official-language-packs) · [Advanced usage](#advanced-php-usage) · [Contributing](CONTRIBUTING.md)
+[![PHP](https://img.shields.io/badge/PHP-777BB4?logo=php&logoColor=white)](#php)
+[![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](#platforms)
+[![Go](https://img.shields.io/badge/Go-00ADD8?logo=go&logoColor=white)](#platforms)
+[![Java](https://img.shields.io/badge/Java-ED8B00?logo=openjdk&logoColor=white)](#platforms)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](#platforms)
+
+[🚀 Quick start](#quick-start) · [📦 Packages](#platforms) · [🧩 API](#core-api) · [🌐 Countries](#country-and-currency-support) · [🛠️ Advanced](#advanced-php-usage)
 
 </div>
 
 ---
 
-```text
-Input:  1234.50, IND, INR
-Output: One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only
-```
+| Amount | Country | Currency | Result |
+|---:|:---:|:---:|---|
+| `1234.50` | `IND` | `INR` | **One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only** |
 
 WorldMoneyWords is an amount-to-words library for PHP, Laravel, Python, Go, Java, React, TypeScript, browsers, and Node.js. Give it an amount, an ISO country code, and an ISO currency code; it returns correctly formatted wording with the appropriate major and minor currency units.
 
@@ -35,7 +40,7 @@ The same simple API is available on every supported platform:
 convert(amount, countryCode, currencyCode, options?)
 ```
 
-## Official-language packs
+## 🗣️ Official-language packs
 
 WorldMoneyWords provides consistent native amount wording in English (`en`), Hindi (`hi`), and Arabic (`ar`) across every supported platform.
 
@@ -115,7 +120,7 @@ echo $converter->convert(
 > [!IMPORTANT]
 > Only describe a language as supported after its grammar, currency terminology, decimals, negative values, and large-number output have been reviewed and tested. Registering a language code alone is not native-language support.
 
-## Why WorldMoneyWords?
+## ✨ Why WorldMoneyWords?
 
 | Feature | Description |
 |---|---|
@@ -144,7 +149,7 @@ echo $converter->convert(
 | 🧠 Custom language support | Add native number grammar, currency wording, and local labels for your required languages |
 | 🛡️ Clear validation | Provides specific errors for invalid amounts, countries, and currencies |
 
-## Quick start
+## 🚀 Quick start
 
 ### PHP
 
@@ -163,19 +168,19 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 // One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only
 ```
 
-## Platforms
+## 📦 Platforms
 
-| Platform | Package | Main API |
+| Platform | Install / package | Main API |
 |---|---|---|
-| PHP | `3mdikram/worldmoneywords` | `$converter->convert(...)` |
-| Laravel | `3mdikram/worldmoneywords-laravel` | `AmountToWords::convert(...)` |
-| Python | `worldmoneywords` | `converter.convert(...)` |
-| Go | `github.com/3mdikram/WorldMoneyWords/go/v2` | `amountwords.Convert(...)` |
-| Java | `io.github.3mdikram:worldmoneywords` | `converter.convert(...)` |
-| React / Node.js | `@3mdikram/worldmoneywords` | `amountToWords(...)` |
+| 🐘 **PHP** | `composer require 3mdikram/worldmoneywords` | `$converter->convert(...)` |
+| 🔺 **Laravel** | `composer require 3mdikram/worldmoneywords-laravel` | `AmountToWords::convert(...)` |
+| 🐍 **Python** | `pip install worldmoneywords` | `converter.convert(...)` |
+| 🐹 **Go** | `go get github.com/3mdikram/WorldMoneyWords/go/v2` | `amountwords.Convert(...)` |
+| ☕ **Java** | `io.github.3mdikram:worldmoneywords` | `converter.convert(...)` |
+| ⚛️ **React / Node.js** | `npm install @3mdikram/worldmoneywords` | `amountToWords(...)` |
 
 <details>
-<summary><strong>Laravel example</strong></summary>
+<summary><strong>🔺 Laravel examples</strong> — installation, options, language, and short names</summary>
 
 ```bash
 composer require 3mdikram/worldmoneywords-laravel
@@ -240,7 +245,7 @@ Laravel discovers the provider and facade automatically. See the [Laravel guide]
 </details>
 
 <details>
-<summary><strong>Python example</strong></summary>
+<summary><strong>🐍 Python examples</strong> — installation, options, language, and short names</summary>
 
 ```bash
 pip install worldmoneywords
@@ -300,7 +305,7 @@ print(AmountToWords().convert("10.00", "US", "USD", options))
 </details>
 
 <details>
-<summary><strong>Go example</strong></summary>
+<summary><strong>🐹 Go examples</strong> — installation, options, language, and short names</summary>
 
 ```bash
 go get github.com/3mdikram/WorldMoneyWords/go/v2
@@ -380,7 +385,7 @@ fmt.Println(text)
 </details>
 
 <details>
-<summary><strong>Java example</strong></summary>
+<summary><strong>☕ Java examples</strong> — installation, options, language, and short names</summary>
 
 ```bash
 cd java
@@ -441,7 +446,7 @@ Requires Java 11 or newer. See the [Java guide](java/README.md).
 </details>
 
 <details>
-<summary><strong>React / TypeScript example</strong></summary>
+<summary><strong>⚛️ React / TypeScript examples</strong> — installation, options, language, and short names</summary>
 
 ```bash
 npm install @3mdikram/worldmoneywords
@@ -512,7 +517,7 @@ The TypeScript package has no React runtime dependency, so it also works in brow
 
 </details>
 
-## Core API
+## 🧩 Core API
 
 ```php
 convert(int|float|string $amount, string $countryCode, string $currencyCode, ?ConversionOptions $options = null): string
@@ -598,7 +603,7 @@ echo $converter->convert(
 
 Invalid PHP input throws a specific exception from `AmountToWords\Exception`.
 
-## Advanced PHP usage
+## 🛠️ Advanced PHP usage
 
 ### Customize the sentence
 
@@ -923,7 +928,7 @@ $currencies = $converter->supportedCurrencies();
 
 Unknown but valid ICU currencies use their English display name and generic `Minor Unit` wording. Register a custom definition when exact minor-unit terminology is required.
 
-## Requirements
+## ✅ Requirements
 
 - PHP 8.1 or newer
 - PHP `intl` extension
@@ -931,7 +936,7 @@ Unknown but valid ICU currencies use their English display name and generic `Min
 
 The language-specific packages contain their own runtime requirements.
 
-## Development
+## 🧪 Development
 
 ```bash
 git clone https://github.com/3mdikram/WorldMoneyWords.git
@@ -959,11 +964,11 @@ cd java && mvn verify
 cd react && npm install && npm test
 ```
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md), add tests for behavioral changes, and open a pull request.
 
-## License
+## 📄 License
 
 WorldMoneyWords is open-source software released under the [MIT License](LICENSE).
 
