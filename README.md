@@ -28,7 +28,7 @@ One consistent API for PHP, Laravel, Python, Go, Java, React, TypeScript, browse
 |---:|:---:|:---:|---|
 | `1234.50` | `IND` | `INR` | **One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only** |
 
-WorldMoneyWords is a multilingual amount-to-words library with English, Hindi, and Arabic output for PHP, Laravel, Python, Go, Java, React, TypeScript, browsers, and Node.js. Give it an amount, an ISO country code, and an ISO currency code; it returns correctly formatted wording with the appropriate major and minor currency units.
+WorldMoneyWords is a multilingual amount-to-words library with English, Hindi, Arabic, and more through custom language packs for PHP, Laravel, Python, Go, Java, React, TypeScript, browsers, and Node.js. Give it an amount, an ISO country code, and an ISO currency code; it returns correctly formatted wording with the appropriate major and minor currency units.
 
 Use it as an **amount to words**, **amount to text**, **money to words**, **money to text**, **number to words**, **number to text**, or **currency to words** converter. It is designed for cheque amounts, invoices, receipts, payment confirmations, banking forms, and other financial documents.
 
