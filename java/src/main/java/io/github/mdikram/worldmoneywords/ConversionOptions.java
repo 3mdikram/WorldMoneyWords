@@ -12,7 +12,7 @@ public final class ConversionOptions {
 
     public ConversionOptions(boolean includeOnly, boolean includeZeroMinor, String conjunction, String language) {
         if (conjunction == null || conjunction.trim().isEmpty()) throw new IllegalArgumentException("Conjunction cannot be empty");
-        if (language == null || !(language.equalsIgnoreCase("en") || language.equalsIgnoreCase("hi") || language.equalsIgnoreCase("ar"))) throw new IllegalArgumentException("Language must be en, hi, or ar");
+        if (language == null || language.trim().isEmpty()) throw new IllegalArgumentException("Language cannot be empty");
         this.includeOnly = includeOnly;
         this.includeZeroMinor = includeZeroMinor;
         this.conjunction = conjunction;

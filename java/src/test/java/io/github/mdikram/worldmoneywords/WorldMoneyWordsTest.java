@@ -37,4 +37,11 @@ class WorldMoneyWordsTest {
         }
         assertEquals(200, countries);
     }
+
+    @Test void autoLanguageAndEnglishFallback() {
+        assertEquals(true, converter.convert("10", "IN", "INR", new ConversionOptions(true, false, "and", "auto")).startsWith("दस"));
+        assertEquals(true, converter.convert("10", "SA", "SAR", new ConversionOptions(true, false, "and", "auto")).startsWith("عشرة"));
+        assertEquals(true, converter.convert("10", "PK", "PKR", new ConversionOptions(true, false, "and", "auto")).startsWith("Ten"));
+        assertEquals(true, converter.convert("10", "PK", "PKR", new ConversionOptions(true, false, "and", "ur")).startsWith("Ten"));
+    }
 }

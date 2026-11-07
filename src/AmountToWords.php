@@ -43,8 +43,8 @@ final class AmountToWords
     ): string
     {
         $options ??= new ConversionOptions();
-        $language = strtolower($options->language);
         $countryCode = $this->normalizeCountryCode($countryCode);
+        $language = $this->resolveLanguage($options->language, $countryCode);
         $currencyCode = strtoupper(trim($currencyCode));
 
         $this->validateCountry($countryCode);
@@ -78,6 +78,24 @@ final class AmountToWords
         }
 
         return implode(' ', array_filter($parts, static fn (string $part): bool => $part !== ''));
+    }
+
+    private function resolveLanguage(string $requested, string $countryCode): string
+    {
+        $language = strtolower(trim($requested));
+        if (in_array($language, ['en', 'hi', 'ar'], true)) {
+            return $language;
+        }
+        if ($language !== 'auto') {
+            return 'en';
+        }
+        if ($countryCode === 'IND') {
+            return 'hi';
+        }
+        if (in_array($countryCode, ['ARE','BHR','DZA','EGY','IRQ','JOR','KWT','LBN','LBY','MAR','MRT','OMN','PSE','QAT','SAU','SDN','SOM','SYR','TCD','TUN','YEM'], true)) {
+            return 'ar';
+        }
+        return 'en';
     }
 
     private function spellLocalized(string $number, string $language): string

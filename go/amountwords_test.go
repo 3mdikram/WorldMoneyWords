@@ -1,6 +1,9 @@
 package amountwords
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func TestConvert(t *testing.T) {
 	got, err := Convert(1234.50, "IND", "INR")
@@ -51,6 +54,16 @@ func TestAllLanguagesWorkForAll200Countries(t *testing.T) {
 			if err != nil || text == "" {
 				t.Fatalf("%s/%s: %q, %v", country, language, text, err)
 			}
+		}
+	}
+}
+
+func TestAutoLanguageAndEnglishFallback(t *testing.T) {
+	cases := []struct{ country, language, prefix string }{{"IN", "auto", "दस"}, {"SA", "auto", "عشرة"}, {"PK", "auto", "Ten"}, {"PK", "ur", "Ten"}}
+	for _, c := range cases {
+		text, err := Convert(10, c.country, "USD", Options{IncludeOnly: true, Conjunction: "and", Language: c.language})
+		if err != nil || !strings.HasPrefix(text, c.prefix) {
+			t.Fatalf("%+v: %q, %v", c, text, err)
 		}
 	}
 }

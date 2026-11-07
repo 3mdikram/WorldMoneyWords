@@ -25,8 +25,8 @@ class ConversionOptions:
     def __post_init__(self):
         if not self.conjunction.strip():
             raise ValueError("Conjunction cannot be empty")
-        if self.language.lower() not in {"en", "hi", "ar"}:
-            raise ValueError("Language must be en, hi, or ar")
+        if not self.language.strip():
+            raise ValueError("Language cannot be empty")
 
 CURRENCIES = {
     "INR": Currency("Rupee", "Rupees", "Paisa", "Paise"),
@@ -113,12 +113,12 @@ class AmountToWords:
 
     def convert(self, amount: int | float | str | Decimal, country_code: str, currency_code: str, options: ConversionOptions | None = None) -> str:
         options = options or ConversionOptions()
-        language = options.language.lower()
         country_input = country_code.strip().upper()
         country = ISO_COUNTRY_CODES.get(country_input)
         code = currency_code.strip().upper()
         if country is None:
             raise ValueError("Unknown ISO 3166-1 Alpha-2 or Alpha-3 country code")
+        language = _resolve_language(options.language, country)
         if not re.fullmatch(r"[A-Z]{3}", code):
             raise ValueError("Currency code must be a three-letter ISO 4217 code")
         currency = self.currencies.get(code, Currency(code, code, "Minor Unit", "Minor Units"))
@@ -145,3 +145,11 @@ class AmountToWords:
         if options.include_only:
             parts.append(labels[2])
         return " ".join(filter(None, parts))
+
+def _resolve_language(requested: str, country: str) -> str:
+    language = requested.strip().lower()
+    if language in {"en", "hi", "ar"}: return language
+    if language != "auto": return "en"
+    if country == "IND": return "hi"
+    if country in {"ARE","BHR","DZA","EGY","IRQ","JOR","KWT","LBN","LBY","MAR","MRT","OMN","PSE","QAT","SAU","SDN","SOM","SYR","TCD","TUN","YEM"}: return "ar"
+    return "en"

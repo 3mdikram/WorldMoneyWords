@@ -19,7 +19,7 @@ public final class WorldMoneyWords {
     }
 
     public String convert(String amount, String countryCode, String currencyCode, ConversionOptions options) {
-        SupportedCountries.normalize(countryCode);
+        String country = SupportedCountries.normalize(countryCode);
         if (options == null) options = ConversionOptions.defaults();
         String code = currencyCode == null ? "" : currencyCode.trim().toUpperCase();
         CurrencyWords currency = currency(code);
@@ -31,7 +31,7 @@ public final class WorldMoneyWords {
         value = value.abs();
         BigInteger major = value.toBigInteger();
         BigInteger minor = value.subtract(new BigDecimal(major)).movePointRight(currency.fractionDigits).toBigInteger();
-        String language = options.language();
+        String language = resolveLanguage(options.language(), country);
         String[] labels = language.equals("en") ? new String[]{"Minus","and","Only","Minor Unit","Minor Units"} : LocalizedWords.labels(language);
         StringBuilder result = new StringBuilder();
         if (negative && value.signum() != 0) result.append(labels[0]).append(' ');
@@ -49,6 +49,14 @@ public final class WorldMoneyWords {
     }
 
     public String normalizeCountryCode(String code) { return SupportedCountries.normalize(code); }
+
+    private static String resolveLanguage(String requested, String country) {
+        String language = requested.trim().toLowerCase();
+        if (language.equals("en") || language.equals("hi") || language.equals("ar")) return language;
+        if (!language.equals("auto")) return "en";
+        if (country.equals("IND")) return "hi";
+        return java.util.Set.of("ARE","BHR","DZA","EGY","IRQ","JOR","KWT","LBN","LBY","MAR","MRT","OMN","PSE","QAT","SAU","SDN","SOM","SYR","TCD","TUN","YEM").contains(country) ? "ar" : "en";
+    }
 
     private static String spell(BigInteger number) {
         if (number.signum() == 0) return "Zero";
