@@ -548,14 +548,14 @@ echo $converter->convert('10.00', 'US', 'USD', $options);
 // Ten Dollars plus Zero Cents
 ```
 
-### Hindi and Arabic output
+### Hindi and English output
 
 ```php
 $hindi = $converter->convert('1234.50', 'IN', 'INR', new ConversionOptions(language: 'hi'));
 // एक हज़ार दो सौ चौंतीस भारतीय रुपया और पचास उप-इकाई मात्र
 
-$arabic = $converter->convert('1234.50', 'US', 'USD', new ConversionOptions(language: 'ar'));
-// ألف ومائتان وأربعة وثلاثون دولار أمريكي و خمسون وحدة فرعية فقط
+$english = $converter->convert('1234.50', 'US', 'USD', new ConversionOptions(language: 'en'));
+// One Thousand Two Hundred Thirty Four US Dollars and Fifty Cents Only
 ```
 
 Language selection changes only the generated wording. ISO Alpha-2/Alpha-3 country validation remains available for all 200 supported countries.
