@@ -246,11 +246,10 @@ options = ConversionOptions(
     include_only=False,
     include_zero_minor=True,
     conjunction="plus",
-    short_currency_name=True,
 )
 
 print(AmountToWords().convert("10.00", "US", "USD", options))
-# Ten Dollars plus Zero Cents
+# Ten US Dollars plus Zero Cents
 ```
 
 #### 3. Conversion with language
@@ -261,6 +260,22 @@ from amount_to_words import AmountToWords, ConversionOptions
 options = ConversionOptions(language="hi")
 print(AmountToWords().convert("10", "IN", "INR", options))
 # दस भारतीय रुपया मात्र
+```
+
+#### 4. Conversion with short currency name
+
+```python
+from amount_to_words import AmountToWords, ConversionOptions
+
+options = ConversionOptions(
+    include_only=False,
+    include_zero_minor=True,
+    conjunction="plus",
+    short_currency_name=True,
+)
+
+print(AmountToWords().convert("10.00", "US", "USD", options))
+# Ten Dollars plus Zero Cents
 ```
 
 </details>
@@ -295,10 +310,9 @@ func main() {
 
 ```go
 options := amountwords.Options{
-    IncludeOnly:       false,
-    IncludeZeroMinor:  true,
-    Conjunction:       "plus",
-    ShortCurrencyName: true,
+    IncludeOnly:      false,
+    IncludeZeroMinor: true,
+    Conjunction:      "plus",
 }
 
 text, err := amountwords.Convert(10, "US", "USD", options)
@@ -306,7 +320,7 @@ if err != nil {
     panic(err)
 }
 fmt.Println(text)
-// Ten Dollars plus Zero Cents
+// Ten US Dollars plus Zero Cents
 ```
 
 #### 3. Conversion with language
@@ -324,6 +338,24 @@ if err != nil {
 }
 fmt.Println(text)
 // दस भारतीय रुपया मात्र
+```
+
+#### 4. Conversion with short currency name
+
+```go
+options := amountwords.Options{
+    IncludeOnly:       false,
+    IncludeZeroMinor:  true,
+    Conjunction:       "plus",
+    ShortCurrencyName: true,
+}
+
+text, err := amountwords.Convert(10, "US", "USD", options)
+if err != nil {
+    panic(err)
+}
+fmt.Println(text)
+// Ten Dollars plus Zero Cents
 ```
 
 </details>
@@ -353,10 +385,10 @@ import io.github.mdikram.worldmoneywords.ConversionOptions;
 import io.github.mdikram.worldmoneywords.WorldMoneyWords;
 
 WorldMoneyWords converter = new WorldMoneyWords();
-ConversionOptions options = new ConversionOptions(false, true, "plus", "en", true);
+ConversionOptions options = new ConversionOptions(false, true, "plus");
 
 String text = converter.convert("10.00", "US", "USD", options);
-// Ten Dollars plus Zero Cents
+// Ten US Dollars plus Zero Cents
 ```
 
 #### 3. Conversion with language
@@ -370,6 +402,19 @@ ConversionOptions options = new ConversionOptions(true, false, "and", "hi");
 
 String text = converter.convert("10", "IN", "INR", options);
 // दस भारतीय रुपया मात्र
+```
+
+#### 4. Conversion with short currency name
+
+```java
+import io.github.mdikram.worldmoneywords.ConversionOptions;
+import io.github.mdikram.worldmoneywords.WorldMoneyWords;
+
+WorldMoneyWords converter = new WorldMoneyWords();
+ConversionOptions options = new ConversionOptions(false, true, "plus", "en", true);
+
+String text = converter.convert("10.00", "US", "USD", options);
+// Ten Dollars plus Zero Cents
 ```
 
 Requires Java 11 or newer. See the [Java guide](java/README.md).
@@ -404,11 +449,10 @@ export function CustomPaymentTotal() {
     includeOnly: false,
     includeZeroMinor: true,
     conjunction: 'plus',
-    shortCurrencyName: true,
   });
 
   return <p>{words}</p>;
-  // Ten Dollars plus Zero Cents
+  // Ten US Dollars plus Zero Cents
 }
 ```
 
@@ -424,6 +468,24 @@ export function HindiPaymentTotal() {
 
   return <p>{words}</p>;
   // दस भारतीय रुपया मात्र
+}
+```
+
+#### 4. Conversion with short currency name
+
+```tsx
+import { amountToWords } from '@3mdikram/worldmoneywords';
+
+export function ShortCurrencyPaymentTotal() {
+  const words = amountToWords('10.00', 'US', 'USD', {
+    includeOnly: false,
+    includeZeroMinor: true,
+    conjunction: 'plus',
+    shortCurrencyName: true,
+  });
+
+  return <p>{words}</p>;
+  // Ten Dollars plus Zero Cents
 }
 ```
 
