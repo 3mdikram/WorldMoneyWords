@@ -18,7 +18,7 @@ One consistent API for PHP, Laravel, Python, Go, Java, React, TypeScript, browse
 [![Java](https://img.shields.io/badge/Java-ED8B00?logo=openjdk&logoColor=white)](#platforms)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](#platforms)
 
-[🚀 Quick start](#quick-start) · [📦 Packages](#platforms) · [🧩 API](#core-api) · [🌐 Countries](#country-and-currency-support) · [🛠️ Advanced](#advanced-php-usage)
+[📚 Index](#documentation-index) · [🚀 Quick start](#quick-start) · [📦 Packages](#platforms) · [🧩 API](#core-api) · [🌐 Countries](#country-and-currency-support) · [🛠️ Advanced](#advanced-php-usage)
 
 </div>
 
@@ -45,6 +45,16 @@ The same predictable API shape is available on every supported platform:
 ```text
 convert(amount, countryCode, currencyCode, options?)
 ```
+
+## 📚 Documentation index
+
+| Area | Documentation |
+|---|---|
+| **Platform guides** | [PHP](#quick-start) · [Laravel](laravel/README.md) · [Python](python/README.md) · [Go](go/README.md) · [Java](java/README.md) · [React / TypeScript / Node.js](react/README.md) |
+| **Installation and examples** | [All packages and platform examples](#platforms) |
+| **API reference** | [Core API](#core-api) · [Conversion options](#conversion-options) · [Advanced PHP usage](#advanced-php-usage) |
+| **International support** | [Official-language packs](#official-language-packs) · [Country and currency list](#country-and-currency-support) |
+| **Project resources** | [Requirements](#requirements) · [Development](#development) · [Contributing](CONTRIBUTING.md) · [License](LICENSE) |
 
 ## 🗣️ Official-language packs
 

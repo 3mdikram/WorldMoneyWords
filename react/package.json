@@ -1,7 +1,7 @@
 {
   "name": "@3mdikram/worldmoneywords",
   "version": "2.5.0",
-  "description": "Amount-to-words converter for React, browsers, and Node.js",
+  "description": "Amount-to-words and multilingual currency converter for React, TypeScript, browsers, and Node.js with 200-country ISO support",
   "license": "MIT",
   "author": "Md Ikram",
   "homepage": "https://github.com/3mdikram/WorldMoneyWords#readme",

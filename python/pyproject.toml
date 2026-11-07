@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "worldmoneywords"
 version = "2.5.0"
-description = "Convert monetary amounts to English, Hindi, or Arabic words using ISO country and currency codes"
+description = "Python amount-to-words library with multilingual currency wording and 200-country ISO support"
 readme = "README.md"
 requires-python = ">=3.9"
 license = "MIT"
