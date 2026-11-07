@@ -1,4 +1,4 @@
-import test from 'node:test'; import assert from 'node:assert/strict'; import {amountToWords} from '../dist/index.js';
+import test from 'node:test'; import assert from 'node:assert/strict'; import {amountToWords,registerLanguagePack} from '../dist/index.js';
 import { ISO_COUNTRY_CODES } from '../dist/countries.js';
 test('converts INR',()=>assert.equal(amountToWords('1234.50','IND','INR'),'One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only'));
 test('accepts Alpha-2 country codes',()=>assert.equal(amountToWords('10','IN','INR'),'Ten Rupees Only'));
@@ -7,3 +7,4 @@ test('supports conversion options',()=>assert.equal(amountToWords('10','US','USD
 test('supports Hindi and Arabic',()=>{assert.equal(amountToWords('1234.50','IN','INR',{language:'hi'}),'एक हज़ार दो सौ चौंतीस भारतीय रुपया और पचास उप-इकाइयाँ मात्र');assert.equal(amountToWords('1234.50','US','USD',{language:'ar'}),'ألف ومائتان وأربعة وثلاثون دولار أمريكي و خمسون وحدات فرعية فقط')});
 test('all languages work for all 200 countries',()=>{const alpha2=[...ISO_COUNTRY_CODES.keys()].filter(code=>code.length===2);assert.equal(alpha2.length,200);for(const country of alpha2)for(const language of ['en','hi','ar'])assert.ok(amountToWords('42.50',country,'USD',{language}))});
 test('auto language and English fallback',()=>{assert.match(amountToWords('10','IN','INR',{language:'auto'}),/^दस/);assert.match(amountToWords('10','SA','SAR',{language:'auto'}),/^عشرة/);assert.match(amountToWords('10','PK','PKR',{language:'auto'}),/^Ten/);assert.match(amountToWords('10','PK','PKR',{language:'ur'}),/^Ten/)});
+test('registers an official language pack',()=>{registerLanguagePack({code:'xx',spell:n=>`number-${n}`,currencyName:(code,singular)=>code.toLowerCase()+(singular?'-unit':'-units'),labels:{minus:'negative',conjunction:'with',only:'complete',minorSingular:'part',minorPlural:'parts'}});assert.equal(amountToWords('2.50','US','USD',{language:'xx'}),'number-2 usd-units with number-50 parts complete')});

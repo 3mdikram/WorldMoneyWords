@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 import re
+from typing import Callable
 from .countries import ISO_COUNTRY_CODES
 
 ONES = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
@@ -27,6 +28,25 @@ class ConversionOptions:
             raise ValueError("Conjunction cannot be empty")
         if not self.language.strip():
             raise ValueError("Language cannot be empty")
+
+@dataclass(frozen=True)
+class LanguagePack:
+    code: str
+    spell: Callable[[int], str]
+    currency_name: Callable[[str, bool], str]
+    minus: str
+    conjunction: str
+    only: str
+    minor_singular: str
+    minor_plural: str
+
+    def __post_init__(self):
+        normalized = self.code.strip().lower()
+        if normalized == "auto" or not re.fullmatch(r"[a-z]{2,8}(?:-[a-z0-9]{2,8})*", normalized):
+            raise ValueError("Language pack code must be a valid language tag and cannot be auto")
+        for value in (self.minus, self.conjunction, self.only, self.minor_singular, self.minor_plural):
+            if not value.strip(): raise ValueError("Language pack labels cannot be empty")
+        object.__setattr__(self, "code", normalized)
 
 CURRENCIES = {
     "INR": Currency("Rupee", "Rupees", "Paisa", "Paise"),
@@ -108,8 +128,12 @@ LOCALIZED_CURRENCIES = {
 }
 
 class AmountToWords:
-    def __init__(self, currencies: dict[str, Currency] | None = None):
+    def __init__(self, currencies: dict[str, Currency] | None = None, language_packs: list[LanguagePack] | None = None):
         self.currencies = {**CURRENCIES, **(currencies or {})}
+        self.language_packs = {pack.code: pack for pack in (language_packs or [])}
+
+    def add_language_pack(self, pack: LanguagePack) -> "AmountToWords":
+        return AmountToWords(self.currencies, [*self.language_packs.values(), pack])
 
     def convert(self, amount: int | float | str | Decimal, country_code: str, currency_code: str, options: ConversionOptions | None = None) -> str:
         options = options or ConversionOptions()
@@ -118,7 +142,8 @@ class AmountToWords:
         code = currency_code.strip().upper()
         if country is None:
             raise ValueError("Unknown ISO 3166-1 Alpha-2 or Alpha-3 country code")
-        language = _resolve_language(options.language, country)
+        language = _resolve_language(options.language, country, self.language_packs)
+        pack = self.language_packs.get(language)
         if not re.fullmatch(r"[A-Z]{3}", code):
             raise ValueError("Currency code must be a three-letter ISO 4217 code")
         currency = self.currencies.get(code, Currency(code, code, "Minor Unit", "Minor Units"))
@@ -132,23 +157,24 @@ class AmountToWords:
         value = abs(value)
         major = int(value)
         minor = int((value - major) * (10 ** currency.fraction_digits))
-        labels = {"en": ("Minus", "and", "Only", "Minor Unit", "Minor Units"), "hi": ("ऋण", "और", "मात्र", "उप-इकाई", "उप-इकाइयाँ"), "ar": ("سالب", "و", "فقط", "وحدة فرعية", "وحدات فرعية")}[language]
+        labels = (pack.minus, pack.conjunction, pack.only, pack.minor_singular, pack.minor_plural) if pack else {"en": ("Minus", "and", "Only", "Minor Unit", "Minor Units"), "hi": ("ऋण", "और", "मात्र", "उप-इकाई", "उप-इकाइयाँ"), "ar": ("سالب", "و", "فقط", "وحدة فرعية", "وحدات فرعية")}[language]
         parts = [labels[0]] if negative else []
         major_name = currency.major_singular if major == 1 else currency.major_plural
-        if language != "en": major_name = LOCALIZED_CURRENCIES[language].get(code, code)
-        parts += [_spell_localized(major, language), major_name]
+        if pack: major_name = pack.currency_name(code, major == 1)
+        elif language != "en": major_name = LOCALIZED_CURRENCIES[language].get(code, code)
+        parts += [pack.spell(major) if pack else _spell_localized(major, language), major_name]
         if minor or (currency.fraction_digits > 0 and options.include_zero_minor):
             conjunction = labels[1] if options.conjunction == "and" else options.conjunction
             minor_name = currency.minor_singular if minor == 1 else currency.minor_plural
             if language != "en": minor_name = labels[3] if minor == 1 else labels[4]
-            parts += [conjunction, _spell_localized(minor, language), minor_name]
+            parts += [conjunction, pack.spell(minor) if pack else _spell_localized(minor, language), minor_name]
         if options.include_only:
             parts.append(labels[2])
         return " ".join(filter(None, parts))
 
-def _resolve_language(requested: str, country: str) -> str:
+def _resolve_language(requested: str, country: str, language_packs: dict[str, LanguagePack] | None = None) -> str:
     language = requested.strip().lower()
-    if language in {"en", "hi", "ar"}: return language
+    if language in {"en", "hi", "ar"} or language in (language_packs or {}): return language
     if language != "auto": return "en"
     if country == "IND": return "hi"
     if country in {"ARE","BHR","DZA","EGY","IRQ","JOR","KWT","LBN","LBY","MAR","MRT","OMN","PSE","QAT","SAU","SDN","SOM","SYR","TCD","TUN","YEM"}: return "ar"

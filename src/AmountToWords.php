@@ -16,6 +16,9 @@ final class AmountToWords
     /** @var array<string, Currency> */
     private array $currencies;
 
+    /** @var array<string, LanguagePack> */
+    private array $languagePacks = [];
+
     /** @param array<string, Currency> $currencies */
     public function __construct(array $currencies = [])
     {
@@ -45,6 +48,7 @@ final class AmountToWords
         $options ??= new ConversionOptions();
         $countryCode = $this->normalizeCountryCode($countryCode);
         $language = $this->resolveLanguage($options->language, $countryCode);
+        $languagePack = $this->languagePacks[$language] ?? null;
         $currencyCode = strtoupper(trim($currencyCode));
 
         $this->validateCountry($countryCode);
@@ -57,24 +61,27 @@ final class AmountToWords
 
         $parts = [];
         if ($negative) {
-            $parts[] = ['en' => 'Minus', 'hi' => 'ऋण', 'ar' => 'سالب'][$language];
+            $parts[] = $languagePack?->labels()['minus'] ?? ['en' => 'Minus', 'hi' => 'ऋण', 'ar' => 'سالب'][$language];
         }
 
-        $parts[] = $this->spellLocalized($majorAbsolute, $language);
-        $parts[] = $this->localizedCurrencyName($currencyCode, $currency, $majorAbsolute === '1', $language);
+        $parts[] = $languagePack?->spell($majorAbsolute) ?? $this->spellLocalized($majorAbsolute, $language);
+        $parts[] = $languagePack?->currencyName($currencyCode, $majorAbsolute === '1')
+            ?? $this->localizedCurrencyName($currencyCode, $currency, $majorAbsolute === '1', $language);
 
         if ($currency->fractionDigits > 0 && ((int) $minor > 0 || $options->includeZeroMinor)) {
             $parts[] = $options->conjunction === 'and'
-                ? ['en' => 'and', 'hi' => 'और', 'ar' => 'و'][$language]
+                ? ($languagePack?->labels()['conjunction'] ?? ['en' => 'and', 'hi' => 'और', 'ar' => 'و'][$language])
                 : $options->conjunction;
-            $parts[] = $this->spellLocalized($minor, $language);
-            $parts[] = $language === 'en'
+            $parts[] = $languagePack?->spell($minor) ?? $this->spellLocalized($minor, $language);
+            $parts[] = $languagePack !== null
+                ? ($languagePack->labels()[(int) $minor === 1 ? 'minorSingular' : 'minorPlural'])
+                : ($language === 'en'
                 ? ((int) $minor === 1 ? $currency->minorSingular : $currency->minorPlural)
-                : ['hi' => 'उप-इकाई', 'ar' => 'وحدة فرعية'][$language];
+                : ['hi' => 'उप-इकाई', 'ar' => 'وحدة فرعية'][$language]);
         }
 
         if ($options->includeOnly) {
-            $parts[] = ['en' => 'Only', 'hi' => 'मात्र', 'ar' => 'فقط'][$language];
+            $parts[] = $languagePack?->labels()['only'] ?? ['en' => 'Only', 'hi' => 'मात्र', 'ar' => 'فقط'][$language];
         }
 
         return implode(' ', array_filter($parts, static fn (string $part): bool => $part !== ''));
@@ -83,7 +90,7 @@ final class AmountToWords
     private function resolveLanguage(string $requested, string $countryCode): string
     {
         $language = strtolower(trim($requested));
-        if (in_array($language, ['en', 'hi', 'ar'], true)) {
+        if (in_array($language, ['en', 'hi', 'ar'], true) || isset($this->languagePacks[$language])) {
             return $language;
         }
         if ($language !== 'auto') {
@@ -171,6 +178,25 @@ final class AmountToWords
         $clone = clone $this;
         $clone->currencies[strtoupper(trim($code))] = $currency;
 
+        return $clone;
+    }
+
+    public function addLanguagePack(LanguagePack $pack): self
+    {
+        $code = strtolower(trim($pack->code()));
+        if ($code === '' || $code === 'auto' || !preg_match('/^[a-z]{2,8}(?:-[a-z0-9]{2,8})*$/', $code)) {
+            throw new \InvalidArgumentException('Language pack code must be a valid language tag and cannot be auto.');
+        }
+
+        $labels = $pack->labels();
+        foreach (['minus', 'conjunction', 'only', 'minorSingular', 'minorPlural'] as $label) {
+            if (!isset($labels[$label]) || trim($labels[$label]) === '') {
+                throw new \InvalidArgumentException("Language pack label {$label} cannot be empty.");
+            }
+        }
+
+        $clone = clone $this;
+        $clone->languagePacks[$code] = $pack;
         return $clone;
     }
 

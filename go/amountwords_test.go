@@ -1,6 +1,7 @@
 package amountwords
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 )
@@ -65,5 +66,22 @@ func TestAutoLanguageAndEnglishFallback(t *testing.T) {
 		if err != nil || !strings.HasPrefix(text, c.prefix) {
 			t.Fatalf("%+v: %q, %v", c, text, err)
 		}
+	}
+}
+
+func TestCustomOfficialLanguagePack(t *testing.T) {
+	err := RegisterLanguagePack(LanguagePack{Code: "xx", Minus: "negative", Conjunction: "with", Only: "complete", MinorSingular: "part", MinorPlural: "parts", Spell: func(n int64) (string, error) { return fmt.Sprintf("number-%d", n), nil }, CurrencyName: func(code string, singular bool) string {
+		suffix := "-units"
+		if singular {
+			suffix = "-unit"
+		}
+		return strings.ToLower(code) + suffix
+	}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	text, err := Convert(2.50, "US", "USD", Options{IncludeOnly: true, Conjunction: "and", Language: "xx"})
+	if err != nil || text != "number-2 usd-units with number-50 parts complete" {
+		t.Fatalf("%q %v", text, err)
 	}
 }

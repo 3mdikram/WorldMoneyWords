@@ -3,9 +3,18 @@ package io.github.mdikram.worldmoneywords;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
+import java.math.BigInteger;
 
 class WorldMoneyWordsTest {
     private final WorldMoneyWords converter = new WorldMoneyWords();
+
+    @Test void registersCustomOfficialLanguagePack() {
+        LanguagePack pack = new LanguagePack() {
+            public String code(){return "xx";} public String spell(BigInteger n){return "number-"+n;} public String currencyName(String code,boolean singular){return code.toLowerCase()+(singular?"-unit":"-units");}
+            public String minus(){return "negative";} public String conjunction(){return "with";} public String only(){return "complete";} public String minorSingular(){return "part";} public String minorPlural(){return "parts";}
+        };
+        assertEquals("number-2 usd-units with number-50 parts complete", new WorldMoneyWords().registerLanguagePack(pack).convert("2.50","US","USD",new ConversionOptions(true,false,"and","xx")));
+    }
 
     @Test void convertsDefaultAmount() {
         assertEquals("One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only", converter.convert("1234.50", "IN", "INR"));

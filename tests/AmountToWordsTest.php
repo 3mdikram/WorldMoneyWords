@@ -9,10 +9,26 @@ use AmountToWords\Currency;
 use AmountToWords\ConversionOptions;
 use AmountToWords\Exception\InvalidCountryCodeException;
 use AmountToWords\Exception\InvalidCurrencyCodeException;
+use AmountToWords\LanguagePack;
 use PHPUnit\Framework\TestCase;
 
 final class AmountToWordsTest extends TestCase
 {
+    public function testCustomOfficialLanguagePack(): void
+    {
+        $pack = new class implements LanguagePack {
+            public function code(): string { return 'xx'; }
+            public function spell(string $number): string { return "number-{$number}"; }
+            public function labels(): array { return ['minus' => 'negative', 'conjunction' => 'with', 'only' => 'complete', 'minorSingular' => 'part', 'minorPlural' => 'parts']; }
+            public function currencyName(string $currencyCode, bool $singular): string { return strtolower($currencyCode).($singular ? '-unit' : '-units'); }
+        };
+
+        $converter = (new AmountToWords())->addLanguagePack($pack);
+        self::assertSame(
+            'number-2 usd-units with number-50 parts complete',
+            $converter->convert('2.50', 'US', 'USD', new ConversionOptions(language: 'xx')),
+        );
+    }
     public function testIndianRupees(): void
     {
         self::assertSame(

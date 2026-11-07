@@ -19,6 +19,28 @@ type Options struct {
 	Language         string
 }
 
+type LanguagePack struct {
+	Code, Minus, Conjunction, Only, MinorSingular, MinorPlural string
+	Spell                                                      func(int64) (string, error)
+	CurrencyName                                               func(string, bool) string
+}
+
+var languagePacks = map[string]LanguagePack{}
+
+func RegisterLanguagePack(pack LanguagePack) error {
+	code := strings.ToLower(strings.TrimSpace(pack.Code))
+	valid := regexp.MustCompile(`^[a-z]{2,8}(?:-[a-z0-9]{2,8})*$`)
+	if code == "auto" || !valid.MatchString(code) {
+		return fmt.Errorf("language pack code must be a valid language tag and cannot be auto")
+	}
+	if pack.Spell == nil || pack.CurrencyName == nil || strings.TrimSpace(pack.Minus) == "" || strings.TrimSpace(pack.Conjunction) == "" || strings.TrimSpace(pack.Only) == "" || strings.TrimSpace(pack.MinorSingular) == "" || strings.TrimSpace(pack.MinorPlural) == "" {
+		return fmt.Errorf("language pack functions and labels are required")
+	}
+	pack.Code = code
+	languagePacks[code] = pack
+	return nil
+}
+
 func DefaultOptions() Options { return Options{IncludeOnly: true, Conjunction: "and", Language: "en"} }
 
 var currencies = map[string]Currency{
@@ -181,7 +203,7 @@ func Convert(amount float64, countryCode, currencyCode string, supplied ...Optio
 		return "", fmt.Errorf("unknown ISO Alpha-2 or Alpha-3 country code")
 	}
 	requested := strings.ToLower(strings.TrimSpace(options.Language))
-	if requested == "en" || requested == "hi" || requested == "ar" {
+	if _, custom := languagePacks[requested]; requested == "en" || requested == "hi" || requested == "ar" || custom {
 		options.Language = requested
 	} else if requested == "auto" {
 		if country == "IND" {
@@ -207,12 +229,19 @@ func Convert(amount float64, countryCode, currencyCode string, supplied ...Optio
 	rounded = math.Abs(rounded)
 	major := int64(rounded)
 	minor := int64(math.Round((rounded - float64(major)) * factor))
+	pack, custom := languagePacks[options.Language]
 	majorWords, err := localizedSpell(major, options.Language)
+	if custom {
+		majorWords, err = pack.Spell(major)
+	}
 	if err != nil {
 		return "", err
 	}
 	p := []string{}
 	labels := map[string][]string{"en": {"Minus", "and", "Only", "Minor Unit", "Minor Units"}, "hi": {"ऋण", "और", "मात्र", "उप-इकाई", "उप-इकाइयाँ"}, "ar": {"سالب", "و", "فقط", "وحدة فرعية", "وحدات فرعية"}}[options.Language]
+	if custom {
+		labels = []string{pack.Minus, pack.Conjunction, pack.Only, pack.MinorSingular, pack.MinorPlural}
+	}
 	if negative {
 		p = append(p, labels[0])
 	}
@@ -220,7 +249,9 @@ func Convert(amount float64, countryCode, currencyCode string, supplied ...Optio
 	if major == 1 {
 		majorName = c.MajorSingular
 	}
-	if options.Language != "en" {
+	if custom {
+		majorName = pack.CurrencyName(code, major == 1)
+	} else if options.Language != "en" {
 		if name, ok := localizedCurrencies[options.Language][code]; ok {
 			majorName = name
 		} else {
@@ -230,11 +261,20 @@ func Convert(amount float64, countryCode, currencyCode string, supplied ...Optio
 	p = append(p, majorWords, majorName)
 	if minor > 0 || (c.FractionDigits > 0 && options.IncludeZeroMinor) {
 		minorWords, _ := localizedSpell(minor, options.Language)
+		if custom {
+			minorWords, _ = pack.Spell(minor)
+		}
 		minorName := c.MinorPlural
 		if minor == 1 {
 			minorName = c.MinorSingular
 		}
-		if options.Language != "en" {
+		if custom {
+			if minor == 1 {
+				minorName = pack.MinorSingular
+			} else {
+				minorName = pack.MinorPlural
+			}
+		} else if options.Language != "en" {
 			if minor == 1 {
 				minorName = labels[3]
 			} else {

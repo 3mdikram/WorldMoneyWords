@@ -13,6 +13,16 @@ public final class WorldMoneyWords {
     private static final String[] TENS = {"","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"};
     private static final String[] SCALES = {"","Thousand","Million","Billion","Trillion","Quadrillion","Quintillion"};
     private static final Map<String, CurrencyWords> CURRENCIES = currencies();
+    private final Map<String, LanguagePack> languagePacks = new HashMap<>();
+
+    public WorldMoneyWords registerLanguagePack(LanguagePack pack) {
+        if (pack == null) throw new IllegalArgumentException("Language pack is required");
+        String code = pack.code().trim().toLowerCase();
+        if (code.equals("auto") || !code.matches("[a-z]{2,8}(?:-[a-z0-9]{2,8})*")) throw new IllegalArgumentException("Language pack code must be a valid language tag and cannot be auto");
+        if (java.util.List.of(pack.minus(), pack.conjunction(), pack.only(), pack.minorSingular(), pack.minorPlural()).stream().anyMatch(value -> value == null || value.trim().isEmpty())) throw new IllegalArgumentException("Language pack labels cannot be empty");
+        languagePacks.put(code, pack);
+        return this;
+    }
 
     public String convert(String amount, String countryCode, String currencyCode) {
         return convert(amount, countryCode, currencyCode, ConversionOptions.defaults());
@@ -32,16 +42,17 @@ public final class WorldMoneyWords {
         BigInteger major = value.toBigInteger();
         BigInteger minor = value.subtract(new BigDecimal(major)).movePointRight(currency.fractionDigits).toBigInteger();
         String language = resolveLanguage(options.language(), country);
-        String[] labels = language.equals("en") ? new String[]{"Minus","and","Only","Minor Unit","Minor Units"} : LocalizedWords.labels(language);
+        LanguagePack pack = languagePacks.get(language);
+        String[] labels = pack != null ? new String[]{pack.minus(),pack.conjunction(),pack.only(),pack.minorSingular(),pack.minorPlural()} : language.equals("en") ? new String[]{"Minus","and","Only","Minor Unit","Minor Units"} : LocalizedWords.labels(language);
         StringBuilder result = new StringBuilder();
         if (negative && value.signum() != 0) result.append(labels[0]).append(' ');
-        String majorWords = language.equals("en") ? spell(major) : LocalizedWords.spell(major, language);
-        String majorName = language.equals("en") ? (major.equals(BigInteger.ONE) ? currency.majorSingular : currency.majorPlural) : LocalizedWords.currency(code, language);
+        String majorWords = pack != null ? pack.spell(major) : language.equals("en") ? spell(major) : LocalizedWords.spell(major, language);
+        String majorName = pack != null ? pack.currencyName(code, major.equals(BigInteger.ONE)) : language.equals("en") ? (major.equals(BigInteger.ONE) ? currency.majorSingular : currency.majorPlural) : LocalizedWords.currency(code, language);
         result.append(majorWords).append(' ').append(majorName);
         if (minor.signum() > 0 || (currency.fractionDigits > 0 && options.includeZeroMinor())) {
             String conjunction = options.conjunction().equals("and") ? labels[1] : options.conjunction();
-            String minorWords = language.equals("en") ? spell(minor) : LocalizedWords.spell(minor, language);
-            String minorName = language.equals("en") ? (minor.equals(BigInteger.ONE) ? currency.minorSingular : currency.minorPlural) : (minor.equals(BigInteger.ONE) ? labels[3] : labels[4]);
+            String minorWords = pack != null ? pack.spell(minor) : language.equals("en") ? spell(minor) : LocalizedWords.spell(minor, language);
+            String minorName = pack != null ? (minor.equals(BigInteger.ONE) ? pack.minorSingular() : pack.minorPlural()) : language.equals("en") ? (minor.equals(BigInteger.ONE) ? currency.minorSingular : currency.minorPlural) : (minor.equals(BigInteger.ONE) ? labels[3] : labels[4]);
             result.append(' ').append(conjunction).append(' ').append(minorWords).append(' ').append(minorName);
         }
         if (options.includeOnly()) result.append(' ').append(labels[2]);
@@ -50,9 +61,9 @@ public final class WorldMoneyWords {
 
     public String normalizeCountryCode(String code) { return SupportedCountries.normalize(code); }
 
-    private static String resolveLanguage(String requested, String country) {
+    private String resolveLanguage(String requested, String country) {
         String language = requested.trim().toLowerCase();
-        if (language.equals("en") || language.equals("hi") || language.equals("ar")) return language;
+        if (language.equals("en") || language.equals("hi") || language.equals("ar") || languagePacks.containsKey(language)) return language;
         if (!language.equals("auto")) return "en";
         if (country.equals("IND")) return "hi";
         return java.util.Set.of("ARE","BHR","DZA","EGY","IRQ","JOR","KWT","LBN","LBY","MAR","MRT","OMN","PSE","QAT","SAU","SDN","SOM","SYR","TCD","TUN","YEM").contains(country) ? "ar" : "en";

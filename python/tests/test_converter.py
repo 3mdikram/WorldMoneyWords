@@ -1,8 +1,13 @@
 import unittest
-from amount_to_words import AmountToWords, ConversionOptions
+from amount_to_words import AmountToWords, ConversionOptions, LanguagePack
 from amount_to_words.countries import ALPHA2_TO_ALPHA3
 
 class ConverterTest(unittest.TestCase):
+    def test_custom_official_language_pack(self):
+        pack = LanguagePack("xx", lambda number: f"number-{number}", lambda code, singular: code.lower() + ("-unit" if singular else "-units"), "negative", "with", "complete", "part", "parts")
+        converter = AmountToWords().add_language_pack(pack)
+        self.assertEqual("number-2 usd-units with number-50 parts complete", converter.convert("2.50", "US", "USD", ConversionOptions(language="xx")))
+
     def test_inr(self):
         self.assertEqual("One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only", AmountToWords().convert("1234.50", "IND", "INR"))
 

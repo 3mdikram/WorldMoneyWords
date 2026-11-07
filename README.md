@@ -35,6 +35,20 @@ The same simple contract is available on every supported platform:
 convert(amount, countryCode, currencyCode, options?)
 ```
 
+### Add an official-language pack
+
+WorldMoneyWords does not treat an English fallback as native-language support. A language pack supplies its own number writer, currency-name resolver, negative/conjunction/suffix labels, and singular/plural minor-unit labels. Registered packs can then be selected with the normal `language` option.
+
+| Platform | Extension API |
+|---|---|
+| PHP / Laravel | Implement `LanguagePack`, then call `$converter->addLanguagePack($pack)` |
+| Python | Create `LanguagePack(...)`, then call `converter.add_language_pack(pack)` |
+| Go | Create `LanguagePack`, then call `amountwords.RegisterLanguagePack(pack)` |
+| Java | Implement `LanguagePack`, then call `converter.registerLanguagePack(pack)` |
+| React / TypeScript / Node.js | Create `LanguagePack`, then call `registerLanguagePack(pack)` |
+
+Invalid language tags, the reserved `auto` code, missing writers, and empty labels are rejected. Built-in `en`, `hi`, and `ar` output remains backward compatible.
+
 ## Why WorldMoneyWords?
 
 | Feature | Description |
@@ -54,6 +68,7 @@ convert(amount, countryCode, currencyCode, options?)
 | 🧩 Multi-platform | PHP, Laravel, Python, Go, Java, React, browsers, and Node.js |
 | 📦 Batch friendly | Converts multiple monetary values in a single call |
 | 🔧 Extensible | Register or override currency names and minor units |
+| 🧠 Official-language packs | Add native number grammar, currency wording, and labels through a public language-pack API on every platform |
 | 🛡️ Clear validation | Provides specific errors for invalid amounts, countries, and currencies |
 
 ## Quick start
