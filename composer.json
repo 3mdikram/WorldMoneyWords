@@ -3,7 +3,7 @@
   "description": "Amount-to-words and money-to-text converter for PHP and Laravel invoices, cheques, receipts, and payments, with 200-country ISO support.",
   "type": "library",
   "license": "MIT",
-  "keywords": ["amount-to-words", "amount-to-text", "number-to-words", "number-to-text", "money-to-words", "money-to-text", "currency-to-words", "cheque-amount", "invoice-amount", "payment-amount", "currency", "php", "laravel", "invoice", "cheque", "receipt", "iso-3166", "iso-4217"],
+  "keywords": ["amount-to-words", "amount-in-words", "amount-to-text", "amount-converter", "spell-amount", "number-to-words", "number-to-text", "number-converter", "spell-number", "money-to-words", "money-to-text", "money-converter", "currency-to-words", "currency-converter", "multi-currency", "international-currency", "cheque-amount", "cheque-writing", "check-writing", "invoice-amount", "payment-amount", "financial-tools", "currency", "php", "laravel", "invoice", "cheque", "receipt", "iso-3166", "iso-4217"],
   "authors": [
     {
       "name": "Md Ikram",
