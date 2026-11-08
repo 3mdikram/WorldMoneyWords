@@ -5,6 +5,7 @@ import (
 	"math"
 	"regexp"
 	"strings"
+	"sync"
 )
 
 type Currency struct {
@@ -27,6 +28,16 @@ type LanguagePack struct {
 }
 
 var languagePacks = map[string]LanguagePack{}
+var languagePacksMu sync.RWMutex
+
+var isoCurrencies = func() map[string]struct{} {
+	codes := strings.Fields("AED AFN ALL AMD ANG AOA ARS AUD AWG AZN BAM BBD BDT BGN BHD BIF BMD BND BOB BOV BRL BSD BTN BWP BYN BZD CAD CDF CHE CHF CHW CLF CLP CNY COP COU CRC CUC CUP CVE CZK DJF DKK DOP DZD EGP ERN ETB EUR FJD FKP GBP GEL GHS GIP GMD GNF GTQ GYD HKD HNL HTG HUF IDR ILS INR IQD IRR ISK JMD JOD JPY KES KGS KHR KMF KPW KRW KWD KYD KZT LAK LBP LKR LRD LSL LYD MAD MDL MGA MKD MMK MNT MOP MRU MUR MVR MWK MXN MXV MYR MZN NAD NGN NIO NOK NPR NZD OMR PAB PEN PGK PHP PKR PLN PYG QAR RON RSD RUB RWF SAR SBD SCR SDG SEK SGD SHP SLE SLL SOS SRD SSP STN SVC SYP SZL THB TJS TMT TND TOP TRY TTD TWD TZS UAH UGX USD USN UYI UYU UYW UZS VED VES VND VUV WST XAF XAG XAU XBA XBB XBC XBD XCD XDR XOF XPD XPF XPT XSU XTS XUA XXX YER ZAR ZMW ZWL")
+	result := make(map[string]struct{}, len(codes))
+	for _, code := range codes {
+		result[code] = struct{}{}
+	}
+	return result
+}()
 
 func RegisterLanguagePack(pack LanguagePack) error {
 	code := strings.ToLower(strings.TrimSpace(pack.Code))
@@ -38,6 +49,8 @@ func RegisterLanguagePack(pack LanguagePack) error {
 		return fmt.Errorf("language pack functions and labels are required")
 	}
 	pack.Code = code
+	languagePacksMu.Lock()
+	defer languagePacksMu.Unlock()
 	languagePacks[code] = pack
 	return nil
 }
@@ -186,6 +199,9 @@ func localizedSpell(n int64, language string) (string, error) {
 }
 
 func Convert(amount float64, countryCode, currencyCode string, supplied ...Options) (string, error) {
+	if math.IsNaN(amount) || math.IsInf(amount, 0) {
+		return "", fmt.Errorf("amount must be finite")
+	}
 	options := DefaultOptions()
 	if len(supplied) > 0 {
 		options = supplied[0]
@@ -204,13 +220,19 @@ func Convert(amount float64, countryCode, currencyCode string, supplied ...Optio
 		return "", fmt.Errorf("unknown ISO Alpha-2 or Alpha-3 country code")
 	}
 	requested := strings.ToLower(strings.TrimSpace(options.Language))
-	if _, custom := languagePacks[requested]; requested == "en" || requested == "hi" || requested == "ar" || custom {
+	languagePacksMu.RLock()
+	requestedPack, requestedCustom := languagePacks[requested]
+	languagePacksMu.RUnlock()
+	if requested == "en" || requested == "hi" || requested == "ar" || requestedCustom {
 		options.Language = requested
 	} else {
 		options.Language = "en"
 	}
 	if !isoCode.MatchString(code) {
 		return "", fmt.Errorf("currency code must be ISO 4217")
+	}
+	if _, known := isoCurrencies[code]; !known {
+		return "", fmt.Errorf("unknown ISO 4217 currency code: %s", code)
 	}
 	c, ok := currencies[code]
 	if !ok {
@@ -222,7 +244,10 @@ func Convert(amount float64, countryCode, currencyCode string, supplied ...Optio
 	rounded = math.Abs(rounded)
 	major := int64(rounded)
 	minor := int64(math.Round((rounded - float64(major)) * factor))
-	pack, custom := languagePacks[options.Language]
+	pack, custom := requestedPack, requestedCustom
+	if options.Language != requested {
+		pack, custom = LanguagePack{}, false
+	}
 	majorWords, err := localizedSpell(major, options.Language)
 	if custom {
 		majorWords, err = pack.Spell(major)

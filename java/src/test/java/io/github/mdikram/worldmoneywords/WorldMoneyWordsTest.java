@@ -55,4 +55,10 @@ class WorldMoneyWordsTest {
     @Test void unavailableLanguageFallsBackToEnglish() {
         assertEquals(true, converter.convert("10", "PK", "PKR", new ConversionOptions(true, false, "and", "ur")).startsWith("Ten"));
     }
+
+    @Test void validatesThousandsGrouping() {
+        assertEquals("One Thousand Two Hundred Thirty Four US Dollars and Fifty Six Cents Only", converter.convert("1,234.56", "US", "USD"));
+        assertThrows(IllegalArgumentException.class, () -> converter.convert("1,2", "US", "USD"));
+        assertThrows(IllegalArgumentException.class, () -> converter.convert("12,34", "US", "USD"));
+    }
 }

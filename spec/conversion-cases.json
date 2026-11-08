@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "status": "unreleased",
+  "valid": [
+    {"amount": "1234.50", "country": "IN", "currency": "INR", "expected": "One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only"},
+    {"amount": "-10.25", "country": "GB", "currency": "GBP", "expected": "Minus Ten Pounds and Twenty Five Pence Only"},
+    {"amount": "1.999", "country": "US", "currency": "USD", "expected": "Two US Dollars Only"},
+    {"amount": "-0.004", "country": "US", "currency": "USD", "expected": "Zero US Dollars Only"},
+    {"amount": "0", "country": "JP", "currency": "JPY", "expected": "Zero Yen Only"}
+  ],
+  "invalid": [
+    {"amount": "12", "country": "ZZ", "currency": "USD", "reason": "country"},
+    {"amount": "12", "country": "US", "currency": "ZZZ", "reason": "currency"},
+    {"amount": "1,2", "country": "US", "currency": "USD", "reason": "amount"},
+    {"amount": "NaN", "country": "US", "currency": "USD", "reason": "amount"}
+  ]
+}

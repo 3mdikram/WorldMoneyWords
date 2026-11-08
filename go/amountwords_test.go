@@ -2,6 +2,7 @@ package amountwords
 
 import (
 	"fmt"
+	"math"
 	"strings"
 	"testing"
 )
@@ -11,6 +12,20 @@ func TestConvert(t *testing.T) {
 	want := "One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only"
 	if err != nil || got != want {
 		t.Fatalf("got %q, %v", got, err)
+	}
+}
+
+func TestRejectsUnknownCurrency(t *testing.T) {
+	if _, err := Convert(10, "US", "ZZZ"); err == nil {
+		t.Fatal("expected unknown currency error")
+	}
+}
+
+func TestRejectsNonFiniteAmounts(t *testing.T) {
+	for _, amount := range []float64{math.NaN(), math.Inf(1), math.Inf(-1)} {
+		if _, err := Convert(amount, "US", "USD"); err == nil {
+			t.Fatal("expected non-finite amount error")
+		}
 	}
 }
 

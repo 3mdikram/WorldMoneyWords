@@ -44,5 +44,19 @@ class ConverterTest(unittest.TestCase):
         converter = AmountToWords()
         self.assertTrue(converter.convert("10", "PK", "PKR", ConversionOptions(language="ur")).startswith("Ten"))
 
+    def test_rejects_unknown_currency_and_non_finite_amounts(self):
+        converter = AmountToWords()
+        with self.assertRaises(ValueError):
+            converter.convert("10", "US", "ZZZ")
+        for amount in ("NaN", "Infinity", "-Infinity"):
+            with self.assertRaises(ValueError):
+                converter.convert(amount, "US", "USD")
+
+    def test_validates_thousands_grouping(self):
+        converter = AmountToWords()
+        self.assertEqual("One Thousand Two Hundred Thirty Four US Dollars and Fifty Six Cents Only", converter.convert("1,234.56", "US", "USD"))
+        with self.assertRaises(ValueError):
+            converter.convert("1,2", "US", "USD")
+
 if __name__ == "__main__":
     unittest.main()

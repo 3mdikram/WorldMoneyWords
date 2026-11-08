@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AmountToWords;
 
+use InvalidArgumentException;
+
 final class Currency
 {
     public function __construct(
@@ -13,6 +15,17 @@ final class Currency
         public readonly string $minorPlural,
         public readonly int $fractionDigits = 2,
     ) {
+        foreach ([$majorSingular, $majorPlural] as $name) {
+            if (trim($name) === '') {
+                throw new InvalidArgumentException('Major currency names cannot be empty.');
+            }
+        }
+        if ($fractionDigits < 0 || $fractionDigits > 9) {
+            throw new InvalidArgumentException('Currency fraction digits must be between 0 and 9.');
+        }
+        if ($fractionDigits > 0 && (trim($minorSingular) === '' || trim($minorPlural) === '')) {
+            throw new InvalidArgumentException('Minor currency names cannot be empty when fraction digits are used.');
+        }
     }
 
     /** @return array<string, self> */

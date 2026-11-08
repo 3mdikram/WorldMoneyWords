@@ -34,7 +34,10 @@ public final class WorldMoneyWords {
         String code = currencyCode == null ? "" : currencyCode.trim().toUpperCase();
         CurrencyWords currency = currency(code);
         BigDecimal value;
-        try { value = new BigDecimal(amount.replace(",", "")); }
+        if (amount == null || !amount.trim().matches("-?(?:\\d+|\\d{1,3}(?:,\\d{3})+)(?:\\.\\d+)?")) {
+            throw new IllegalArgumentException("Amount must be a plain numeric value with valid thousands grouping");
+        }
+        try { value = new BigDecimal(amount.trim().replace(",", "")); }
         catch (RuntimeException error) { throw new IllegalArgumentException("Amount must be numeric", error); }
         value = value.setScale(currency.fractionDigits, RoundingMode.HALF_UP);
         boolean negative = value.signum() < 0;

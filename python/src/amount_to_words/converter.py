@@ -58,6 +58,19 @@ CURRENCIES = {
     "JPY": Currency("Yen", "Yen", "", "", 0),
 }
 
+ISO_CURRENCY_CODES = frozenset("""
+AED AFN ALL AMD ANG AOA ARS AUD AWG AZN BAM BBD BDT BGN BHD BIF BMD BND BOB
+BOV BRL BSD BTN BWP BYN BZD CAD CDF CHE CHF CHW CLF CLP CNY COP COU CRC CUC
+CUP CVE CZK DJF DKK DOP DZD EGP ERN ETB EUR FJD FKP GBP GEL GHS GIP GMD GNF
+GTQ GYD HKD HNL HTG HUF IDR ILS INR IQD IRR ISK JMD JOD JPY KES KGS KHR
+KMF KPW KRW KWD KYD KZT LAK LBP LKR LRD LSL LYD MAD MDL MGA MKD MMK MNT
+MOP MRU MUR MVR MWK MXN MXV MYR MZN NAD NGN NIO NOK NPR NZD OMR PAB PEN
+PGK PHP PKR PLN PYG QAR RON RSD RUB RWF SAR SBD SCR SDG SEK SGD SHP SLE SLL
+SOS SRD SSP STN SVC SYP SZL THB TJS TMT TND TOP TRY TTD TWD TZS UAH UGX
+USD USN UYI UYU UYW UZS VED VES VND VUV WST XAF XAG XAU XBA XBB XBC XBD
+XCD XDR XOF XPD XPF XPT XSU XTS XUA XXX YER ZAR ZMW ZWL
+""".split())
+
 def _under_thousand(value: int) -> str:
     words = []
     if value >= 100:
@@ -152,13 +165,25 @@ class AmountToWords:
         pack = self.language_packs.get(language)
         if not re.fullmatch(r"[A-Z]{3}", code):
             raise ValueError("Currency code must be a three-letter ISO 4217 code")
+        if code not in ISO_CURRENCY_CODES and code not in self.currencies:
+            raise ValueError(f"Unknown ISO 4217 currency code: {code}")
         currency = self.currencies.get(code, Currency(code, code, "Minor Unit", "Minor Units"))
+        amount_input = str(amount).strip()
+        if "," in amount_input:
+            if not re.fullmatch(r"-?\d{1,3}(?:,\d{3})+(?:\.\d+)?", amount_input):
+                raise ValueError("Amount contains invalid thousands grouping")
+            amount_input = amount_input.replace(",", "")
         try:
-            value = Decimal(str(amount))
+            value = Decimal(amount_input)
         except InvalidOperation as error:
             raise ValueError("Amount must be numeric") from error
+        if not value.is_finite():
+            raise ValueError("Amount must be finite")
         quantum = Decimal(1).scaleb(-currency.fraction_digits)
-        value = value.quantize(quantum, rounding=ROUND_HALF_UP)
+        try:
+            value = value.quantize(quantum, rounding=ROUND_HALF_UP)
+        except InvalidOperation as error:
+            raise ValueError("Amount is outside the supported range") from error
         negative = value < 0
         value = abs(value)
         major = int(value)

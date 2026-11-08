@@ -14,6 +14,12 @@ use PHPUnit\Framework\TestCase;
 
 final class AmountToWordsTest extends TestCase
 {
+    public function testRejectsInvalidCustomCurrencyDefinitions(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        new Currency('Token', 'Tokens', 'Bit', 'Bits', -1);
+    }
+
     public function testCustomOfficialLanguagePack(): void
     {
         $pack = new class implements LanguagePack {
