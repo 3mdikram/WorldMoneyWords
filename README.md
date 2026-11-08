@@ -28,7 +28,7 @@ One consistent API for PHP, Laravel, Python, Go, Java, React, TypeScript, browse
 |---:|:---:|:---:|---|
 | `1234.50` | `IND` | `INR` | **One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only** |
 
-WorldMoneyWords is a multilingual amount-to-words library with English, Hindi, Arabic, and more through custom language packs for PHP, Laravel, Python, Go, Java, React, TypeScript, browsers, and Node.js. Give it an amount, an ISO country code, and an ISO currency code; it returns correctly formatted wording with the appropriate major and minor currency units.
+WorldMoneyWords is a multilingual amount-to-words library with English, Hindi, Arabic, and more through custom language packs for PHP, Laravel, Python, Go, Java, Android/Kotlin, React, TypeScript, browsers, and Node.js. Give it an amount, an ISO country code, and an ISO currency code; it returns correctly formatted wording with the appropriate major and minor currency units.
 
 > **Development status:** improvements listed in [CHANGELOG.md](CHANGELOG.md) are unreleased. Package versions have not been bumped and no release is implied by the current branch. See [ROADMAP.md](ROADMAP.md) for planned cross-runtime parity and language work.
 
@@ -52,7 +52,7 @@ convert(amount, countryCode, currencyCode, options?)
 
 | Area | Documentation |
 |---|---|
-| **Platform guides** | [PHP](#quick-start) · [Laravel](laravel/README.md) · [Python](python/README.md) · [Go](go/README.md) · [Java](java/README.md) · [React / TypeScript / Node.js](react/README.md) |
+| **Platform guides** | [PHP](#quick-start) · [Laravel](laravel/README.md) · [Python](python/README.md) · [Go](go/README.md) · [Java](java/README.md) · [Android / Kotlin](android/README.md) · [React / TypeScript / Node.js](react/README.md) |
 | **Installation and examples** | [All packages and platform examples](#platforms) |
 | **API reference** | [Core API](#core-api) · [Conversion options](#conversion-options) · [Advanced PHP usage](#advanced-php-usage) |
 | **International support** | [Official-language packs](#official-language-packs) · [Country and currency list](#country-and-currency-support) |

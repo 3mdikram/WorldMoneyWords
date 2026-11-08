@@ -12,3 +12,7 @@
 /react/node_modules/
 /react/dist/
 /java/target/
+/android/.gradle/
+/android/.kotlin/
+/android/build/
+/android/local.properties

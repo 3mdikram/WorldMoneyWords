@@ -15,6 +15,8 @@ Package versions remain unchanged while the work below is in the **Unreleased** 
 
 ## Cross-runtime API parity
 
+- [x] Add an unreleased Android AAR backed by the Java conversion engine.
+- [ ] Publish the Android AAR to Maven Central after release readiness review.
 - [ ] Structured conversion results in Python, Go, Java, and TypeScript.
 - [ ] Batch conversion in Python, Go, Java, and TypeScript.
 - [ ] Country, currency, and language discovery APIs in every runtime.
