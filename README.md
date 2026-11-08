@@ -195,7 +195,8 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 | 🐘 **PHP** | `composer require 3mdikram/worldmoneywords` | `$converter->convert(...)` |
 | 🔺 **Laravel** | `composer require 3mdikram/worldmoneywords-laravel` | `AmountToWords::convert(...)` |
 | 🐍 **Python** | `pip install worldmoneywords` | `converter.convert(...)` |
-| 🐹 **Go** | `go get github.com/3mdikram/WorldMoneyWords/go/v2` | `amountwords.Convert(...)` |
+| 🐹 **Go v2** | `go get github.com/3mdikram/WorldMoneyWords/go/v2` | `amountwords.Convert(...)` |
+| 🐹 **Go root compatibility** | Unreleased: `go get github.com/3mdikram/WorldMoneyWords` | `amountwords.Convert(...)` |
 | ☕ **Java** | `io.github.3mdikram:worldmoneywords` | `converter.convert(...)` |
 | 🤖 **Android / Kotlin** | Unreleased AAR: `worldmoneywords-android` | `converter.convert(...)` |
 | ⚛️ **React / Node.js** | `npm install @3mdikram/worldmoneywords` | `amountToWords(...)` |
@@ -328,9 +329,25 @@ print(AmountToWords().convert("10.00", "US", "USD", options))
 <details open>
 <summary><strong>🐹 Go examples</strong> — installation, options, language, and short names</summary>
 
+The versioned v2 module is the current released package:
+
 ```bash
 go get github.com/3mdikram/WorldMoneyWords/go/v2
 ```
+
+Root import-path compatibility is implemented but unreleased. Test it from `main` with:
+
+```bash
+go get github.com/3mdikram/WorldMoneyWords@main
+```
+
+After a future root-compatible `v1.x` tag is published, the shorter command will work without `@main`:
+
+```bash
+go get github.com/3mdikram/WorldMoneyWords
+```
+
+Both packages expose the same `Convert`, `Options`, `Currency`, `LanguagePack`, `DefaultOptions`, and `RegisterLanguagePack` API. Go semantic import versioning requires `/go/v2` for v2 releases; the root module is therefore maintained as a v1 compatibility facade.
 
 #### 1. Default conversion
 
@@ -1040,6 +1057,7 @@ composer test
 cd python && PYTHONPATH=src python3 -m unittest discover -s tests
 
 # Go
+GOFLAGS=-mod=mod go test -race ./...
 cd go && go test ./...
 
 # Java

@@ -15,6 +15,8 @@ Package versions remain unchanged while the work below is in the **Unreleased** 
 
 ## Cross-runtime API parity
 
+- [x] Add a root Go compatibility module while preserving the versioned `/go/v2` module.
+- [ ] Publish the root Go module with a deliberate `v1.x` compatibility tag.
 - [x] Add an unreleased Android AAR backed by the Java conversion engine.
 - [ ] Publish the Android AAR to Maven Central after release readiness review.
 - [ ] Structured conversion results in Python, Go, Java, and TypeScript.

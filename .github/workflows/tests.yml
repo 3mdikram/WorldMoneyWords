@@ -86,7 +86,14 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.go }}
-          cache-dependency-path: go/go.mod
+          cache-dependency-path: |
+            go.mod
+            go.sum
+            go/go.mod
+      - run: go test -race ./...
+        working-directory: .
+      - run: go vet ./...
+        working-directory: .
       - run: go test -race ./...
       - run: go vet ./...
 
