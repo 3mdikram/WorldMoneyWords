@@ -4,18 +4,19 @@
 
 **Turn currency amounts into clear, document-ready words for invoices, cheques, receipts, payments, and banking workflows.**
 
-One consistent API for PHP, Laravel, Python, Go, Java, React, TypeScript, browsers, and Node.js—with ISO country codes, global currencies, multilingual output, and customizable financial wording.
+One consistent API for PHP, Laravel, Python, Go, Java, Android/Kotlin, React, TypeScript, browsers, and Node.js—with ISO country codes, global currencies, multilingual output, and customizable financial wording.
 
 [![Tests](https://github.com/3mdikram/WorldMoneyWords/actions/workflows/tests.yml/badge.svg)](https://github.com/3mdikram/WorldMoneyWords/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![PHP](https://img.shields.io/badge/PHP-8.1%2B-777BB4?logo=php&logoColor=white)](https://www.php.net/)
 [![Countries](https://img.shields.io/badge/important_countries-200-1f6feb)](#country-and-currency-support)
-[![Languages](https://img.shields.io/badge/platforms-PHP_%7C_Python_%7C_Go_%7C_Java_%7C_TypeScript-orange)](#platforms)
+[![Languages](https://img.shields.io/badge/platforms-PHP_%7C_Python_%7C_Go_%7C_Java_%7C_Android_%7C_TypeScript-orange)](#platforms)
 
 [![PHP](https://img.shields.io/badge/PHP-777BB4?logo=php&logoColor=white)](#php)
 [![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](#platforms)
 [![Go](https://img.shields.io/badge/Go-00ADD8?logo=go&logoColor=white)](#platforms)
 [![Java](https://img.shields.io/badge/Java-ED8B00?logo=openjdk&logoColor=white)](#platforms)
+[![Android](https://img.shields.io/badge/Android_API_21%2B-3DDC84?logo=android&logoColor=white)](android/README.md)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](#platforms)
 
 [📚 Index](#documentation-index) · [🚀 Quick start](#quick-start) · [📦 Packages](#platforms) · [🧩 API](#core-api) · [🌐 Countries](#country-and-currency-support) · [🛠️ Advanced](#advanced-php-usage)
@@ -85,6 +86,7 @@ A language pack is responsible for the complete financial wording of a language:
 | Python | Create `LanguagePack(...)`, then call `converter.add_language_pack(pack)` |
 | Go | Create `LanguagePack`, then call `amountwords.RegisterLanguagePack(pack)` |
 | Java | Implement `LanguagePack`, then call `converter.registerLanguagePack(pack)` |
+| Android / Kotlin | Register a Java `LanguagePack` through `converter.javaDelegate()` |
 | React / TypeScript / Node.js | Create `LanguagePack`, then call `registerLanguagePack(pack)` |
 
 ### PHP integration template
@@ -160,7 +162,7 @@ echo $converter->convert(
 | 🧾 Structured results | Returns JSON-serializable text, country, currency, major amount, and minor amount |
 | 📚 Discovery helpers | Lists supported countries and currencies for validation and form controls |
 | 🔠 Case insensitive | Accepts country and currency codes in upper or lowercase |
-| 🧩 Multi-platform | PHP, Laravel, Python, Go, Java, React, browsers, and Node.js |
+| 🧩 Multi-platform | PHP, Laravel, Python, Go, Java, Android/Kotlin, React, browsers, and Node.js |
 | 🔁 Consistent platform options | Provides equivalent language, suffix, minor-unit, conjunction, and short-name controls in every runtime |
 | 📦 Batch friendly | Converts multiple monetary values in a single call |
 | 🔧 Extensible | Register or override currency names and minor units |
@@ -195,6 +197,7 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 | 🐍 **Python** | `pip install worldmoneywords` | `converter.convert(...)` |
 | 🐹 **Go** | `go get github.com/3mdikram/WorldMoneyWords/go/v2` | `amountwords.Convert(...)` |
 | ☕ **Java** | `io.github.3mdikram:worldmoneywords` | `converter.convert(...)` |
+| 🤖 **Android / Kotlin** | Unreleased AAR: `worldmoneywords-android` | `converter.convert(...)` |
 | ⚛️ **React / Node.js** | `npm install @3mdikram/worldmoneywords` | `amountToWords(...)` |
 
 <details open>
@@ -464,6 +467,64 @@ Requires Java 11 or newer. See the [Java guide](java/README.md).
 </details>
 
 <details open>
+<summary><strong>🤖 Android / Kotlin examples</strong> — exact decimal strings, options, and localization</summary>
+
+> **Unreleased:** the Android AAR is currently `0.0.0-SNAPSHOT`. Do not add production Maven coordinates until an Android release is announced.
+
+After release to Maven Central, installation will use:
+
+```kotlin
+dependencies {
+    implementation("io.github.3mdikram:worldmoneywords-android:<released-version>")
+}
+```
+
+#### 1. Default conversion
+
+```kotlin
+import io.github.mdikram.worldmoneywords.android.AndroidAmountToWords
+
+val converter = AndroidAmountToWords()
+val text = converter.convert("1234.50", "IN", "INR")
+// One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only
+```
+
+#### 2. Conversion with Kotlin options
+
+```kotlin
+import io.github.mdikram.worldmoneywords.android.AndroidConversionOptions
+
+val text = converter.convert(
+    amount = "10.00",
+    countryCode = "US",
+    currencyCode = "USD",
+    options = AndroidConversionOptions(
+        includeOnly = false,
+        includeZeroMinor = true,
+        conjunction = "plus",
+        shortCurrencyName = true,
+    ),
+)
+// Ten Dollars plus Zero Cents
+```
+
+#### 3. Hindi output
+
+```kotlin
+val hindi = converter.convert(
+    amount = "1234.50",
+    countryCode = "IN",
+    currencyCode = "INR",
+    options = AndroidConversionOptions(language = "hi"),
+)
+// एक हज़ार दो सौ चौंतीस भारतीय रुपया और पचास उप-इकाइयाँ मात्र
+```
+
+The Android API intentionally accepts monetary amounts as decimal strings, avoiding accidental `Double` precision loss. It supports Android API 21 and newer and delegates to the tested Java conversion engine. See the [Android guide](android/README.md).
+
+</details>
+
+<details open>
 <summary><strong>⚛️ React / TypeScript examples</strong> — installation, options, language, and short names</summary>
 
 ```bash
@@ -568,7 +629,7 @@ Use the options when you need wording tailored to invoices, cheques, banking for
 
 Option names follow each language's normal style:
 
-| Option | PHP / TypeScript | Python | Go | Java |
+| Option | PHP / TypeScript | Python | Go | Java / Android Kotlin |
 |---|---|---|---|---|
 | Only suffix | `includeOnly` | `include_only` | `IncludeOnly` | `includeOnly` |
 | Zero minor unit | `includeZeroMinor` | `include_zero_minor` | `IncludeZeroMinor` | `includeZeroMinor` |
@@ -954,6 +1015,12 @@ Unknown but valid ICU currencies use their English display name and generic `Min
 
 The language-specific packages contain their own runtime requirements.
 
+Android package requirements:
+
+- Android API 21 or newer
+- JDK 17 and Android SDK 35 for building the AAR
+- Decimal-string inputs for financial values
+
 ## 🧪 Development
 
 ```bash
@@ -977,6 +1044,9 @@ cd go && go test ./...
 
 # Java
 cd java && mvn verify
+
+# Android / Kotlin (unreleased AAR)
+gradle -p android testDebugUnitTest assembleRelease
 
 # TypeScript
 cd react && npm install && npm test
