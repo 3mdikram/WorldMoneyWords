@@ -19,6 +19,7 @@ This section is intentionally unreleased. Package versions and release tags have
 
 ### Changed
 
+- Changed PHP/Laravel `shortCurrencyName: true` to prefix the short Alpha-2 country code (`PK Rupees`) for bundled and ICU-backed currencies; `ignoreCountryName: true` continues to return `Rupees` without a country prefix.
 - Bundled the Laravel service provider and facade with the main Composer package so `3mdikram/worldmoneywords` supports Laravel auto-discovery directly.
 - Removed the obsolete separate Laravel Composer manifest; one package now supports both plain PHP and Laravel.
 - Strengthened currency and amount validation across runtimes.

@@ -53,7 +53,7 @@ final class LaravelIntegrationTest extends TestCase
         (new AmountToWordsServiceProvider($container))->register();
 
         self::assertSame(
-            'Seven Hundred Forty Five Rupees and Sixty One Paisa Only',
+            'Seven Hundred Forty Five PK Rupees and Sixty One Paisa Only',
             AmountToWords::convert(
                 '745.61',
                 'PK',

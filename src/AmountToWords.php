@@ -67,9 +67,18 @@ final class AmountToWords
         $parts[] = $languagePack?->spell($majorAbsolute) ?? $this->spellLocalized($majorAbsolute, $language);
         $majorName = $languagePack?->currencyName($currencyCode, $majorAbsolute === '1')
             ?? $this->localizedCurrencyName($currencyCode, $currency, $majorAbsolute === '1', $language);
-        $parts[] = $options->shortCurrencyName || $options->ignoreCountryName
-            ? $this->shortCurrencyName($currencyCode, $language, $majorAbsolute === '1', $majorName)
-            : $majorName;
+        if ($options->shortCurrencyName || $options->ignoreCountryName) {
+            $majorName = $this->shortCurrencyName(
+                $currencyCode,
+                $language,
+                $majorAbsolute === '1',
+                $majorName,
+            );
+        }
+        if ($options->shortCurrencyName && !$options->ignoreCountryName) {
+            $majorName = $this->shortCountryCode($countryCode) . ' ' . $majorName;
+        }
+        $parts[] = $majorName;
 
         if ($currency->fractionDigits > 0 && ((int) $minor > 0 || $options->includeZeroMinor)) {
             $parts[] = $options->conjunction === 'and'
@@ -151,7 +160,26 @@ final class AmountToWords
             'ar' => ['INR' => ['روبية', 'روبية'], 'USD' => ['دولار', 'دولار'], 'GBP' => ['جنيه', 'جنيه'], 'EUR' => ['يورو', 'يورو'], 'AED' => ['درهم', 'درهم'], 'JPY' => ['ين', 'ين']],
         ];
 
-        return $names[$language][$code][$singular ? 0 : 1] ?? $fallback;
+        $configured = $names[$language][$code][$singular ? 0 : 1] ?? null;
+        if ($configured !== null) {
+            return $configured;
+        }
+
+        $words = preg_split('/\s+/u', trim($fallback));
+        return $words === false || $words === [] ? $fallback : end($words);
+    }
+
+    private function shortCountryCode(string $alpha3): string
+    {
+        if ($alpha3 === 'XKX') {
+            return 'XK';
+        }
+
+        try {
+            return (new ISO3166())->alpha3($alpha3)['alpha2'];
+        } catch (\Throwable) {
+            return $alpha3;
+        }
     }
 
     public function convertDetailed(

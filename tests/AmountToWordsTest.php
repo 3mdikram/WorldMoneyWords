@@ -137,14 +137,14 @@ final class AmountToWordsTest extends TestCase
     public function testShortCurrencyNameOption(): void
     {
         $options = new ConversionOptions(includeOnly: false, includeZeroMinor: true, conjunction: 'plus', shortCurrencyName: true);
-        self::assertSame('Ten Dollars plus Zero Cents', (new AmountToWords())->convert('10.00', 'US', 'USD', $options));
+        self::assertSame('Ten US Dollars plus Zero Cents', (new AmountToWords())->convert('10.00', 'US', 'USD', $options));
     }
 
     public function testShortCurrencyNameRemovesPakistaniQualifier(): void
     {
         $options = new ConversionOptions(shortCurrencyName: true);
         self::assertSame(
-            'Seven Hundred Forty Five Rupees and Sixty One Paisa Only',
+            'Seven Hundred Forty Five PK Rupees and Sixty One Paisa Only',
             (new AmountToWords())->convert('745.61', 'PK', 'PKR', $options),
         );
     }
@@ -153,23 +153,23 @@ final class AmountToWordsTest extends TestCase
     {
         $converter = new AmountToWords();
         $expected = [
-            'AUD' => 'Two Dollars Only', 'BDT' => 'Two Taka Only',
-            'BHD' => 'Two Dinars Only', 'CAD' => 'Two Dollars Only',
-            'CHF' => 'Two Francs Only', 'CNY' => 'Two Yuan Only',
-            'HKD' => 'Two Dollars Only', 'IDR' => 'Two Rupiah Only',
-            'KES' => 'Two Shillings Only', 'KWD' => 'Two Dinars Only',
-            'LKR' => 'Two Rupees Only', 'MYR' => 'Two Ringgit Only',
-            'NGN' => 'Two Naira Only', 'NPR' => 'Two Rupees Only',
-            'NZD' => 'Two Dollars Only', 'OMR' => 'Two Rials Only',
-            'PKR' => 'Two Rupees Only', 'QAR' => 'Two Riyals Only',
-            'SAR' => 'Two Riyals Only', 'SGD' => 'Two Dollars Only',
-            'THB' => 'Two Baht Only', 'ZAR' => 'Two Rand Only',
+            'AUD' => ['AU', 'Two AU Dollars Only'], 'BDT' => ['BD', 'Two BD Taka Only'],
+            'BHD' => ['BH', 'Two BH Dinars Only'], 'CAD' => ['CA', 'Two CA Dollars Only'],
+            'CHF' => ['CH', 'Two CH Francs Only'], 'CNY' => ['CN', 'Two CN Yuan Only'],
+            'HKD' => ['HK', 'Two HK Dollars Only'], 'IDR' => ['ID', 'Two ID Rupiah Only'],
+            'KES' => ['KE', 'Two KE Shillings Only'], 'KWD' => ['KW', 'Two KW Dinars Only'],
+            'LKR' => ['LK', 'Two LK Rupees Only'], 'MYR' => ['MY', 'Two MY Ringgit Only'],
+            'NGN' => ['NG', 'Two NG Naira Only'], 'NPR' => ['NP', 'Two NP Rupees Only'],
+            'NZD' => ['NZ', 'Two NZ Dollars Only'], 'OMR' => ['OM', 'Two OM Rials Only'],
+            'PKR' => ['PK', 'Two PK Rupees Only'], 'QAR' => ['QA', 'Two QA Riyals Only'],
+            'SAR' => ['SA', 'Two SA Riyals Only'], 'SGD' => ['SG', 'Two SG Dollars Only'],
+            'THB' => ['TH', 'Two TH Baht Only'], 'ZAR' => ['ZA', 'Two ZA Rand Only'],
         ];
 
-        foreach ($expected as $currency => $text) {
+        foreach ($expected as $currency => [$country, $text]) {
             self::assertSame(
                 $text,
-                $converter->convert('2', 'US', $currency, new ConversionOptions(shortCurrencyName: true)),
+                $converter->convert('2', $country, $currency, new ConversionOptions(shortCurrencyName: true)),
                 $currency,
             );
         }
@@ -184,6 +184,19 @@ final class AmountToWordsTest extends TestCase
                 'PK',
                 'PKR',
                 new ConversionOptions(ignoreCountryName: true),
+            ),
+        );
+    }
+
+    public function testShortCurrencyNameUsesIsoFallbackCurrencyUnit(): void
+    {
+        self::assertSame(
+            'Two BR Reals Only',
+            (new AmountToWords())->convert(
+                '2',
+                'BR',
+                'BRL',
+                new ConversionOptions(shortCurrencyName: true),
             ),
         );
     }
