@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use AmountToWords\ConversionOptions;
-use AmountToWords\Laravel\Facades\AmountToWords;
+use mdikram\Facades\AmountToWords;
 
 // Basic facade usage.
 echo AmountToWords::convert('1234.50', 'IN', 'INR');

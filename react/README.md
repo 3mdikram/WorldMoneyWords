@@ -205,7 +205,7 @@ composer require 3mdikram/worldmoneywords
 #### 1. Default conversion
 
 ```php
-use AmountToWords\Laravel\Facades\AmountToWords;
+use mdikram\Facades\AmountToWords;
 
 echo AmountToWords::convert('99.95', 'USA', 'USD');
 // Ninety Nine US Dollars and Ninety Five Cents Only
@@ -215,7 +215,7 @@ echo AmountToWords::convert('99.95', 'USA', 'USD');
 
 ```php
 use AmountToWords\ConversionOptions;
-use AmountToWords\Laravel\Facades\AmountToWords;
+use mdikram\Facades\AmountToWords;
 
 $options = new ConversionOptions(
     includeOnly: false,
@@ -231,7 +231,7 @@ echo AmountToWords::convert('10.00', 'US', 'USD', $options);
 
 ```php
 use AmountToWords\ConversionOptions;
-use AmountToWords\Laravel\Facades\AmountToWords;
+use mdikram\Facades\AmountToWords;
 
 $options = new ConversionOptions(language: 'hi');
 
@@ -243,7 +243,7 @@ echo AmountToWords::convert('10', 'IN', 'INR', $options);
 
 ```php
 use AmountToWords\ConversionOptions;
-use AmountToWords\Laravel\Facades\AmountToWords;
+use mdikram\Facades\AmountToWords;
 
 $options = new ConversionOptions(
     includeOnly: false,

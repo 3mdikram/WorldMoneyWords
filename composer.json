@@ -23,6 +23,7 @@
   },
   "autoload": {
     "psr-4": {
+      "mdikram\\": "src/mdikram/",
       "AmountToWords\\": "src/"
     }
   },
@@ -45,7 +46,7 @@
         "AmountToWords\\Laravel\\AmountToWordsServiceProvider"
       ],
       "aliases": {
-        "AmountToWords": "AmountToWords\\Laravel\\Facades\\AmountToWords"
+        "AmountToWords": "mdikram\\Facades\\AmountToWords"
       }
     }
   },

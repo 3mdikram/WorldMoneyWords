@@ -6,9 +6,9 @@ namespace AmountToWords\Tests;
 
 use AmountToWords\AmountToWords as Converter;
 use AmountToWords\Laravel\AmountToWordsServiceProvider;
-use AmountToWords\Laravel\Facades\AmountToWords;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Facade;
+use mdikram\Facades\AmountToWords;
 use PHPUnit\Framework\TestCase;
 
 final class LaravelIntegrationTest extends TestCase
@@ -26,6 +26,7 @@ final class LaravelIntegrationTest extends TestCase
     {
         self::assertTrue(class_exists(AmountToWordsServiceProvider::class));
         self::assertTrue(class_exists(AmountToWords::class));
+        self::assertTrue(class_exists(\AmountToWords\Laravel\Facades\AmountToWords::class));
     }
 
     public function testFacadeResolvesRegisteredConverter(): void
