@@ -24,3 +24,14 @@ func TestRootOptionsCompatibility(t *testing.T) {
 		t.Fatalf("unexpected text: %q", text)
 	}
 }
+
+func TestRootCountryNameOptionsCompatibility(t *testing.T) {
+	withCode, err := Convert(2, "PK", "PKR", Options{IncludeOnly: true, Conjunction: "and", ShortCurrencyName: true})
+	if err != nil || withCode != "Two PK Rupees Only" {
+		t.Fatalf("got %q, %v", withCode, err)
+	}
+	withoutCode, err := Convert(2, "PK", "PKR", Options{IncludeOnly: true, Conjunction: "and", IgnoreCountryName: true})
+	if err != nil || withoutCode != "Two Rupees Only" {
+		t.Fatalf("got %q, %v", withoutCode, err)
+	}
+}
