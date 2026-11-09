@@ -132,20 +132,10 @@ final class AmountToWords
     {
         $names = [
             'en' => [
+                'INR' => ['Rupee', 'Rupees'], 'USD' => ['Dollar', 'Dollars'],
+                'GBP' => ['Pound', 'Pounds'], 'EUR' => ['Euro', 'Euros'],
                 'AED' => ['Dirham', 'Dirhams'], 'JPY' => ['Yen', 'Yen'],
-                'AUD' => ['Dollar', 'Dollars'], 'BDT' => ['Taka', 'Taka'],
-                'BHD' => ['Dinar', 'Dinars'], 'CAD' => ['Dollar', 'Dollars'],
-                'CHF' => ['Franc', 'Francs'], 'CNY' => ['Yuan', 'Yuan'],
-                'EUR' => ['Euro', 'Euros'], 'GBP' => ['Pound', 'Pounds'],
-                'HKD' => ['Dollar', 'Dollars'], 'IDR' => ['Rupiah', 'Rupiah'],
-                'INR' => ['Rupee', 'Rupees'], 'KES' => ['Shilling', 'Shillings'],
-                'KWD' => ['Dinar', 'Dinars'], 'LKR' => ['Rupee', 'Rupees'],
-                'MYR' => ['Ringgit', 'Ringgit'], 'NGN' => ['Naira', 'Naira'],
-                'NPR' => ['Rupee', 'Rupees'], 'NZD' => ['Dollar', 'Dollars'],
-                'OMR' => ['Rial', 'Rials'], 'PKR' => ['Rupee', 'Rupees'],
-                'QAR' => ['Riyal', 'Riyals'], 'SAR' => ['Riyal', 'Riyals'],
-                'SGD' => ['Dollar', 'Dollars'], 'THB' => ['Baht', 'Baht'],
-                'USD' => ['Dollar', 'Dollars'], 'ZAR' => ['Rand', 'Rand'],
+                'PKR' => ['Rupee', 'Rupees'],
             ],
             'hi' => ['INR' => ['रुपया', 'रुपये'], 'USD' => ['डॉलर', 'डॉलर'], 'GBP' => ['पाउंड', 'पाउंड'], 'EUR' => ['यूरो', 'यूरो'], 'AED' => ['दिरहम', 'दिरहम'], 'JPY' => ['येन', 'येन']],
             'ar' => ['INR' => ['روبية', 'روبية'], 'USD' => ['دولار', 'دولار'], 'GBP' => ['جنيه', 'جنيه'], 'EUR' => ['يورو', 'يورو'], 'AED' => ['درهم', 'درهم'], 'JPY' => ['ين', 'ين']],
