@@ -24,6 +24,7 @@ This section is intentionally unreleased. Package versions and release tags have
 
 ### Fixed
 
+- Expanded English short currency names to every bundled currency, including `PKR` (`Pakistani Rupees` → `Rupees`).
 - Fixed `Class "AmountToWords\\Laravel\\Facades\\AmountToWords" not found` caused by documentation pointing to an unpublished integration package and missing root-package autoload metadata.
 - Improved repository hygiene by ignoring Java build output.
 

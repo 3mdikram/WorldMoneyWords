@@ -140,6 +140,15 @@ final class AmountToWordsTest extends TestCase
         self::assertSame('Ten Dollars plus Zero Cents', (new AmountToWords())->convert('10.00', 'US', 'USD', $options));
     }
 
+    public function testShortCurrencyNameRemovesPakistaniQualifier(): void
+    {
+        $options = new ConversionOptions(shortCurrencyName: true);
+        self::assertSame(
+            'Seven Hundred Forty Five Rupees and Sixty One Paisa Only',
+            (new AmountToWords())->convert('745.61', 'PK', 'PKR', $options),
+        );
+    }
+
     public function testHindiLanguageOptionWorksForEveryCountry(): void
     {
         $converter = new AmountToWords();

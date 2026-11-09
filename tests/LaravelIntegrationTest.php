@@ -6,6 +6,7 @@ namespace AmountToWords\Tests;
 
 use AmountToWords\AmountToWords as Converter;
 use AmountToWords\Laravel\AmountToWordsServiceProvider;
+use AmountToWords\ConversionOptions;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Facade;
 use mdikram\Facades\AmountToWords;
@@ -41,6 +42,24 @@ final class LaravelIntegrationTest extends TestCase
         self::assertSame(
             'One Thousand Two Hundred Thirty Four Rupees and Fifty Paise Only',
             AmountToWords::convert('1234.50', 'IN', 'INR'),
+        );
+    }
+
+    public function testFacadeSupportsShortPakistaniCurrencyName(): void
+    {
+        $container = new Container();
+        Container::setInstance($container);
+        Facade::setFacadeApplication($container);
+        (new AmountToWordsServiceProvider($container))->register();
+
+        self::assertSame(
+            'Seven Hundred Forty Five Rupees and Sixty One Paisa Only',
+            AmountToWords::convert(
+                '745.61',
+                'PK',
+                'PKR',
+                new ConversionOptions(shortCurrencyName: true),
+            ),
         );
     }
 }
