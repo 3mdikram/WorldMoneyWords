@@ -4,7 +4,8 @@ test('converts INR',()=>assert.equal(amountToWords('1234.50','IND','INR'),'One T
 test('accepts Alpha-2 country codes',()=>assert.equal(amountToWords('10','IN','INR'),'Ten Rupees Only'));
 test('rejects minor territories outside the 200-country list',()=>assert.throws(()=>amountToWords('10','AI','USD')));
 test('supports conversion options',()=>assert.equal(amountToWords('10','US','USD',{includeOnly:false,includeZeroMinor:true,conjunction:'plus'}),'Ten US Dollars plus Zero Cents'));
-test('supports short currency names',()=>assert.equal(amountToWords('10','US','USD',{includeOnly:false,includeZeroMinor:true,conjunction:'plus',shortCurrencyName:true}),'Ten Dollars plus Zero Cents'));
+test('supports short currency names',()=>assert.equal(amountToWords('10','US','USD',{includeOnly:false,includeZeroMinor:true,conjunction:'plus',shortCurrencyName:true}),'Ten US Dollars plus Zero Cents'));
+test('supports country code and ignored country name options',()=>{assert.equal(amountToWords('2','PK','PKR',{shortCurrencyName:true}),'Two PK Rupees Only');assert.equal(amountToWords('2','PK','PKR',{ignoreCountryName:true}),'Two Rupees Only')});
 test('supports Hindi and Arabic',()=>{assert.equal(amountToWords('1234.50','IN','INR',{language:'hi'}),'एक हज़ार दो सौ चौंतीस भारतीय रुपया और पचास उप-इकाइयाँ मात्र');assert.equal(amountToWords('1234.50','US','USD',{language:'ar'}),'ألف ومائتان وأربعة وثلاثون دولار أمريكي و خمسون وحدات فرعية فقط')});
 test('all languages work for all 200 countries',()=>{const alpha2=[...ISO_COUNTRY_CODES.keys()].filter(code=>code.length===2);assert.equal(alpha2.length,200);for(const country of alpha2)for(const language of ['en','hi','ar'])assert.ok(amountToWords('42.50',country,'USD',{language}))});
 test('unavailable language falls back to English',()=>assert.match(amountToWords('10','PK','PKR',{language:'ur'}),/^Ten/));

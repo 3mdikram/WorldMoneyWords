@@ -27,7 +27,12 @@ class WorldMoneyWordsTest {
 
     @Test void usesShortCurrencyName() {
         ConversionOptions options = new ConversionOptions(false, true, "plus", "en", true);
-        assertEquals("Ten Dollars plus Zero Cents", converter.convert("10.00", "US", "USD", options));
+        assertEquals("Ten US Dollars plus Zero Cents", converter.convert("10.00", "US", "USD", options));
+    }
+
+    @Test void supportsCountryCodeAndIgnoredCountryNameOptions() {
+        assertEquals("Two PK Rupees Only", converter.convert("2", "PK", "PKR", new ConversionOptions(true, false, "and", "en", true, false)));
+        assertEquals("Two Rupees Only", converter.convert("2", "PK", "PKR", new ConversionOptions(true, false, "and", "en", false, true)));
     }
 
     @Test void normalizesAlpha2AndRejectsMinorTerritory() {

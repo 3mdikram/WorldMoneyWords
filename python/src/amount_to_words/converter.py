@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 import re
 from typing import Callable
-from .countries import ISO_COUNTRY_CODES
+from .countries import ALPHA2_TO_ALPHA3, ISO_COUNTRY_CODES
 
 ONES = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
 TENS = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"]
@@ -23,6 +23,7 @@ class ConversionOptions:
     conjunction: str = "and"
     language: str = "en"
     short_currency_name: bool = False
+    ignore_country_name: bool = False
 
     def __post_init__(self):
         if not self.conjunction.strip():
@@ -56,6 +57,7 @@ CURRENCIES = {
     "EUR": Currency("Euro", "Euros", "Cent", "Cents"),
     "AED": Currency("Dirham", "Dirhams", "Fil", "Fils"),
     "JPY": Currency("Yen", "Yen", "", "", 0),
+    "PKR": Currency("Pakistani Rupee", "Pakistani Rupees", "Paisa", "Paisa"),
 }
 
 ISO_CURRENCY_CODES = frozenset("""
@@ -193,7 +195,12 @@ class AmountToWords:
         major_name = currency.major_singular if major == 1 else currency.major_plural
         if pack: major_name = pack.currency_name(code, major == 1)
         elif language != "en": major_name = LOCALIZED_CURRENCIES[language].get(code, code)
-        if options.short_currency_name: major_name = SHORT_CURRENCIES.get(language, {}).get(code, (major_name, major_name))[0 if major == 1 else 1]
+        if options.short_currency_name or options.ignore_country_name:
+            configured = SHORT_CURRENCIES.get(language, {}).get(code)
+            major_name = configured[0 if major == 1 else 1] if configured else major_name.split()[-1]
+        if options.short_currency_name and not options.ignore_country_name:
+            alpha2 = country_input if len(country_input) == 2 else next(key for key, value in ALPHA2_TO_ALPHA3.items() if value == country)
+            major_name = f"{alpha2} {major_name}"
         parts += [pack.spell(major) if pack else _spell_localized(major, language), major_name]
         if minor or (currency.fraction_digits > 0 and options.include_zero_minor):
             conjunction = labels[1] if options.conjunction == "and" else options.conjunction

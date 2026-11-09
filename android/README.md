@@ -34,6 +34,9 @@ val hindi = converter.convert(
 )
 ```
 
+Use `AndroidConversionOptions(shortCurrencyName = true)` for `PK Rupees`, or
+`AndroidConversionOptions(ignoreCountryName = true)` for `Rupees` without the country code.
+
 Prefer decimal strings rather than `Double` for financial values. `AndroidAmountToWords` deliberately exposes a string amount API so Android applications do not accidentally introduce binary floating-point rounding.
 
 Custom Java `LanguagePack` implementations can be registered through `converter.javaDelegate()`.

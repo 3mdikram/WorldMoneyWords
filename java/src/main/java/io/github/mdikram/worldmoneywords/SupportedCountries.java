@@ -224,4 +224,12 @@ final class SupportedCountries {
         if (normalized == null) throw new IllegalArgumentException("Unknown supported Alpha-2 or Alpha-3 country code: " + input);
         return normalized;
     }
+
+    static String alpha2(String alpha3) {
+        if (alpha3.equals("XKX")) return "XK";
+        for (Map.Entry<String, String> entry : ALPHA2_TO_ALPHA3.entrySet()) {
+            if (entry.getValue().equals(alpha3)) return entry.getKey();
+        }
+        return alpha3;
+    }
 }

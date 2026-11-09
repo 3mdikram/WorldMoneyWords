@@ -27,7 +27,12 @@ class ConverterTest(unittest.TestCase):
 
     def test_short_currency_name_option(self):
         options = ConversionOptions(include_only=False, include_zero_minor=True, conjunction="plus", short_currency_name=True)
-        self.assertEqual("Ten Dollars plus Zero Cents", AmountToWords().convert("10", "US", "USD", options))
+        self.assertEqual("Ten US Dollars plus Zero Cents", AmountToWords().convert("10", "US", "USD", options))
+
+    def test_country_code_and_ignored_country_name_options(self):
+        converter = AmountToWords()
+        self.assertEqual("Two PK Rupees Only", converter.convert("2", "PK", "PKR", ConversionOptions(short_currency_name=True)))
+        self.assertEqual("Two Rupees Only", converter.convert("2", "PK", "PKR", ConversionOptions(ignore_country_name=True)))
 
     def test_hindi_and_arabic(self):
         self.assertEqual("एक हज़ार दो सौ चौंतीस भारतीय रुपया और पचास उप-इकाइयाँ मात्र", AmountToWords().convert("1234.50", "IN", "INR", ConversionOptions(language="hi")))

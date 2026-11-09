@@ -51,8 +51,19 @@ func TestOptions(t *testing.T) {
 
 func TestShortCurrencyNameOption(t *testing.T) {
 	got, err := Convert(10, "US", "USD", Options{IncludeZeroMinor: true, Conjunction: "plus", ShortCurrencyName: true})
-	if err != nil || got != "Ten Dollars plus Zero Cents" {
+	if err != nil || got != "Ten US Dollars plus Zero Cents" {
 		t.Fatalf("got %q, %v", got, err)
+	}
+}
+
+func TestCountryCodeAndIgnoredCountryNameOptions(t *testing.T) {
+	withCode, err := Convert(2, "PK", "PKR", Options{IncludeOnly: true, Conjunction: "and", ShortCurrencyName: true})
+	if err != nil || withCode != "Two PK Rupees Only" {
+		t.Fatalf("got %q, %v", withCode, err)
+	}
+	withoutCode, err := Convert(2, "PK", "PKR", Options{IncludeOnly: true, Conjunction: "and", IgnoreCountryName: true})
+	if err != nil || withoutCode != "Two Rupees Only" {
+		t.Fatalf("got %q, %v", withoutCode, err)
 	}
 }
 

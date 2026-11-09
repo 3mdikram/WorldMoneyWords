@@ -7,6 +7,7 @@ data class AndroidConversionOptions(
     val conjunction: String = "and",
     val language: String = "en",
     val shortCurrencyName: Boolean = false,
+    val ignoreCountryName: Boolean = false,
 ) {
     init {
         require(conjunction.isNotBlank()) { "Conjunction cannot be empty" }

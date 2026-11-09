@@ -151,7 +151,7 @@ echo $converter->convert(
 | ⚙️ Configurable wording | Control the `Only` suffix, zero minor units, and conjunction text |
 | 🗣️ Multilingual output | Generate amount wording in English (`en`), Hindi (`hi`), or Arabic (`ar`) for every supported country |
 | 🎛️ Explicit language selection | Keeps English as the default and changes language only when the caller supplies a language code |
-| 🏷️ Short currency names | Optionally produces `Dollars` instead of `US Dollars`, with equivalent built-in localized names |
+| 🏷️ Short currency names | Produces Alpha-2 country codes with short units such as `PK Rupees` |
 | 🌍 Country-independent language | Uses the requested language without silently changing it from the supplied country code |
 | 🧠 Reusable language packs | Adds reviewed number grammar, currency terminology, and local labels through a dedicated interface |
 | 🧯 Safe language fallback | Uses English when a requested language writer is unavailable |
@@ -321,7 +321,7 @@ options = ConversionOptions(
 )
 
 print(AmountToWords().convert("10.00", "US", "USD", options))
-# Ten Dollars plus Zero Cents
+# Ten US Dollars plus Zero Cents
 ```
 
 </details>
@@ -417,7 +417,7 @@ if err != nil {
     panic(err)
 }
 fmt.Println(text)
-// Ten Dollars plus Zero Cents
+// Ten US Dollars plus Zero Cents
 ```
 
 </details>
@@ -476,7 +476,7 @@ WorldMoneyWords converter = new WorldMoneyWords();
 ConversionOptions options = new ConversionOptions(false, true, "plus", "en", true);
 
 String text = converter.convert("10.00", "US", "USD", options);
-// Ten Dollars plus Zero Cents
+// Ten US Dollars plus Zero Cents
 ```
 
 Requires Java 11 or newer. See the [Java guide](java/README.md).
@@ -522,7 +522,7 @@ val text = converter.convert(
         shortCurrencyName = true,
     ),
 )
-// Ten Dollars plus Zero Cents
+// Ten US Dollars plus Zero Cents
 ```
 
 #### 3. Hindi output
@@ -605,7 +605,7 @@ export function ShortCurrencyPaymentTotal() {
   });
 
   return <p>{words}</p>;
-  // Ten Dollars plus Zero Cents
+  // Ten US Dollars plus Zero Cents
 }
 ```
 
@@ -655,7 +655,7 @@ Option names follow each language's normal style:
 | Conjunction | `conjunction` | `conjunction` | `Conjunction` | `conjunction` |
 | Output language | `language` | `language` | `Language` | `language` |
 | Short currency name | `shortCurrencyName` | `short_currency_name` | `ShortCurrencyName` | `shortCurrencyName` |
-| Ignore country qualifier | PHP: `ignoreCountryName`; TypeScript: `shortCurrencyName` | — | — | Android: `shortCurrencyName` |
+| Ignore country qualifier | `ignoreCountryName` | `ignore_country_name` | `IgnoreCountryName` | `ignoreCountryName` |
 
 ### Short currency name
 

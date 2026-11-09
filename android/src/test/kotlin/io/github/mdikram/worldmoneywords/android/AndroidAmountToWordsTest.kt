@@ -18,7 +18,7 @@ class AndroidAmountToWordsTest {
     @Test
     fun supportsKotlinOptions() {
         assertEquals(
-            "Ten Dollars plus Zero Cents",
+            "Ten US Dollars plus Zero Cents",
             converter.convert(
                 "10.00",
                 "US",
@@ -31,6 +31,12 @@ class AndroidAmountToWordsTest {
                 ),
             ),
         )
+    }
+
+    @Test
+    fun supportsCountryCodeAndIgnoredCountryNameOptions() {
+        assertEquals("Two PK Rupees Only", converter.convert("2", "PK", "PKR", AndroidConversionOptions(shortCurrencyName = true)))
+        assertEquals("Two Rupees Only", converter.convert("2", "PK", "PKR", AndroidConversionOptions(ignoreCountryName = true)))
     }
 
     @Test

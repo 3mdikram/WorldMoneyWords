@@ -51,7 +51,8 @@ public final class WorldMoneyWords {
         if (negative && value.signum() != 0) result.append(labels[0]).append(' ');
         String majorWords = pack != null ? pack.spell(major) : language.equals("en") ? spell(major) : LocalizedWords.spell(major, language);
         String majorName = pack != null ? pack.currencyName(code, major.equals(BigInteger.ONE)) : language.equals("en") ? (major.equals(BigInteger.ONE) ? currency.majorSingular : currency.majorPlural) : LocalizedWords.currency(code, language);
-        if (options.shortCurrencyName()) majorName = shortCurrencyName(code, language, major.equals(BigInteger.ONE), majorName);
+        if (options.shortCurrencyName() || options.ignoreCountryName()) majorName = shortCurrencyName(code, language, major.equals(BigInteger.ONE), majorName);
+        if (options.shortCurrencyName() && !options.ignoreCountryName()) majorName = SupportedCountries.alpha2(country) + " " + majorName;
         result.append(majorWords).append(' ').append(majorName);
         if (minor.signum() > 0 || (currency.fractionDigits > 0 && options.includeZeroMinor())) {
             String conjunction = options.conjunction().equals("and") ? labels[1] : options.conjunction();
@@ -116,7 +117,9 @@ public final class WorldMoneyWords {
         else if (language.equals("hi")) { names.put("INR",new String[]{"रुपया","रुपये"}); names.put("USD",new String[]{"डॉलर","डॉलर"}); names.put("GBP",new String[]{"पाउंड","पाउंड"}); names.put("EUR",new String[]{"यूरो","यूरो"}); names.put("AED",new String[]{"दिरहम","दिरहम"}); names.put("JPY",new String[]{"येन","येन"}); }
         else if (language.equals("ar")) { names.put("INR",new String[]{"روبية","روبية"}); names.put("USD",new String[]{"دولار","دولار"}); names.put("GBP",new String[]{"جنيه","جنيه"}); names.put("EUR",new String[]{"يورو","يورو"}); names.put("AED",new String[]{"درهم","درهم"}); names.put("JPY",new String[]{"ين","ين"}); }
         String[] value = names.get(code);
-        return value == null ? fallback : value[singular ? 0 : 1];
+        if (value != null) return value[singular ? 0 : 1];
+        String[] words = fallback.trim().split("\\s+");
+        return words.length == 0 ? fallback : words[words.length - 1];
     }
 
     private static Map<String, CurrencyWords> currencies() {
@@ -127,6 +130,7 @@ public final class WorldMoneyWords {
         map.put("EUR", new CurrencyWords("Euro","Euros","Cent","Cents",2));
         map.put("AED", new CurrencyWords("Dirham","Dirhams","Fil","Fils",2));
         map.put("JPY", new CurrencyWords("Yen","Yen","","",0));
+        map.put("PKR", new CurrencyWords("Pakistani Rupee","Pakistani Rupees","Paisa","Paisa",2));
         return map;
     }
 

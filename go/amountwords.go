@@ -19,6 +19,7 @@ type Options struct {
 	Conjunction       string
 	Language          string
 	ShortCurrencyName bool
+	IgnoreCountryName bool
 }
 
 type LanguagePack struct {
@@ -61,6 +62,7 @@ var currencies = map[string]Currency{
 	"INR": {"Rupee", "Rupees", "Paisa", "Paise", 2}, "USD": {"US Dollar", "US Dollars", "Cent", "Cents", 2},
 	"GBP": {"Pound", "Pounds", "Penny", "Pence", 2}, "EUR": {"Euro", "Euros", "Cent", "Cents", 2},
 	"AED": {"Dirham", "Dirhams", "Fil", "Fils", 2}, "JPY": {"Yen", "Yen", "", "", 0},
+	"PKR": {"Pakistani Rupee", "Pakistani Rupees", "Paisa", "Paisa", 2},
 }
 var ones = []string{"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"}
 var tens = []string{"", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"}
@@ -212,7 +214,8 @@ func Convert(amount float64, countryCode, currencyCode string, supplied ...Optio
 	if options.Language == "" {
 		options.Language = "en"
 	}
-	country, code := strings.ToUpper(strings.TrimSpace(countryCode)), strings.ToUpper(strings.TrimSpace(currencyCode))
+	countryInput := strings.ToUpper(strings.TrimSpace(countryCode))
+	country, code := countryInput, strings.ToUpper(strings.TrimSpace(currencyCode))
 	if alpha3, ok := isoAlpha2To3[country]; ok {
 		country = alpha3
 	}
@@ -276,14 +279,28 @@ func Convert(amount float64, countryCode, currencyCode string, supplied ...Optio
 			majorName = code
 		}
 	}
-	if options.ShortCurrencyName {
+	if options.ShortCurrencyName || options.IgnoreCountryName {
 		if names, ok := shortCurrencies[options.Language][code]; ok {
 			if major == 1 {
 				majorName = names[0]
 			} else {
 				majorName = names[1]
 			}
+		} else if words := strings.Fields(majorName); len(words) > 0 {
+			majorName = words[len(words)-1]
 		}
+	}
+	if options.ShortCurrencyName && !options.IgnoreCountryName {
+		alpha2 := countryInput
+		if len(alpha2) != 2 {
+			for candidate, alpha3 := range isoAlpha2To3 {
+				if alpha3 == country {
+					alpha2 = candidate
+					break
+				}
+			}
+		}
+		majorName = alpha2 + " " + majorName
 	}
 	p = append(p, majorWords, majorName)
 	if minor > 0 || (c.FractionDigits > 0 && options.IncludeZeroMinor) {
