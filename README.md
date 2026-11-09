@@ -635,6 +635,7 @@ convert(int|float|string $amount, string $countryCode, string $currencyCode, ?Co
 | `conjunction` | `string` | `and` | Changes the word joining major and minor units | `Ten US Dollars plus Fifty Cents Only` |
 | `language` | `string` | `en` | Uses English by default. Pass `hi`, `ar`, or a registered language code to request that output explicitly | `एक हज़ार भारतीय रुपया मात्र` |
 | `shortCurrencyName` | `boolean` | `false` | Removes the country qualifier from supported currency names | `Ten Dollars plus Zero Cents` |
+| `ignoreCountryName` | `boolean` | `false` | Explicitly removes the country qualifier from bundled currency names | `Ten Rupees Only` |
 
 Use the options when you need wording tailored to invoices, cheques, banking forms, or local document rules:
 
@@ -643,6 +644,7 @@ Use the options when you need wording tailored to invoices, cheques, banking for
 - Set `includeZeroMinor` to `true` when zero cents, paise, or fils must be stated explicitly.
 - Change `conjunction` to wording such as `plus` when required by your output format.
 - Set `shortCurrencyName` to `true` to use `Dollars` instead of `US Dollars` and equivalent localized short names.
+- Set `ignoreCountryName` to `true` when you explicitly want `Rupees` instead of `Pakistani Rupees`; it uses the same bundled short-name rules.
 
 Option names follow each language's normal style:
 
@@ -653,6 +655,7 @@ Option names follow each language's normal style:
 | Conjunction | `conjunction` | `conjunction` | `Conjunction` | `conjunction` |
 | Output language | `language` | `language` | `Language` | `language` |
 | Short currency name | `shortCurrencyName` | `short_currency_name` | `ShortCurrencyName` | `shortCurrencyName` |
+| Ignore country qualifier | PHP: `ignoreCountryName`; TypeScript: `shortCurrencyName` | — | — | Android: `shortCurrencyName` |
 
 ### Short currency name
 

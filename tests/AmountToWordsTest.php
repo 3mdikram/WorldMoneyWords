@@ -149,6 +149,45 @@ final class AmountToWordsTest extends TestCase
         );
     }
 
+    public function testShortCurrencyNameWorksForEveryBundledCurrency(): void
+    {
+        $converter = new AmountToWords();
+        $expected = [
+            'AUD' => 'Two Dollars Only', 'BDT' => 'Two Taka Only',
+            'BHD' => 'Two Dinars Only', 'CAD' => 'Two Dollars Only',
+            'CHF' => 'Two Francs Only', 'CNY' => 'Two Yuan Only',
+            'HKD' => 'Two Dollars Only', 'IDR' => 'Two Rupiah Only',
+            'KES' => 'Two Shillings Only', 'KWD' => 'Two Dinars Only',
+            'LKR' => 'Two Rupees Only', 'MYR' => 'Two Ringgit Only',
+            'NGN' => 'Two Naira Only', 'NPR' => 'Two Rupees Only',
+            'NZD' => 'Two Dollars Only', 'OMR' => 'Two Rials Only',
+            'PKR' => 'Two Rupees Only', 'QAR' => 'Two Riyals Only',
+            'SAR' => 'Two Riyals Only', 'SGD' => 'Two Dollars Only',
+            'THB' => 'Two Baht Only', 'ZAR' => 'Two Rand Only',
+        ];
+
+        foreach ($expected as $currency => $text) {
+            self::assertSame(
+                $text,
+                $converter->convert('2', 'US', $currency, new ConversionOptions(shortCurrencyName: true)),
+                $currency,
+            );
+        }
+    }
+
+    public function testIgnoreCountryNameOptionUsesShortCurrencyName(): void
+    {
+        self::assertSame(
+            'Two Rupees Only',
+            (new AmountToWords())->convert(
+                '2',
+                'PK',
+                'PKR',
+                new ConversionOptions(ignoreCountryName: true),
+            ),
+        );
+    }
+
     public function testHindiLanguageOptionWorksForEveryCountry(): void
     {
         $converter = new AmountToWords();

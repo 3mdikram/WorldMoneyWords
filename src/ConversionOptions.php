@@ -14,6 +14,7 @@ final class ConversionOptions
         public readonly string $conjunction = 'and',
         public readonly string $language = 'en',
         public readonly bool $shortCurrencyName = false,
+        public readonly bool $ignoreCountryName = false,
     ) {
         if (trim($this->conjunction) === '') {
             throw new InvalidArgumentException('Conjunction cannot be empty.');

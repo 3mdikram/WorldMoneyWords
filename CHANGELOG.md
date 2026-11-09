@@ -8,6 +8,7 @@ This section is intentionally unreleased. Package versions and release tags have
 
 ### Added
 
+- Added the PHP/Laravel `ignoreCountryName` option as an explicit way to remove country qualifiers from bundled currency names.
 - Added the Laravel facade import `mdikram\Facades\AmountToWords`, while retaining the previous namespace for backward compatibility.
 - Unreleased root Go compatibility module for `github.com/3mdikram/WorldMoneyWords`, forwarding to the maintained `/go/v2` engine.
 - Unreleased Android AAR with a Kotlin-friendly, exact-decimal-string API and API 21+ support.
@@ -24,7 +25,7 @@ This section is intentionally unreleased. Package versions and release tags have
 
 ### Fixed
 
-- Fixed the `PKR` short currency name so `Pakistani Rupees` becomes `Rupees` when requested.
+- Expanded short currency names across every bundled PHP/Laravel currency, including `Pakistani Rupees` → `Rupees` and `Australian Dollars` → `Dollars`.
 - Fixed `Class "AmountToWords\\Laravel\\Facades\\AmountToWords" not found` caused by documentation pointing to an unpublished integration package and missing root-package autoload metadata.
 - Improved repository hygiene by ignoring Java build output.
 
