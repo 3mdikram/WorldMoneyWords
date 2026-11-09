@@ -467,8 +467,6 @@ Requires Java 11 or newer. See the [Java guide](java/README.md).
 <details open>
 <summary><strong>🤖 Android / Kotlin examples</strong> — exact decimal strings, options, and localization</summary>
 
-> **Unreleased:** the Android AAR is currently `0.0.0-SNAPSHOT`. Do not add production Maven coordinates until an Android release is announced.
-
 After release to Maven Central, installation will use:
 
 ```kotlin
