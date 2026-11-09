@@ -31,8 +31,6 @@ One consistent API for PHP, Laravel, Python, Go, Java, Android/Kotlin, React, Ty
 
 WorldMoneyWords is a multilingual amount-to-words library with English, Hindi, Arabic, and more through custom language packs for PHP, Laravel, Python, Go, Java, Android/Kotlin, React, TypeScript, browsers, and Node.js. Give it an amount, an ISO country code, and an ISO currency code; it returns correctly formatted wording with the appropriate major and minor currency units.
 
-> **Development status:** improvements listed in [CHANGELOG.md](CHANGELOG.md) are unreleased. Package versions have not been bumped and no release is implied by the current branch. See [ROADMAP.md](ROADMAP.md) for planned cross-runtime parity and language work.
-
 Use it as an **amount to words**, **amount to text**, **money to words**, **money to text**, **number to words**, **number to text**, or **currency to words** converter. It is designed for cheque amounts, invoices, receipts, payment confirmations, banking forms, and other financial documents.
 
 Common searches and use cases include **amount in words**, **amount converter**, **number converter**, **money converter**, **currency converter**, **spell amount**, **spell number**, **cheque writing**, **check writing**, **multi-currency**, and **international currency** formatting.
