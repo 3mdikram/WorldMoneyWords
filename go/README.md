@@ -189,7 +189,7 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 | Platform | Install / package | Main API |
 |---|---|---|
 | 🐘 **PHP** | `composer require 3mdikram/worldmoneywords` | `$converter->convert(...)` |
-| 🔺 **Laravel** | `composer require 3mdikram/worldmoneywords-laravel` | `AmountToWords::convert(...)` |
+| 🔺 **Laravel** | `composer require 3mdikram/worldmoneywords` | `AmountToWords::convert(...)` |
 | 🐍 **Python** | `pip install worldmoneywords` | `converter.convert(...)` |
 | 🐹 **Go** | `go get github.com/3mdikram/WorldMoneyWords/go/v2` | `amountwords.Convert(...)` |
 | ☕ **Java** | `io.github.3mdikram:worldmoneywords` | `converter.convert(...)` |
@@ -199,7 +199,7 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 <summary><strong>🔺 Laravel examples</strong> — installation, options, language, and short names</summary>
 
 ```bash
-composer require 3mdikram/worldmoneywords-laravel
+composer require 3mdikram/worldmoneywords
 ```
 
 #### 1. Default conversion

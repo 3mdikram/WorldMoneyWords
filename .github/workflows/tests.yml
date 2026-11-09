@@ -97,7 +97,7 @@ jobs:
       - run: go test -race ./...
       - run: go vet ./...
 
-  laravel-package:
+  laravel-integration:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -105,8 +105,8 @@ jobs:
         with:
           php-version: '8.3'
           extensions: intl
-      - run: composer validate --strict
-        working-directory: laravel
+      - uses: ramsey/composer-install@v3
+      - run: composer test -- --filter LaravelIntegrationTest
 
   android-tests:
     runs-on: ubuntu-latest
