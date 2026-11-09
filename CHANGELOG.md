@@ -17,7 +17,12 @@ This section is intentionally unreleased. Package versions and release tags have
 
 ### Changed
 
+- Bundled the Laravel service provider and facade with the main Composer package so `3mdikram/worldmoneywords` supports Laravel auto-discovery directly.
 - Strengthened currency and amount validation across runtimes.
+
+### Fixed
+
+- Fixed `Class "AmountToWords\\Laravel\\Facades\\AmountToWords" not found` caused by documentation pointing to an unpublished Laravel package and missing root-package autoload metadata.
 - Improved repository hygiene by ignoring Java build output.
 
 ### Security

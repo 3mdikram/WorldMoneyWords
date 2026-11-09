@@ -193,7 +193,7 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 | Platform | Install / package | Main API |
 |---|---|---|
 | 🐘 **PHP** | `composer require 3mdikram/worldmoneywords` | `$converter->convert(...)` |
-| 🔺 **Laravel** | `composer require 3mdikram/worldmoneywords-laravel` | `AmountToWords::convert(...)` |
+| 🔺 **Laravel** | `composer require 3mdikram/worldmoneywords` | `AmountToWords::convert(...)` |
 | 🐍 **Python** | `pip install worldmoneywords` | `converter.convert(...)` |
 | 🐹 **Go v2** | `go get github.com/3mdikram/WorldMoneyWords/go/v2` | `amountwords.Convert(...)` |
 | 🐹 **Go root compatibility** | Unreleased: `go get github.com/3mdikram/WorldMoneyWords` | `amountwords.Convert(...)` |
@@ -205,7 +205,7 @@ echo $converter->convert('1234.50', 'IND', 'INR');
 <summary><strong>🔺 Laravel examples</strong> — installation, options, language, and short names</summary>
 
 ```bash
-composer require 3mdikram/worldmoneywords-laravel
+composer require 3mdikram/worldmoneywords
 ```
 
 #### 1. Default conversion
@@ -262,7 +262,7 @@ echo AmountToWords::convert('10.00', 'US', 'USD', $options);
 // Ten Dollars plus Zero Cents
 ```
 
-Laravel discovers the provider and facade automatically. See the [Laravel guide](laravel/README.md).
+Laravel discovers the provider and facade automatically from the main package. See the [Laravel guide](laravel/README.md).
 
 </details>
 
